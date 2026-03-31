@@ -13,3 +13,5 @@ RUN curl -fsSL https://opencode.ai/install | bash && \
         echo "opencode binary not found after installation" >&2; \
         exit 1; \
     fi
+
+ENTRYPOINT []

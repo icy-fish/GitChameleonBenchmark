@@ -1,0 +1,26 @@
+{
+  "image_name": "gitchameleon-opencode:1.1",
+  "default_model": "opencode/minimax-m2.5-free",
+  "workspace_dir": "/app",
+  "container_network": "bridge",
+  "use_stdin_prompt": false,
+  "env": {
+    "HOME": "/tmp/opencode-home",
+    "XDG_DATA_HOME": "/tmp/opencode-home/.local/share",
+    "XDG_CONFIG_HOME": "/tmp/opencode-home/.config",
+    "XDG_CACHE_HOME": "/tmp/opencode-home/.cache"
+  },
+  "result_file_template": "sample_{example_id}.py",
+  "command": [
+    "opencode",
+    "run",
+    "--format",
+    "json",
+    "--thinking",
+    "--dir",
+    "{workspace}",
+    "-m",
+    "{model}",
+    "{prompt}"
+  ]
+}
