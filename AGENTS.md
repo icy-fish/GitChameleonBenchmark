@@ -25,6 +25,7 @@ The automation harness is expected to behave as follows:
 - each prepared workspace contains `sample_{i}.py`, `prompt.md`, task metadata, and `starting_code.py`
 - each task has a prebuilt venv at `.dataset_venvs/gcham_venv_*`, selected from task metadata and mounted into the container
 - containerized runs execute in a temporary runtime copy of the prepared workspace, mounted inside the container at the agent-defined workspace path, typically `/app`
+- `run-agent` may execute multiple prepared tasks in parallel; the harness worker count controls the maximum concurrent task runs
 - edits made by the agent inside the container must be captured from that runtime copy and must not mutate the prepared host workspace
 - the harness reads the final answer from the agent-defined result file when configured, otherwise it falls back to stdout
 - `agent_log.txt` must contain the exact launch command first, then the merged stdout/stderr stream in execution order

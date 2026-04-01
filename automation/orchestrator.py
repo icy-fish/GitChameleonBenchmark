@@ -4,6 +4,7 @@ import copy
 import json
 import shlex
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -124,50 +125,41 @@ class BenchmarkOrchestrator:
         raw_output_path = outputs_dir / "raw_outputs.jsonl"
         solutions_path = outputs_dir / "solutions.jsonl"
 
-        raw_records: list[dict] = []
-        solution_records: list[dict] = []
-        for example_id in manifest["tasks"]:
-            workspace = self.config.workspace_root / run_dir.name / agent_name / example_id
-            bundle = self._load_task_bundle(run_dir, example_id)
-            task_config = self._build_task_config(
-                base_config=config,
-                agent_name=agent_name,
-                bundle=bundle,
-                model=model or (agent_spec.default_model if agent_spec else ""),
-                agent_spec=agent_spec,
-            )
-            result = backend.run(workspace=workspace, config=task_config)
-            answer = extract_code(result.solution_text or result.stdout)
-            raw_records.append(
-                {
-                    "example_id": example_id,
-                    "agent": agent_name,
-                    "command": result.command,
-                    "exit_code": result.exit_code,
-                    "timed_out": result.timed_out,
-                    "started_at": result.started_at,
-                    "completed_at": result.completed_at,
-                    "duration_sec": result.duration_sec,
-                    "metrics": result.metrics,
-                    "stdout": result.stdout,
-                    "stderr": result.stderr,
-                    "combined_output": result.combined_output,
-                    "solution_text": result.solution_text,
-                    "workspace": str(workspace),
-                    "container_image": task_config.container_image,
-                    "answer_source": "result_file" if result.solution_text else "stdout",
-                }
-            )
-            solution_records.append(
-                {
-                    "example_id": example_id,
-                    "answer": answer,
-                }
-            )
-            (workspace / "agent_stdout.txt").write_text(result.stdout, encoding="utf-8")
-            (workspace / "agent_stderr.txt").write_text(result.stderr, encoding="utf-8")
-            log_header = self._build_agent_log_header(result.command)
-            (workspace / "agent_log.txt").write_text(log_header + result.combined_output, encoding="utf-8")
+        task_examples = [str(example_id) for example_id in manifest["tasks"]]
+        run_model = model or (agent_spec.default_model if agent_spec else "")
+        if self.config.workers <= 1 or len(task_examples) <= 1:
+            task_outputs = [
+                self._run_agent_task(
+                    backend=backend,
+                    run_dir=run_dir,
+                    agent_name=agent_name,
+                    example_id=example_id,
+                    base_config=config,
+                    agent_spec=agent_spec,
+                    model=run_model,
+                )
+                for example_id in task_examples
+            ]
+        else:
+            max_workers = min(self.config.workers, len(task_examples))
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                task_outputs = list(
+                    executor.map(
+                        lambda example_id: self._run_agent_task(
+                            backend=backend,
+                            run_dir=run_dir,
+                            agent_name=agent_name,
+                            example_id=example_id,
+                            base_config=config,
+                            agent_spec=agent_spec,
+                            model=run_model,
+                        ),
+                        task_examples,
+                    )
+                )
+
+        raw_records = [task_output["raw_record"] for task_output in task_outputs]
+        solution_records = [task_output["solution_record"] for task_output in task_outputs]
 
         raw_output_path.write_text("".join(json.dumps(record) + "\n" for record in raw_records), encoding="utf-8")
         solutions_path.write_text("".join(json.dumps(record) + "\n" for record in solution_records), encoding="utf-8")
@@ -209,6 +201,58 @@ class BenchmarkOrchestrator:
         task_bundle_path = run_dir / "task_bundles" / str(example_id) / "task_bundle.json"
         payload = json.loads(task_bundle_path.read_text(encoding="utf-8"))
         return TaskBundle.from_dict(payload)
+
+    def _run_agent_task(
+        self,
+        backend,
+        run_dir: Path,
+        agent_name: str,
+        example_id: str,
+        base_config,
+        agent_spec: AgentSpec | None,
+        model: str,
+    ) -> dict[str, dict]:
+        workspace = self.config.workspace_root / run_dir.name / agent_name / example_id
+        bundle = self._load_task_bundle(run_dir, example_id)
+        task_config = self._build_task_config(
+            base_config=base_config,
+            agent_name=agent_name,
+            bundle=bundle,
+            model=model,
+            agent_spec=agent_spec,
+        )
+        result = backend.run(workspace=workspace, config=task_config)
+        answer = extract_code(result.solution_text or result.stdout)
+        raw_record = {
+            "example_id": example_id,
+            "agent": agent_name,
+            "command": result.command,
+            "exit_code": result.exit_code,
+            "timed_out": result.timed_out,
+            "started_at": result.started_at,
+            "completed_at": result.completed_at,
+            "duration_sec": result.duration_sec,
+            "metrics": result.metrics,
+            "stdout": result.stdout,
+            "stderr": result.stderr,
+            "combined_output": result.combined_output,
+            "solution_text": result.solution_text,
+            "workspace": str(workspace),
+            "container_image": task_config.container_image,
+            "answer_source": "result_file" if result.solution_text else "stdout",
+        }
+        solution_record = {
+            "example_id": example_id,
+            "answer": answer,
+        }
+        (workspace / "agent_stdout.txt").write_text(result.stdout, encoding="utf-8")
+        (workspace / "agent_stderr.txt").write_text(result.stderr, encoding="utf-8")
+        log_header = self._build_agent_log_header(result.command)
+        (workspace / "agent_log.txt").write_text(log_header + result.combined_output, encoding="utf-8")
+        return {
+            "raw_record": raw_record,
+            "solution_record": solution_record,
+        }
 
     def _build_task_config(
         self,
