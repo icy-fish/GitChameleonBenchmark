@@ -12,7 +12,14 @@ from automation.agent_specs import AgentSpec, load_agent_spec
 from automation.backends import get_backend
 from automation.models import TaskBundle
 from automation.protected_evaluator import evaluate_solutions
-from automation.reporter import summarize_results, write_agent_report, write_comparison_report
+from automation.reporter import (
+    archive_run_artifacts,
+    is_full_benchmark_run,
+    summarize_results,
+    update_project_history,
+    write_agent_report,
+    write_comparison_report,
+)
 from automation.solution_normalizer import extract_code
 from automation.task_bundle_builder import build_task_bundles
 from automation.workspace_builder import build_isolated_workspace
@@ -191,6 +198,9 @@ class BenchmarkOrchestrator:
             write_agent_report(report_dir, agent_name, summary)
             summaries[agent_name] = summary
         write_comparison_report(report_dir, summaries)
+        if is_full_benchmark_run(run_dir, self.config.dataset_path):
+            archived_run_dir = archive_run_artifacts(self.config.benchmark_root, run_dir)
+            update_project_history(self.config.benchmark_root / "reports", archived_run_dir, summaries)
         return summaries
 
     def _load_task_bundle(self, run_dir: Path, example_id: str) -> TaskBundle:

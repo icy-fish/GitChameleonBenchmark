@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "pyparsing==2.3.1",
+  "example_id": "330",
+  "library": "matplotlib",
+  "problem": "Implement a function to use Seaborn style.",
+  "python_version": "3.10",
+  "starting_code": "import matplotlib.pyplot as plt\n\ndef use_seaborn() -> None:\n    ",
+  "version": "3.8.0"
+}

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import csv
 import json
+import shutil
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 
 from automation.backends.opencode import OpencodeBackend
@@ -11,6 +13,18 @@ from automation.backends.opencode import OpencodeBackend
 def _load_dataset_index(dataset_path: Path) -> dict[str, dict]:
     with dataset_path.open("r", encoding="utf-8") as handle:
         return {str(row["example_id"]): row for row in (json.loads(line) for line in handle if line.strip())}
+
+
+def _dataset_size(dataset_path: Path) -> int:
+    with dataset_path.open("r", encoding="utf-8") as handle:
+        return sum(1 for line in handle if line.strip())
+
+
+def _path_relative_to_reports(path_str: str) -> str:
+    path = Path(path_str)
+    if path.parts and path.parts[0] == "reports":
+        return str(Path(*path.parts[1:]))
+    return str(path)
 
 
 def _load_raw_run_records(raw_output_path: Path | None) -> list[dict]:
@@ -189,3 +203,137 @@ def write_comparison_report(report_dir: Path, agent_summaries: dict[str, dict]) 
     lines.append("")
     comparison_path.write_text("\n".join(lines), encoding="utf-8")
     return comparison_path
+
+
+def is_full_benchmark_run(run_dir: Path, dataset_path: Path) -> bool:
+    config_path = run_dir / "config.json"
+    manifest_path = run_dir / "manifest.json"
+    if not config_path.is_file() or not manifest_path.is_file():
+        return False
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    example_ids = config.get("example_ids") or []
+    limit = config.get("limit")
+    tasks = manifest.get("tasks") or []
+    return not example_ids and limit is None and len(tasks) == _dataset_size(dataset_path)
+
+
+def archive_run_artifacts(benchmark_root: Path, run_dir: Path) -> Path:
+    artifacts_root = benchmark_root / "reports" / "artifacts"
+    artifacts_root.mkdir(parents=True, exist_ok=True)
+    archived_run_dir = artifacts_root / run_dir.name
+    if run_dir.resolve() == archived_run_dir.resolve():
+        return archived_run_dir
+    if archived_run_dir.exists():
+        shutil.rmtree(archived_run_dir)
+    shutil.move(str(run_dir), str(archived_run_dir))
+    return archived_run_dir
+
+
+def update_project_history(
+    project_report_dir: Path,
+    run_dir: Path,
+    agent_summaries: dict[str, dict],
+) -> tuple[Path, Path]:
+    project_report_dir.mkdir(parents=True, exist_ok=True)
+    history_path = project_report_dir / "benchmark_history.jsonl"
+    comparison_path = project_report_dir / "benchmark_history.md"
+
+    existing_records: list[dict] = []
+    if history_path.is_file():
+        with history_path.open("r", encoding="utf-8") as handle:
+            existing_records = [json.loads(line) for line in handle if line.strip()]
+
+    retained_records = [
+        record
+        for record in existing_records
+        if not (record.get("run_id") == run_dir.name and record.get("agent") in agent_summaries)
+    ]
+
+    updated_at = datetime.now(timezone.utc).isoformat()
+    for agent_name, summary in sorted(agent_summaries.items()):
+        retained_records.append(
+            {
+                "run_id": run_dir.name,
+                "agent": agent_name,
+                "updated_at": updated_at,
+                "run_dir": str(run_dir.relative_to(project_report_dir.parent)),
+                "run_report": str((run_dir / "reports" / f"{agent_name}_report.md").relative_to(project_report_dir.parent)),
+                "run_summary": str((run_dir / "reports" / f"{agent_name}_summary.json").relative_to(project_report_dir.parent)),
+                "total": summary["total"],
+                "hidden_passed": summary["hidden_passed"],
+                "hidden_pass_rate": summary["hidden_pass_rate"],
+                "hidden_compiled": summary["hidden_compiled"],
+                "visible_passed": summary["visible_passed"],
+                "visible_pass_rate": summary["visible_pass_rate"],
+                "visible_compiled": summary["visible_compiled"],
+                "avg_runtime_seconds": summary["metrics"]["runtime"]["average_seconds"],
+                "total_runtime_seconds": summary["metrics"]["runtime"]["total_seconds"],
+                "total_tokens": summary["metrics"]["token_usage"]["total_tokens"],
+                "avg_tokens": summary["metrics"]["token_usage"]["average_tokens"],
+                "token_records": summary["metrics"]["token_usage"]["count"],
+            }
+        )
+
+    retained_records.sort(key=lambda record: (record["agent"], record["run_id"]))
+    history_path.write_text("".join(json.dumps(record, sort_keys=True) + "\n" for record in retained_records), encoding="utf-8")
+
+    latest_by_agent: dict[str, dict] = {}
+    for record in retained_records:
+        latest_by_agent[record["agent"]] = record
+
+    lines = [
+        "# Full Benchmark History",
+        "",
+        "## Latest Per Agent",
+        "",
+        "| Agent | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Run Report |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for agent_name, record in sorted(latest_by_agent.items()):
+        token_cell = str(record["total_tokens"]) if record["token_records"] else "n/a"
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    agent_name,
+                    record["run_id"],
+                    f"{record['hidden_passed']}/{record['total']} ({record['hidden_pass_rate']:.2%})",
+                    f"{record['visible_passed']}/{record['total']} ({record['visible_pass_rate']:.2%})",
+                    f"{record['avg_runtime_seconds']:.2f}",
+                    token_cell,
+                    f"[report]({_path_relative_to_reports(record['run_report'])})",
+                ]
+            )
+            + " |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Run History",
+            "",
+            "| Agent | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Updated At |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for record in sorted(retained_records, key=lambda item: (item["run_id"], item["agent"]), reverse=True):
+        token_cell = str(record["total_tokens"]) if record["token_records"] else "n/a"
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    record["agent"],
+                    record["run_id"],
+                    f"{record['hidden_passed']}/{record['total']} ({record['hidden_pass_rate']:.2%})",
+                    f"{record['visible_passed']}/{record['total']} ({record['visible_pass_rate']:.2%})",
+                    f"{record['avg_runtime_seconds']:.2f}",
+                    token_cell,
+                    record["updated_at"],
+                ]
+            )
+            + " |"
+        )
+    lines.append("")
+    comparison_path.write_text("\n".join(lines), encoding="utf-8")
+    return history_path, comparison_path

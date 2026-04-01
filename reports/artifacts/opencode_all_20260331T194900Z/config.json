@@ -1,0 +1,11 @@
+{
+  "agents": [
+    "opencode"
+  ],
+  "dataset_path": "/home/keith/sources/GitChameleonBenchmark/dataset/dataset.jsonl",
+  "example_ids": [],
+  "include_visible_tests": false,
+  "limit": null,
+  "run_id": "opencode_all_20260331T194900Z",
+  "workspace_root": "/tmp/gitchameleon_agent_workspaces"
+}

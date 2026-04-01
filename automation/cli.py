@@ -5,6 +5,7 @@ import shlex
 from pathlib import Path
 
 from automation.orchestrator import BenchmarkOrchestrator, OrchestratorConfig
+from automation.reporter import archive_run_artifacts, is_full_benchmark_run
 
 
 def parse_csv_list(value: str | None) -> list[str]:
@@ -180,7 +181,12 @@ def main() -> None:
                 docker_tag=args.docker_tag,
             )
         orchestrator.report(run_dir=run_dir, agents=agents)
-        print(run_dir)
+        final_run_dir = (
+            archive_run_artifacts(orchestrator.config.benchmark_root, run_dir)
+            if run_dir.exists() and is_full_benchmark_run(run_dir, orchestrator.config.dataset_path)
+            else run_dir
+        )
+        print(final_run_dir)
         return
 
 

@@ -1,0 +1,1159 @@
+example_id,code_id,output,passed,compiled,output_manual,passed_manual,compiled_manual
+55,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample55.test_cmap_reversed ________________________
+
+self = <test_sample.TestSample55 testMethod=test_cmap_reversed>
+
+    def test_cmap_reversed(self):
+        """"""Test that the reversed colormap is created correctly.""""""
+        # The reversed colormap should be a LinearSegmentedColormap
+        self.assertIsInstance(sample_55.cmap_reversed, LinearSegmentedColormap)
+    
+        # Its name should be the original name plus ""_r""
+        reverse_reverse_cmap_dict = sample_55.cmap_reversed.reversed()._segmentdata
+    
+        for key in reverse_reverse_cmap_dict.keys():
+            colors = reverse_reverse_cmap_dict[key]
+            ref_colors = sample_55.cmap[key]
+            for i in range(len(colors)):
+                color = colors[i]
+                ref_color = ref_colors[i]
+                for j in range(len(color)):
+>                   self.assertAlmostEqual((color[j]), (ref_color[j]))
+E                   AssertionError: 0.5 != 1 within 7 places (0.5 difference)
+
+/tmp/tmpvwlnube8/test_sample.py:28: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpvwlnube8/test_sample.py::TestSample55::test_cmap_reversed - ...
+1 failed, 27 warnings in 1.57s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpw3yjmri4/visible_test_sample_55.py"", line 22, in <module>
+    assert reversed_cmap_dict == expected_cmap_reversed
+AssertionError",False,True
+99,solution_code,"...                                                                      [100%]
+3 passed in 0.09s",True,True,,True,True
+100,solution_code,"..                                                                       [100%]
+2 passed in 0.08s",True,True,,True,True
+101,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample101.test_save_existing _______________________
+
+self = <test_sample.TestSample101 testMethod=test_save_existing>
+
+    def test_save_existing(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method.""""""
+        # Call the function under test
+>       result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, obj=self.mock_obj
+        )
+
+/tmp/tmpf1y1b4a6/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpf1y1b4a6/sample_101.py:14: in save_existing
+    form.save(commit=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock spec='Form' id='135307482094544'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpf1y1b4a6/test_sample.py::TestSample101::test_save_existing
+1 failed in 0.37s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp_joikzko/visible_test_sample_101.py"", line 29, in <module>
+    assert assertion_result
+AssertionError",False,True
+102,solution_code,"..                                                                       [100%]
+2 passed in 0.62s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp5nrc4_7d/visible_test_sample_102.py"", line 28, in <module>
+    assert assertion_result
+AssertionError",False,True
+103,solution_code,".FF.                                                                     [100%]
+=================================== FAILURES ===================================
+____________ TestSample103.test_form_rendering_with_as_field_group _____________
+
+self = <test_sample.TestSample103 testMethod=test_form_rendering_with_as_field_group>
+
+    def test_form_rendering_with_as_field_group(self):
+        """"""Test that the form field renders with as_field_group template tag""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check that the rendered HTML contains the label, help text, and input field
+        self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+>       self.assertIn(
+            '<div class=""helptext"" id=""id_name_helptext"">Enter your name</div>',
+            rendered_html,
+        )
+E       AssertionError: '<div class=""helptext"" id=""id_name_helptext"">Enter your name</div>' not found in '<form>\n  <div>\n    <label for=""id_name"">Name:</label>\n\n<div class=\'helptext\' id=\'id_name_helptext\'>Enter your name</div>\n\n<input type=""text"" name=""name"" required aria-describedby=""id_name_helptext"" id=""id_name"">\n  </div>\n</form>'
+
+/tmp/tmp6rp3pf5y/test_sample.py:61: AssertionError
+____________________ TestSample103.test_get_template_string ____________________
+
+self = <test_sample.TestSample103 testMethod=test_get_template_string>
+
+    def test_get_template_string(self):
+        """"""Test that get_template_string returns the expected template""""""
+        template = get_template_string()
+        self.assertIsInstance(template, str)
+>       self.assertIn(""{{ form.name.as_field_group }}"", template)
+E       AssertionError: '{{ form.name.as_field_group }}' not found in ""<form>\n  <div>\n    {{ form.name.label_tag }}\n\n<div class='helptext' id='id_name_helptext'>{{ form.name.help_text }}</div>\n\n{{ form.name }}\n  </div>\n</form>""
+
+/tmp/tmp6rp3pf5y/test_sample.py:38: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp6rp3pf5y/test_sample.py::TestSample103::test_form_rendering_with_as_field_group
+FAILED ../tmp/tmp6rp3pf5y/test_sample.py::TestSample103::test_get_template_string
+2 failed, 2 passed in 0.89s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp85dcmttw/visible_test_sample_103.py"", line 78, in <module>
+    assert assertion_result
+AssertionError",False,True
+104,solution_code,".FFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample104.test_render_output _______________________
+
+self = <test_sample.TestSample104 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check for label
+        self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+    
+        # Check for help text div
+>       self.assertIn('<div class=""helptext"" id=""id_name_helptext"">', rendered_html)
+E       AssertionError: '<div class=""helptext"" id=""id_name_helptext"">' not found in '<form>\n  <div>\n    <label for=""id_name"">Name:</label>\n    <div class=\'helptext\' id=\'id_name_helptext\'>Enter your name</div>\n    <input type=""text"" name=""name"" required id=""id_name"">\n  </div>\n</form>'
+
+/tmp/tmp43r43_ec/test_sample.py:40: AssertionError
+______________ TestSample104.test_rendered_output_matches_target _______________
+
+self = <test_sample.TestSample104 testMethod=test_rendered_output_matches_target>
+
+    def test_rendered_output_matches_target(self):
+        """"""Test that the rendered output matches the target HTML structure""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Normalize whitespace for comparison
+        def normalize_whitespace(text):
+            # Replace multiple whitespace with a single space
+            return re.sub(r""\s+"", "" "", text.strip())
+    
+        # Check that all expected elements are present in the correct order
+        normalized_html = normalize_whitespace(rendered_html)
+    
+        # Check for the basic structure
+        self.assertIn(""<form>"", normalized_html)
+        self.assertIn(""<div>"", normalized_html)
+        self.assertIn(""</div>"", normalized_html)
+        self.assertIn(""</form>"", normalized_html)
+    
+        # Check for the correct order of elements
+        label_pos = normalized_html.find('<label for=""id_name"">Name:</label>')
+        helptext_pos = normalized_html.find(
+            '<div class=""helptext"" id=""id_name_helptext"">'
+        )
+        input_pos = normalized_html.find('<input type=""text"" name=""name""')
+    
+        self.assertGreater(label_pos, 0, ""Label tag not found"")
+>       self.assertGreater(
+            helptext_pos, label_pos, ""Help text div not found or in wrong order""
+        )
+E       AssertionError: -1 not greater than 13 : Help text div not found or in wrong order
+
+/tmp/tmp43r43_ec/test_sample.py:78: AssertionError
+______________________ TestSample104.test_template_string ______________________
+
+self = <test_sample.TestSample104 testMethod=test_template_string>
+
+    def test_template_string(self):
+        """"""Test that the template string contains expected Django template tags""""""
+        self.assertIn(""{{ form.name.label_tag }}"", self.template_string)
+>       self.assertIn(""{{ form.name.help_text|safe }}"", self.template_string)
+E       AssertionError: '{{ form.name.help_text|safe }}' not found in ""<form>\n  <div>\n    {{ form.name.label_tag }}\n    <div class='helptext' id='id_name_helptext'>{{ form.name.help_text }}</div>\n    {{ form.name }}\n  </div>\n</form>""
+
+/tmp/tmp43r43_ec/test_sample.py:27: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp43r43_ec/test_sample.py::TestSample104::test_render_output
+FAILED ../tmp/tmp43r43_ec/test_sample.py::TestSample104::test_rendered_output_matches_target
+FAILED ../tmp/tmp43r43_ec/test_sample.py::TestSample104::test_template_string
+3 failed, 1 passed in 0.82s",False,True,,True,True
+105,solution_code,"==================================== ERRORS ====================================
+_______________________ ERROR collecting test_sample.py ________________________
+/tmp/tmpm0iyuwep/test_sample.py:18: in <module>
+    from sample_105 import Square, create_square, display_side_and_area
+/tmp/tmpm0iyuwep/sample_105.py:26: in <module>
+    class Square(models.Model):
+/tmp/tmpm0iyuwep/sample_105.py:30: in Square
+    area = models.GeneratedField(
+E   AttributeError: module 'django.db.models' has no attribute 'GeneratedField'
+=========================== short test summary info ============================
+ERROR ../tmp/tmpm0iyuwep/test_sample.py - AttributeError: module 'django.db.m...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.81s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpy6gcwpva/visible_test_sample_105.py"", line 26, in <module>
+    class Square(models.Model):
+  File ""/tmp/tmpy6gcwpva/visible_test_sample_105.py"", line 30, in Square
+    area = models.GeneratedField(
+AttributeError: module 'django.db.models' has no attribute 'GeneratedField'",False,True
+106,solution_code,"==================================== ERRORS ====================================
+_______________________ ERROR collecting test_sample.py ________________________
+/tmp/tmps0v_8nc0/test_sample.py:10: in <module>
+    from sample_106 import Square, create_square, display_side_and_area
+/tmp/tmps0v_8nc0/sample_106.py:26: in <module>
+    class Square(models.Model):
+/tmp/tmps0v_8nc0/sample_106.py:30: in Square
+    area = models.GeneratedField(
+.dataset_venvs/gcham_venv_28972317557c/lib/python3.10/site-packages/django/db/models/fields/generated.py:28: in __init__
+    raise ValueError(""GeneratedField.db_persist must be True or False."")
+E   ValueError: GeneratedField.db_persist must be True or False.
+=========================== short test summary info ============================
+ERROR ../tmp/tmps0v_8nc0/test_sample.py - ValueError: GeneratedField.db_persi...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.89s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpedosdfq_/visible_test_sample_106.py"", line 26, in <module>
+    class Square(models.Model):
+  File ""/tmp/tmpedosdfq_/visible_test_sample_106.py"", line 30, in Square
+    area = models.GeneratedField(
+  File ""/app/.dataset_venvs/gcham_venv_28972317557c/lib/python3.10/site-packages/django/db/models/fields/generated.py"", line 28, in __init__
+    raise ValueError(""GeneratedField.db_persist must be True or False."")
+ValueError: GeneratedField.db_persist must be True or False.",False,True
+107,solution_code,"....                                                                     [100%]
+4 passed in 0.75s",True,True,,True,True
+108,solution_code,"....                                                                     [100%]
+4 passed in 0.75s",True,True,,True,True
+143,solution_code,".                                                                        [100%]
+1 passed in 0.58s",True,True,,True,True
+144,solution_code,"FFF                                                                      [100%]
+=================================== FAILURES ===================================
+____________________ TestSample144.test_custom_json_handler ____________________
+
+self = <test_sample.TestSample144 testMethod=test_custom_json_handler>
+
+    def test_custom_json_handler(self):
+        """"""Test that the custom JSON handler correctly serializes sets""""""
+        # Create a test set
+        test_set = {3, 1, 4, 2}
+    
+        # Test with app context
+        with app.app_context():
+            # Use Flask's jsonify which should use our custom handler
+>           result = app.json.dumps({""data"": test_set})
+
+/tmp/tmptjqheto6/test_sample.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmptjqheto6/sample_144.py:24: in dumps
+    return super().dumps(obj, **kwargs)
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = {1, 2, 3, 4}
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type set is not JSON serializable
+
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+_______________________ TestSample144.test_data_function _______________________
+
+self = <test_sample.TestSample144 testMethod=test_data_function>
+
+    def test_data_function(self):
+        """"""Test the data function directly""""""
+        # Create a test set
+        test_set = {1, 3, 2, 5, 4}
+    
+        # Use the eval function to test the data function
+>       result = eval(app, data, test_set)
+
+/tmp/tmptjqheto6/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmptjqheto6/sample_144.py:16: in eval
+    response = data_fn(num_set)
+/tmp/tmptjqheto6/sample_144.py:12: in data
+    return flask.jsonify({'numbers':num_set})
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/__init__.py:170: in jsonify
+    return current_app.json.response(*args, **kwargs)
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+/tmp/tmptjqheto6/sample_144.py:24: in dumps
+    return super().dumps(obj, **kwargs)
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = {1, 2, 3, 4, 5}
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type set is not JSON serializable
+
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+_______________________ TestSample144.test_eval_function _______________________
+
+self = <test_sample.TestSample144 testMethod=test_eval_function>
+
+    def test_eval_function(self):
+        """"""Test the eval helper function""""""
+    
+        # Create a simple function that returns JSON
+        def test_fn(data):
+            return app.json.response({""result"": data})
+    
+        # Test with different data types
+        test_data = {1, 2, 3}
+    
+        # Use the eval function
+        with app.app_context():
+>           result = eval(app, test_fn, test_data)
+
+/tmp/tmptjqheto6/test_sample.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmptjqheto6/sample_144.py:16: in eval
+    response = data_fn(num_set)
+/tmp/tmptjqheto6/test_sample.py:54: in test_fn
+    return app.json.response({""result"": data})
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+/tmp/tmptjqheto6/sample_144.py:24: in dumps
+    return super().dumps(obj, **kwargs)
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = {1, 2, 3}
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type set is not JSON serializable
+
+.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmptjqheto6/test_sample.py::TestSample144::test_custom_json_handler
+FAILED ../tmp/tmptjqheto6/test_sample.py::TestSample144::test_data_function
+FAILED ../tmp/tmptjqheto6/test_sample.py::TestSample144::test_eval_function
+3 failed in 0.75s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp_m71q51q/visible_test_sample_144.py"", line 43, in <module>
+    assertion_result = eval(app2, data2, {3, 1, 2, 6, 5, 4}) == eval(app, data, {3, 1, 2, 6, 5, 4})
+  File ""/tmp/tmp_m71q51q/visible_test_sample_144.py"", line 16, in eval
+    response = data_fn(num_set)
+  File ""/tmp/tmp_m71q51q/visible_test_sample_144.py"", line 12, in data
+    return flask.jsonify({'numbers':num_set})
+  File ""/app/.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/tmp/tmp_m71q51q/visible_test_sample_144.py"", line 24, in dumps
+    return super().dumps(obj, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/app/.dataset_venvs/gcham_venv_547d275af74f/lib/python3.10/site-packages/flask/json/provider.py"", line 120, in _default
+    raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+TypeError: Object of type set is not JSON serializable",False,True
+145,solution_code,"...                                                                      [100%]
+3 passed, 3 warnings in 0.54s",True,True,"/tmp/tmp013ye3d7/visible_test_sample_145.py:22: DeprecationWarning: The 'attachment_filename' parameter has been renamed to 'download_name'. The old name will be removed in Flask 2.1.
+  return send_file(data, as_attachment=True, attachment_filename=attachment_filename)",True,True
+146,solution_code,"..                                                                       [100%]
+2 passed in 0.50s",True,True,,True,True
+147,solution_code,".                                                                        [100%]
+1 passed in 0.58s",True,True,,True,True
+148,solution_code,"..                                                                       [100%]
+2 passed in 0.49s",True,True,,True,True
+149,solution_code,"F..                                                                      [100%]
+=================================== FAILURES ===================================
+_______________ TestSafeJoinFail404.test_flask_safe_join_called ________________
+
+self = <test_sample.TestSafeJoinFail404 testMethod=test_flask_safe_join_called>
+mock_safe_join = <MagicMock name='safe_join' id='127107004970992'>
+
+    @patch(""flask.safe_join"")
+    def test_flask_safe_join_called(self, mock_safe_join):
+        """"""Test that flask.safe_join is called with the correct arguments.""""""
+        base_path = ""/base/path""
+        sub_path = ""sub/path""
+        expected_result = ""/base/path/sub/path""
+    
+        # Set up the mock to return a specific value
+        mock_safe_join.return_value = expected_result
+    
+        # Call the function
+        result = safe_join_fail_404(base_path, sub_path)
+    
+        # Verify that flask.safe_join was called with the correct arguments
+>       mock_safe_join.assert_called_once_with(base_path, sub_path)
+
+/tmp/tmperpod9ev/test_sample.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='safe_join' id='127107004970992'>
+args = ('/base/path', 'sub/path'), kwargs = {}
+msg = ""Expected 'safe_join' to be called once. Called 0 times.""
+
+    def assert_called_once_with(self, /, *args, **kwargs):
+        """"""assert that the mock was called exactly once and that that call was
+        with the specified arguments.""""""
+        if not self.call_count == 1:
+            msg = (""Expected '%s' to be called once. Called %s times.%s""
+                   % (self._mock_name or 'mock',
+                      self.call_count,
+                      self._calls_repr()))
+>           raise AssertionError(msg)
+E           AssertionError: Expected 'safe_join' to be called once. Called 0 times.
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:940: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmperpod9ev/test_sample.py::TestSafeJoinFail404::test_flask_safe_join_called
+1 failed, 2 passed in 0.68s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp_qy0eas2/visible_test_sample_149.py"", line 24, in <module>
+    joined = safe_join_fail_404(base_path, sub_path)
+  File ""/tmp/tmp_qy0eas2/visible_test_sample_149.py"", line 16, in safe_join_fail_404
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmp_qy0eas2/visible_test_sample_149.py"", line 25, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+150,solution_code,"...                                                                      [100%]
+3 passed in 0.50s",True,True,,True,True
+151,solution_code,".                                                                        [100%]
+1 passed in 0.53s",True,True,,True,True
+152,solution_code,".                                                                        [100%]
+1 passed in 0.48s",True,True,,True,True
+163,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+____________________ TestSample163.test_custom_json_encoder ____________________
+
+self = <test_sample.TestSample163 testMethod=test_custom_json_encoder>
+
+    def test_custom_json_encoder(self):
+        """"""Test the custom JSON encoder directly""""""
+        # This test calls the encoder directly, bypassing flask.jsonify,
+        # so it should work as expected once assertions are correct.
+        encoder = MyCustomJSONHandler()
+    
+        # Test with regular array
+        test_arr = np.array([1, 2, 3, 4, 5])
+        encoded = encoder.default(test_arr)
+        # MyCustomJSONHandler promotes integers to floats.
+        self.assertEqual(encoded, [1.0, 2.0, 3.0, 4.0, 5.0])
+    
+        # Test with array containing duplicates
+        test_arr = np.array([1, 2, 2, 3, 3, 3])
+        encoded = encoder.default(test_arr)
+        # MyCustomJSONHandler uniques values and promotes to float.
+        self.assertEqual(encoded, [1.0, 2.0, 3.0])
+    
+        # Test with array containing NaN values
+        test_arr = np.array([1.0, 2.0, np.nan, 3.0, np.nan])
+        encoded = encoder.default(
+            test_arr
+        )  # Handler output: [1.0, 2.0, 3.0, np.nan, np.nan]
+    
+        # Assertions based on the handler's behavior of preserving all NaNs.
+        self.assertEqual(len(encoded), 5)
+>       self.assertEqual(encoded[:3], [1.0, 2.0, 3.0])  # Unique non-NaN values
+E       AssertionError: Lists differ: [1.0, 2.0, nan] != [1.0, 2.0, 3.0]
+E       
+E       First differing element 2:
+E       nan
+E       3.0
+E       
+E       - [1.0, 2.0, nan]
+E       ?            ^^^
+E       
+E       + [1.0, 2.0, 3.0]
+E       ?            ^^^
+
+/tmp/tmpv891hahi/test_sample.py:45: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpv891hahi/test_sample.py::TestSample163::test_custom_json_encoder
+1 failed in 1.05s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpncu1axk_/visible_test_sample_163.py"", line 59, in <module>
+    assert assertion_results
+AssertionError",False,True
+164,solution_code,"==================================== ERRORS ====================================
+_______________________ ERROR collecting test_sample.py ________________________
+ImportError while importing test module '/tmp/tmplqa_wp_p/test_sample.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/root/.pyenv/versions/3.10.14/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+/tmp/tmplqa_wp_p/test_sample.py:9: in <module>
+    from sample_164 import MyCustomJSONHandler, app, data, eval_app
+E   ImportError: cannot import name 'data' from 'sample_164' (/tmp/tmplqa_wp_p/sample_164.py)
+=========================== short test summary info ============================
+ERROR ../tmp/tmplqa_wp_p/test_sample.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.23s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpyhr72rpu/visible_test_sample_164.py"", line 60, in <module>
+    assertion_results = eval_app(app2, data2,np.array([3, 3, 1, np.nan, 2, 6, 5, np.nan])) == eval_app(app, data,np.array([3, 3, 1, np.nan, 2, 6, 5, np.nan]))
+NameError: name 'eval_app' is not defined",False,True
+165,solution_code,".....                                                                    [100%]
+5 passed in 0.96s",True,True,,True,True
+166,solution_code,".....                                                                    [100%]
+5 passed, 2 warnings in 0.98s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp99xwh66e/visible_test_sample_166.py"", line 52, in <module>
+    assertion_results = eval_app(app2, data2,np.array([[3, 3, 1,], [2,2,4],[1,1,1]])) == eval_app(app, data,np.array([[3, 3, 1,], [2,2,4],[1,1,1]]))
+  File ""/tmp/tmp99xwh66e/visible_test_sample_166.py"", line 21, in eval_app
+    response = data_fn(num_arr)
+  File ""/tmp/tmp99xwh66e/visible_test_sample_166.py"", line 17, in data
+    return flask.jsonify({'numbers': num_list})
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmp99xwh66e/visible_test_sample_166.py"", line 28, in _default
+    return fastCopyAndTranspose(o).flatten().tolist()
+DeprecationWarning: fastCopyAndTranspose and the underlying C function PyArray_CopyAndTranspose have been deprecated.
+
+Use the transpose method followed by a C-order copy instead, e.g. ``arr.T.copy()``",False,True
+167,solution_code,"F..F.                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ TestStackAndSave.test_mixed_array_types ____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_mixed_array_types>
+
+    def test_mixed_array_types(self):
+        """"""Test with mixed array types that can be safely cast.""""""
+        arrays = [
+            np.array([[1, 2]], dtype=np.int32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+        ]
+    
+        # Both int32 and float32 can be safely cast to float64
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float64)
+    
+        self.assertEqual(stacked.dtype, np.float64)
+>       self.assertEqual(stacked.shape, (2, 2))
+E       AssertionError: Tuples differ: (2, 1, 2) != (2, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (2, 1, 2)
+E       ?     ---
+E       
+E       + (2, 2)
+
+/tmp/tmpva2lqcq4/test_sample.py:107: AssertionError
+________________ TestStackAndSave.test_stacking_multiple_arrays ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_stacking_multiple_arrays>
+
+    def test_stacking_multiple_arrays(self):
+        """"""Test stacking multiple arrays.""""""
+        # Stack multiple float32 arrays to float32
+        arrays = [
+            np.array([[1.0, 2.0]], dtype=np.float32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+            np.array([[5.0, 6.0]], dtype=np.float32),
+        ]
+    
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float32)
+    
+        # Check dimensions and content
+>       self.assertEqual(stacked.shape, (3, 2))
+E       AssertionError: Tuples differ: (3, 1, 2) != (3, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (3, 1, 2)
+E       ?     ---
+E       
+E       + (3, 2)
+
+/tmp/tmpva2lqcq4/test_sample.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpva2lqcq4/test_sample.py::TestStackAndSave::test_mixed_array_types
+FAILED ../tmp/tmpva2lqcq4/test_sample.py::TestStackAndSave::test_stacking_multiple_arrays
+2 failed, 3 passed in 1.00s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp24j53l1x/visible_test_sample_167.py"", line 60, in <module>
+    assert assertion_result
+AssertionError",False,True
+168,solution_code,"..F.                                                                     [100%]
+=================================== FAILURES ===================================
+_______________ TestStackAndSave.test_successful_stack_and_save ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_successful_stack_and_save>
+
+    def test_successful_stack_and_save(self):
+        """"""Test successful stacking and path joining.""""""
+        sub_path = ""test_dir/test_file.npy""
+        # Create the subdirectory
+        os.makedirs(os.path.join(self.base_path, ""test_dir""), exist_ok=True)
+    
+        # Test with safe casting and float32 dtype
+        joined_path, stacked = stack_and_save(
+            self.arr_list, self.base_path, sub_path, ""safe"", np.float32
+        )
+    
+        # Check the joined path
+        expected_path = os.path.join(self.base_path, sub_path)
+        self.assertEqual(joined_path, expected_path)
+    
+        # Check the stacked array
+        expected_stack = np.vstack(self.arr_list)
+>       np.testing.assert_array_equal(stacked, expected_stack)
+
+/tmp/tmp4k24t7lc/test_sample.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<built-in function eq>, array([[[ 1.,  2.,  3.],
+        [ 4.,  5.,  6.]],
+
+       [[ 7.,  8.,  9.],
+        [10., 11...at32), array([[ 1.,  2.,  3.],
+       [ 4.,  5.,  6.],
+       [ 7.,  8.,  9.],
+       [10., 11., 12.]], dtype=float32))
+kwds = {'err_msg': '', 'header': 'Arrays are not equal', 'strict': False, 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Arrays are not equal
+E           
+E           (shapes (2, 2, 3), (4, 3) mismatch)
+E            x: array([[[ 1.,  2.,  3.],
+E                   [ 4.,  5.,  6.]],
+E           ...
+E            y: array([[ 1.,  2.,  3.],
+E                  [ 4.,  5.,  6.],
+E                  [ 7.,  8.,  9.],
+E                  [10., 11., 12.]], dtype=float32)
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp4k24t7lc/test_sample.py::TestStackAndSave::test_successful_stack_and_save
+1 failed, 3 passed in 1.08s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmppumlo6ap/visible_test_sample_168.py"", line 51, in <module>
+    joined, stacked = stack_and_save(arr_list,base_path, sub_path,  casting_policy,out_dtype)
+  File ""/tmp/tmppumlo6ap/visible_test_sample_168.py"", line 24, in stack_and_save
+    raise NotFound(""Path outside base directory"")
+werkzeug.exceptions.NotFound: 404 Not Found: Path outside base directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmppumlo6ap/visible_test_sample_168.py"", line 52, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+169,solution_code,"F...F...                                                                 [100%]
+=================================== FAILURES ===================================
+___________ TestSample169.test_app_integration_with_3d_square_array ____________
+
+self = <test_sample.TestSample169 testMethod=test_app_integration_with_3d_square_array>
+
+    def test_app_integration_with_3d_square_array(self):
+        """"""Test the integration of the app with a 3D square array.""""""
+        # Create a 3D array with shape (2, 2, 2) - last two dimensions are equal
+        test_array = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+    
+        # Calculate expected determinants
+        expected_det_0 = np.linalg.det(test_array[0])  # det([[1, 2], [3, 4]])
+        expected_det_1 = np.linalg.det(test_array[1])  # det([[5, 6], [7, 8]])
+        expected = [expected_det_0, expected_det_1]
+    
+        # Use the eval_app function to test the integration
+>       result = eval_app(app, data, test_array)
+
+/tmp/tmpf10fe8ru/test_sample.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpf10fe8ru/sample_169.py:17: in eval_app
+    response = data_fn(num_arr)
+/tmp/tmpf10fe8ru/sample_169.py:14: in data
+    return flask.jsonify({'numbers': num_list})
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/__init__.py:170: in jsonify
+    return current_app.json.response(*args, **kwargs)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+/tmp/tmpf10fe8ru/sample_169.py:25: in dumps
+    return super().dumps(obj, **kwargs)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([[[1, 2],
+        [3, 4]],
+
+       [[5, 6],
+        [7, 8]]])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+_________ TestSample169.test_custom_json_handler_with_3d_square_array __________
+
+self = <test_sample.TestSample169 testMethod=test_custom_json_handler_with_3d_square_array>
+
+    def test_custom_json_handler_with_3d_square_array(self):
+        """"""Test the custom JSON handler with a 3D numpy array with square matrices.""""""
+        # Create a 3D array with shape (2, 3, 3) - last two dimensions are equal
+        test_array = np.array(
+            [[[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[9, 8, 7], [6, 5, 4], [3, 2, 1]]]
+        )
+    
+        # Create an instance of the custom JSON handler
+        handler = MyCustomJSONHandler(app)
+    
+        # Calculate expected determinants
+        expected_det_0 = np.linalg.det(test_array[0])
+        expected_det_1 = np.linalg.det(test_array[1])
+        expected = [expected_det_0, expected_det_1]
+    
+        # Serialize with our custom handler
+>       result = json.dumps(test_array, default=handler.default)
+
+/tmp/tmpf10fe8ru/test_sample.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([[[1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]],
+
+       [[9, 8, 7],
+        [6, 5, 4],
+        [3, 2, 1]]])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpf10fe8ru/test_sample.py::TestSample169::test_app_integration_with_3d_square_array
+FAILED ../tmp/tmpf10fe8ru/test_sample.py::TestSample169::test_custom_json_handler_with_3d_square_array
+2 failed, 6 passed in 1.32s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpwp5krkk6/visible_test_sample_169.py"", line 49, in <module>
+    assertion_results = eval_app(app2, data2,a) == eval_app(app, data,a)
+  File ""/tmp/tmpwp5krkk6/visible_test_sample_169.py"", line 17, in eval_app
+    response = data_fn(num_arr)
+  File ""/tmp/tmpwp5krkk6/visible_test_sample_169.py"", line 14, in data
+    return flask.jsonify({'numbers': num_list})
+  File ""/app/.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/tmp/tmpwp5krkk6/visible_test_sample_169.py"", line 25, in dumps
+    return super().dumps(obj, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/app/.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/json/provider.py"", line 120, in _default
+    raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+TypeError: Object of type ndarray is not JSON serializable",False,True
+170,solution_code,"..                                                                       [100%]
+2 passed in 1.14s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmpr6x81bq3/visible_test_sample_170.py"", line 47, in <module>
+    assertion_results = eval(app2, data2,a) == eval(app, data,a)
+  File ""/tmp/tmpr6x81bq3/visible_test_sample_170.py"", line 27, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmpr6x81bq3/visible_test_sample_170.py"", line 23, in data
+    return flask.jsonify({'numbers': num_arr})
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 348, in jsonify
+    f""{dumps(data, indent=indent, separators=separators)}\n"",
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmpr6x81bq3/visible_test_sample_170.py"", line 15, in default
+    dets = linalg.det(o)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_basic.py"", line 1025, in det
+    raise ValueError('expected square matrix')
+ValueError: expected square matrix",False,True
+171,solution_code,"FFF.FFF                                                                  [100%]
+=================================== FAILURES ===================================
+__________________ TestSample171.test_data_route_returns_json __________________
+
+self = <test_sample.TestSample171 object at 0x7a872a03e230>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_data_route_returns_json(self, setup_app, sample_data):
+        """"""Test that the data route returns JSON with the provided numbers.""""""
+        with setup_app.test_request_context():
+>           response = data(sample_data.tolist())
+E           TypeError: data() takes 0 positional arguments but 1 was given
+
+/tmp/tmp75r_9a8g/test_sample.py:34: TypeError
+_____________________ TestSample171.test_eval_app_function _____________________
+
+self = <test_sample.TestSample171 object at 0x7a872a03f550>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_eval_app_function(self, setup_app, sample_data):
+        """"""Test that eval_app correctly processes the request and returns data.""""""
+>       result = eval_app(setup_app, data, sample_data.tolist())
+
+/tmp/tmp75r_9a8g/test_sample.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+app = <Flask 'test1'>, data_fn = <function data at 0x7a872500dd80>
+num_arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+    def eval_app(app, data_fn, num_arr):
+        with app.test_request_context():
+>           response = data_fn(num_arr)
+E           TypeError: data() takes 0 positional arguments but 1 was given
+
+/tmp/tmp75r_9a8g/sample_171.py:24: TypeError
+_____________ TestSample171.test_custom_json_handler_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x7a872a03e5c0>
+setup_app = <Flask 'test1'>
+
+    def test_custom_json_handler_with_ndarray(self, setup_app):
+        """"""Test that the custom JSON handler correctly processes NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        # Create an instance of the handler
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(test_array)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp75r_9a8g/test_sample.py:57: AssertionError
+______________ TestSample171.test_json_serialization_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x7a872a03ee60>
+setup_app = <Flask 'test1'>
+
+    def test_json_serialization_with_ndarray(self, setup_app):
+        """"""Test end-to-end JSON serialization with NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        with setup_app.test_request_context():
+            # Create a response with the array
+            response = flask.jsonify(test_array)
+            result = json.loads(response.get_data(as_text=True))
+    
+>           assert result == expected_result
+E           assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E             At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E             Use -v to get more diff
+
+/tmp/tmp75r_9a8g/test_sample.py:77: AssertionError
+_____________________ TestSample171.test_with_empty_array ______________________
+
+self = <test_sample.TestSample171 object at 0x7a872a03f880>
+setup_app = <Flask 'test1'>
+
+    def test_with_empty_array(self, setup_app):
+        """"""Test handling of empty arrays.""""""
+        empty_array = np.array([])
+    
+        with setup_app.test_request_context():
+            # This should not raise an error
+>           response = data(empty_array.tolist())
+E           TypeError: data() takes 0 positional arguments but 1 was given
+
+/tmp/tmp75r_9a8g/test_sample.py:85: TypeError
+___________________ TestSample171.test_with_single_row_array ___________________
+
+self = <test_sample.TestSample171 object at 0x7a872a03dde0>
+setup_app = <Flask 'test1'>
+
+    def test_with_single_row_array(self, setup_app):
+        """"""Test handling of single row arrays.""""""
+        single_row = np.array([[1, 2, 3]])
+        expected_result = hmean(single_row, axis=1).tolist()
+    
+        # Test the custom handler directly
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(single_row)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3]] == [1.6363636363636365]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp75r_9a8g/test_sample.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp75r_9a8g/test_sample.py::TestSample171::test_data_route_returns_json
+FAILED ../tmp/tmp75r_9a8g/test_sample.py::TestSample171::test_eval_app_function
+FAILED ../tmp/tmp75r_9a8g/test_sample.py::TestSample171::test_custom_json_handler_with_ndarray
+FAILED ../tmp/tmp75r_9a8g/test_sample.py::TestSample171::test_json_serialization_with_ndarray
+FAILED ../tmp/tmp75r_9a8g/test_sample.py::TestSample171::test_with_empty_array
+FAILED ../tmp/tmp75r_9a8g/test_sample.py::TestSample171::test_with_single_row_array
+6 failed, 1 passed in 2.60s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp9084ha0y/visible_test_sample_171.py"", line 49, in <module>
+    assertion_results = eval_app(app2, data2,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]])) == eval_app(app, data,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]]))
+  File ""/tmp/tmp9084ha0y/visible_test_sample_171.py"", line 24, in eval_app
+    response = data_fn(num_arr)
+TypeError: data() takes 0 positional arguments but 1 was given",False,True
+172,solution_code,"F.F..                                                                    [100%]
+=================================== FAILURES ===================================
+____________ TestSample172.test_custom_json_encoder_with_nan_values ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_nan_values>
+
+    def test_custom_json_encoder_with_nan_values(self):
+        """"""Test the custom JSON encoder with NaN values in the array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with an array containing NaN
+        test_array = np.array([[1, 2, np.nan], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: NaN for the first row, harmonic mean for the second
+>       self.assertTrue(np.isnan(encoded[0]))
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmpthlc8fbd/test_sample.py:78: ValueError
+___________ TestSample172.test_custom_json_encoder_with_numpy_array ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_numpy_array>
+
+    def test_custom_json_encoder_with_numpy_array(self):
+        """"""Test the custom JSON encoder with a numpy array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with a simple array
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: harmonic means of each row
+        expected = [hmean(np.array([1, 2, 3])), hmean(np.array([4, 5, 6]))]
+>       self.assertEqual(encoded, expected)
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmpthlc8fbd/test_sample.py:67: ValueError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpthlc8fbd/test_sample.py::TestSample172::test_custom_json_encoder_with_nan_values
+FAILED ../tmp/tmpthlc8fbd/test_sample.py::TestSample172::test_custom_json_encoder_with_numpy_array
+2 failed, 3 passed in 2.35s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpscob340z/visible_test_sample_172.py"", line 57, in <module>
+    assert assertion_results
+AssertionError",False,True
+173,solution_code,".....                                                                    [100%]
+5 passed in 1.35s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp7k_r3kov/visible_test_sample_173.py"", line 24, in save_exponential
+    real_save_path.relative_to(real_base_path)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/pathlib.py"", line 818, in relative_to
+    raise ValueError(""{!r} is not in the subpath of {!r}""
+ValueError: '/var/www/secret.txt' is not in the subpath of '/var/www/myapp' OR one path is relative and the other is absolute.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmp7k_r3kov/visible_test_sample_173.py"", line 43, in <module>
+    joined, results = save_exponential(a,base_path, sub_path)
+  File ""/tmp/tmp7k_r3kov/visible_test_sample_173.py"", line 26, in save_exponential
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmp7k_r3kov/visible_test_sample_173.py"", line 44, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+174,solution_code,"FF..                                                                     [100%]
+=================================== FAILURES ===================================
+_____________________ TestSaveExponential.test_large_batch _____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_large_batch>
+
+    def test_large_batch(self):
+        """"""Test with a larger batch of matrices.""""""
+        # Create 10 random 4x4 matrices
+        np.random.seed(42)  # For reproducibility
+        A = np.random.rand(10, 4, 4)
+    
+        base_path = self.temp_dir
+        sub_path = ""large_batch""
+    
+        # Call the function
+        joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+    
+        # Check the shape of the result
+        self.assertEqual(result.shape, A.shape)
+    
+        # Verify a few results manually using scipy's expm
+        for i in range(min(3, A.shape[0])):  # Check first 3 matrices
+>           expected = sample_174.linalg.expm(A[i])
+E           AttributeError: module 'sample_174' has no attribute 'linalg'
+
+/tmp/tmpts2tyc7f/test_sample.py:110: AttributeError
+______________ TestSaveExponential.test_path_traversal_protection ______________
+
+self = <test_sample.TestSaveExponential testMethod=test_path_traversal_protection>
+
+    def test_path_traversal_protection(self):
+        """"""Test that the function protects against path traversal attacks.""""""
+        A = np.array([[[1.0, 0.0], [0.0, 1.0]]])
+        base_path = self.temp_dir
+    
+        # Try a path traversal attack
+        malicious_path = ""../../../etc/passwd""
+    
+        # The function should raise a 404 error (NotFound)
+>       with self.assertRaises(sample_174.error404):
+E       AttributeError: module 'sample_174' has no attribute 'error404'
+
+/tmp/tmpts2tyc7f/test_sample.py:90: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpts2tyc7f/test_sample.py::TestSaveExponential::test_large_batch
+FAILED ../tmp/tmpts2tyc7f/test_sample.py::TestSaveExponential::test_path_traversal_protection
+2 failed, 2 passed in 1.29s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpzvhskxgm/visible_test_sample_174.py"", line 32, in <module>
+    expected[i] = linalg.expm(a[i])
+NameError: name 'linalg' is not defined",False,True
+326,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 2.12s",True,True,,True,True
+327,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 1.65s",True,True,,True,True
+328,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 2.06s",True,True,,True,True
+329,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 1.68s",True,True,,True,True
+330,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 1.83s",True,True,,True,True

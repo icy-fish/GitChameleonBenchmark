@@ -30,6 +30,8 @@ The automation harness is expected to behave as follows:
 - `agent_log.txt` must contain the exact launch command first, then the merged stdout/stderr stream in execution order
 - `raw_outputs.jsonl` must retain per-task run metadata including start/end timestamps, wall-clock duration, and any structured consumption metrics captured from the agent backend
 - `report` output should summarize both correctness metrics and consumption metrics, including runtime and token usage when available
+- full-dataset benchmark runs should also update project-level history artifacts under `reports/`, preserving a per-run record and a cross-run comparison view
+- full-dataset benchmark runs that are included in project history should be moved from `runs/` into `reports/artifacts/{run_id}/`
 
 ## Sample File Workflow
 

@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "108",
+  "library": "django",
+  "problem": "\nCreate a model based on the given color choices. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import django\nfrom django.conf import settings\nfrom django.db import models\n\nsettings.configure()\ndjango.setup()\n\ncolor = models.TextChoices('Color', 'RED GREEN BLUE')\n\nclass MyModel(models.Model):\n    class Meta:\n        app_label = 'myapp'\n    color = models.CharField(max_length=5,",
+  "version": "4.0.0"
+}
