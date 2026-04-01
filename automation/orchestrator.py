@@ -14,6 +14,7 @@ from automation.models import TaskBundle
 from automation.protected_evaluator import evaluate_solutions
 from automation.reporter import (
     archive_run_artifacts,
+    build_run_setup,
     is_full_benchmark_run,
     summarize_results,
     update_project_history,
@@ -195,6 +196,7 @@ class BenchmarkOrchestrator:
             eval_csv = run_dir / "outputs" / agent_name / "solutions_eval_results.csv"
             raw_output_path = run_dir / "outputs" / agent_name / "raw_outputs.jsonl"
             summary = summarize_results(self.config.dataset_path, eval_csv, raw_output_path)
+            summary["run_setup"] = build_run_setup(self.config.benchmark_root, agent_name, raw_output_path)
             write_agent_report(report_dir, agent_name, summary)
             summaries[agent_name] = summary
         write_comparison_report(report_dir, summaries)

@@ -7,6 +7,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+from automation.agent_specs import load_agent_spec
 from automation.backends.opencode import OpencodeBackend
 
 
@@ -25,6 +26,41 @@ def _path_relative_to_reports(path_str: str) -> str:
     if path.parts and path.parts[0] == "reports":
         return str(Path(*path.parts[1:]))
     return str(path)
+
+
+def _agent_version_from_spec(agent_name: str, image_name: str | None) -> str:
+    if image_name and ":" in image_name:
+        return image_name.rsplit(":", 1)[1]
+    if image_name:
+        return image_name
+    return agent_name
+
+
+def _model_from_raw_records(raw_records: list[dict]) -> str | None:
+    for record in raw_records:
+        command = record.get("command") or []
+        if not isinstance(command, list):
+            continue
+        for index, arg in enumerate(command[:-1]):
+            if arg in {"-m", "--model"}:
+                candidate = command[index + 1]
+                if isinstance(candidate, str) and candidate.strip():
+                    return candidate
+    return None
+
+
+def build_run_setup(benchmark_root: Path, agent_name: str, raw_output_path: Path | None) -> dict[str, str]:
+    agent_spec = load_agent_spec(benchmark_root, agent_name)
+    raw_records = _load_raw_run_records(raw_output_path)
+    model_name = _model_from_raw_records(raw_records) or (agent_spec.default_model if agent_spec else "") or "unknown"
+    image_name = agent_spec.image_name if agent_spec else None
+    return {
+        "identifier": f"{agent_name}:{model_name}",
+        "agent_name": agent_name,
+        "agent_version": _agent_version_from_spec(agent_name, image_name),
+        "model_name": model_name,
+        "initial_prompt": agent_spec.prompt_template.strip() if agent_spec and agent_spec.prompt_template else "",
+    }
 
 
 def _load_raw_run_records(raw_output_path: Path | None) -> list[dict]:
@@ -142,6 +178,7 @@ def write_agent_report(report_dir: Path, agent_name: str, summary: dict) -> tupl
         "",
     ]
     token_usage = summary["metrics"]["token_usage"]
+    run_setup = summary.get("run_setup", {})
     if token_usage["count"]:
         lines.extend(
             [
@@ -161,6 +198,19 @@ def write_agent_report(report_dir: Path, agent_name: str, summary: dict) -> tupl
         )
     lines.extend(
         [
+        "## Run Setup",
+        "",
+        f"- Identifier: {run_setup.get('identifier', agent_name)}",
+        f"- Agent: {run_setup.get('agent_name', agent_name)}",
+        f"- Agent version: {run_setup.get('agent_version', 'unknown')}",
+        f"- Model: {run_setup.get('model_name', 'unknown')}",
+        "",
+        "### Initial Prompt",
+        "",
+        "```text",
+        run_setup.get("initial_prompt", ""),
+        "```",
+        "",
         "## Per-Library Hidden Pass Rate",
         "",
         ]
@@ -243,19 +293,37 @@ def update_project_history(
     if history_path.is_file():
         with history_path.open("r", encoding="utf-8") as handle:
             existing_records = [json.loads(line) for line in handle if line.strip()]
+    for record in existing_records:
+        if "identifier" not in record:
+            agent = record.get("agent", "unknown")
+            model_name = record.get("model_name") or "unknown"
+            record["identifier"] = f"{agent}:{model_name}"
+        if "agent_version" not in record:
+            record["agent_version"] = record.get("agent", "unknown")
+        if "initial_prompt" not in record:
+            record["initial_prompt"] = ""
+        if "model_name" not in record:
+            record["model_name"] = "unknown"
 
-    retained_records = [
-        record
-        for record in existing_records
-        if not (record.get("run_id") == run_dir.name and record.get("agent") in agent_summaries)
-    ]
+    retained_records = existing_records[:]
 
     updated_at = datetime.now(timezone.utc).isoformat()
     for agent_name, summary in sorted(agent_summaries.items()):
+        run_setup = summary.get("run_setup", {})
+        identifier = run_setup.get("identifier", agent_name)
+        retained_records = [
+            record
+            for record in retained_records
+            if not (record.get("run_id") == run_dir.name and record.get("identifier") == identifier)
+        ]
         retained_records.append(
             {
                 "run_id": run_dir.name,
+                "identifier": identifier,
                 "agent": agent_name,
+                "agent_version": run_setup.get("agent_version", agent_name),
+                "model_name": run_setup.get("model_name", "unknown"),
+                "initial_prompt": run_setup.get("initial_prompt", ""),
                 "updated_at": updated_at,
                 "run_dir": str(run_dir.relative_to(project_report_dir.parent)),
                 "run_report": str((run_dir / "reports" / f"{agent_name}_report.md").relative_to(project_report_dir.parent)),
@@ -275,28 +343,42 @@ def update_project_history(
             }
         )
 
-    retained_records.sort(key=lambda record: (record["agent"], record["run_id"]))
+    resolved_run_agents = {
+        (record.get("run_id"), record.get("agent"))
+        for record in retained_records
+        if record.get("model_name") and record.get("model_name") != "unknown"
+    }
+    retained_records = [
+        record
+        for record in retained_records
+        if not (
+            record.get("model_name") == "unknown"
+            and (record.get("run_id"), record.get("agent")) in resolved_run_agents
+        )
+    ]
+
+    retained_records.sort(key=lambda record: (record["identifier"], record["run_id"]))
     history_path.write_text("".join(json.dumps(record, sort_keys=True) + "\n" for record in retained_records), encoding="utf-8")
 
-    latest_by_agent: dict[str, dict] = {}
+    latest_by_identifier: dict[str, dict] = {}
     for record in retained_records:
-        latest_by_agent[record["agent"]] = record
+        latest_by_identifier[record["identifier"]] = record
 
     lines = [
         "# Full Benchmark History",
         "",
-        "## Latest Per Agent",
+        "## Latest Per Agent Model",
         "",
-        "| Agent | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Run Report |",
+        "| Identifier | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Run Report |",
         "| --- | --- | --- | --- | --- | --- | --- |",
     ]
-    for agent_name, record in sorted(latest_by_agent.items()):
+    for identifier, record in sorted(latest_by_identifier.items()):
         token_cell = str(record["total_tokens"]) if record["token_records"] else "n/a"
         lines.append(
             "| "
             + " | ".join(
                 [
-                    agent_name,
+                    identifier,
                     record["run_id"],
                     f"{record['hidden_passed']}/{record['total']} ({record['hidden_pass_rate']:.2%})",
                     f"{record['visible_passed']}/{record['total']} ({record['visible_pass_rate']:.2%})",
@@ -311,19 +393,43 @@ def update_project_history(
     lines.extend(
         [
             "",
+            "## Run Setup",
+            "",
+        ]
+    )
+    for identifier, record in sorted(latest_by_identifier.items()):
+        lines.extend(
+            [
+                f"### {identifier}",
+                "",
+                f"- Agent: {record['agent']}",
+                f"- Agent version: {record['agent_version']}",
+                f"- Model: {record['model_name']}",
+                f"- Run ID: {record['run_id']}",
+                "",
+                "```text",
+                record["initial_prompt"],
+                "```",
+                "",
+            ]
+        )
+
+    lines.extend(
+        [
+            "",
             "## Run History",
             "",
-            "| Agent | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Updated At |",
+            "| Identifier | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Updated At |",
             "| --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
-    for record in sorted(retained_records, key=lambda item: (item["run_id"], item["agent"]), reverse=True):
+    for record in sorted(retained_records, key=lambda item: (item["run_id"], item["identifier"]), reverse=True):
         token_cell = str(record["total_tokens"]) if record["token_records"] else "n/a"
         lines.append(
             "| "
             + " | ".join(
                 [
-                    record["agent"],
+                    record["identifier"],
                     record["run_id"],
                     f"{record['hidden_passed']}/{record['total']} ({record['hidden_pass_rate']:.2%})",
                     f"{record['visible_passed']}/{record['total']} ({record['visible_pass_rate']:.2%})",

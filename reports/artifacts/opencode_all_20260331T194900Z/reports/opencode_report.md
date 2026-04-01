@@ -15,6 +15,20 @@
 - Prompt tokens: 385726
 - Completion tokens: 4560
 
+## Run Setup
+
+- Identifier: opencode:opencode/minimax-m2.5-free
+- Agent: opencode
+- Agent version: 1.1
+- Model: opencode/minimax-m2.5-free
+
+### Initial Prompt
+
+```text
+Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.
+You should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.
+```
+
 ## Per-Library Hidden Pass Rate
 
 - django: 5/10 (50.00%)

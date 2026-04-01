@@ -33,6 +33,13 @@
       "total_tokens": 390286
     }
   },
+  "run_setup": {
+    "agent_name": "opencode",
+    "agent_version": "1.1",
+    "identifier": "opencode:opencode/minimax-m2.5-free",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.\nYou should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.",
+    "model_name": "opencode/minimax-m2.5-free"
+  },
   "total": 38,
   "visible_compiled": 38,
   "visible_pass_rate": 0.5,
