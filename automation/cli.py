@@ -47,6 +47,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_agent.add_argument("--executable")
     run_agent.add_argument("--backend-args", help="Shell-style backend args; supports {prompt_path} etc.")
     run_agent.add_argument("--model")
+    run_agent.add_argument("--provider", choices=["openai", "openrouter"])
     run_agent.add_argument("--timeout-sec", type=int, default=900)
     run_agent.add_argument("--no-stdin-prompt", action="store_true")
     run_agent.add_argument("--container-image")
@@ -72,6 +73,7 @@ def build_parser() -> argparse.ArgumentParser:
     full_run.add_argument("--executable-codex")
     full_run.add_argument("--backend-args-codex")
     full_run.add_argument("--model-codex")
+    full_run.add_argument("--provider-codex", choices=["openai", "openrouter"])
     full_run.add_argument("--executable-opencode")
     full_run.add_argument("--backend-args-opencode")
     full_run.add_argument("--model-opencode")
@@ -126,6 +128,7 @@ def main() -> None:
             executable=args.executable,
             args=backend_args,
             model=args.model,
+            provider=args.provider,
             timeout_sec=args.timeout_sec,
             use_stdin_prompt=False if args.no_stdin_prompt else None,
             container_image=args.container_image,
@@ -168,6 +171,7 @@ def main() -> None:
                 executable=executable,
                 args=backend_args,
                 model=getattr(args, f"model_{agent_name}", None),
+                provider=getattr(args, f"provider_{agent_name}", None),
                 timeout_sec=args.timeout_sec,
                 container_image=getattr(args, f"container_image_{agent_name}", None),
                 container_workdir=args.container_workdir,

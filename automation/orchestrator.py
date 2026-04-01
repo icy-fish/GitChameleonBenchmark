@@ -89,6 +89,7 @@ class BenchmarkOrchestrator:
         executable: str | None = None,
         args: list[str] | None = None,
         model: str | None = None,
+        provider: str | None = None,
         timeout_sec: int = 900,
         use_stdin_prompt: bool | None = None,
         container_image: str | None = None,
@@ -137,6 +138,7 @@ class BenchmarkOrchestrator:
                     base_config=config,
                     agent_spec=agent_spec,
                     model=run_model,
+                    provider=provider,
                 )
                 for example_id in task_examples
             ]
@@ -153,6 +155,7 @@ class BenchmarkOrchestrator:
                             base_config=config,
                             agent_spec=agent_spec,
                             model=run_model,
+                            provider=provider,
                         ),
                         task_examples,
                     )
@@ -211,6 +214,7 @@ class BenchmarkOrchestrator:
         base_config,
         agent_spec: AgentSpec | None,
         model: str,
+        provider: str | None,
     ) -> dict[str, dict]:
         workspace = self.config.workspace_root / run_dir.name / agent_name / example_id
         bundle = self._load_task_bundle(run_dir, example_id)
@@ -219,6 +223,7 @@ class BenchmarkOrchestrator:
             agent_name=agent_name,
             bundle=bundle,
             model=model,
+            provider=provider,
             agent_spec=agent_spec,
         )
         if task_config.use_stdin_prompt and task_config.format_vars.get("prompt"):
@@ -262,6 +267,7 @@ class BenchmarkOrchestrator:
         agent_name: str,
         bundle: TaskBundle,
         model: str,
+        provider: str | None,
         agent_spec: AgentSpec | None,
     ):
         task_config = copy.deepcopy(base_config)
@@ -295,10 +301,15 @@ class BenchmarkOrchestrator:
         )
         if model:
             task_config.env["GC_AGENT_MODEL"] = model
+        resolved_provider = provider or ("openai" if agent_name == "codex" else "")
+        if resolved_provider:
+            task_config.env["GC_AGENT_PROVIDER"] = resolved_provider
         task_config.format_vars = {
             "agent_name": agent_name,
             "example_id": bundle.example_id,
             "model": model,
+            "provider": resolved_provider,
+            "provider_config_args": self._provider_config_args(agent_name, resolved_provider),
             "sample_path": str(inner_workspace / bundle.sample_filename()),
             "result_file": result_file,
             "result_path": str(inner_workspace / result_file),
@@ -308,6 +319,16 @@ class BenchmarkOrchestrator:
         if agent_spec is not None and agent_spec.prompt_template:
             task_config.format_vars["prompt"] = agent_spec.prompt_template.format(**task_config.format_vars)
         return task_config
+
+    def _provider_config_args(self, agent_name: str, provider: str) -> str:
+        if agent_name != "codex" or not provider or provider == "openai":
+            return ""
+        if provider == "openrouter":
+            return (
+                "-c model_provider='\"openrouter\"' "
+                "-c 'model_providers.openrouter={name=\"OpenRouter\",base_url=\"https://openrouter.ai/api/v1\",env_key=\"OPENROUTER_API_KEY\"}'"
+            )
+        raise ValueError(f"Unsupported provider {provider!r} for agent {agent_name}")
 
     def _ensure_agent_image(self, agent_spec: AgentSpec) -> None:
         if not agent_spec.image_name:

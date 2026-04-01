@@ -1,0 +1,11 @@
+{
+  "agents": [
+    "codex"
+  ],
+  "dataset_path": "/home/keith/sources/GitChameleonBenchmark/dataset/dataset.jsonl",
+  "example_ids": [],
+  "include_visible_tests": false,
+  "limit": null,
+  "run_id": "codex_openrouter_qwen36plus_all_20260401T204000Z",
+  "workspace_root": "/tmp/gitchameleon_agent_workspaces"
+}

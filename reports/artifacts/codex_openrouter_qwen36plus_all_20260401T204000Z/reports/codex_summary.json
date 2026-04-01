@@ -1,0 +1,48 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.5526315789473685,
+  "hidden_passed": 21,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.5,
+      "passed": 5,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.5454545454545454,
+      "passed": 12,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.6666666666666666,
+      "passed": 4,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 81.10566394652491,
+      "count": 38,
+      "total_seconds": 3082.0152299679467
+    },
+    "token_usage": {
+      "average_tokens": 69903.31578947368,
+      "completion_tokens": 57512,
+      "count": 38,
+      "prompt_tokens": 2598814,
+      "total_tokens": 2656326
+    }
+  },
+  "run_setup": {
+    "agent_name": "codex",
+    "agent_version": "codex",
+    "identifier": "codex:qwen/qwen3.6-plus-preview:free",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file. Only modify that sample file.",
+    "model_name": "qwen/qwen3.6-plus-preview:free",
+    "provider_name": "openrouter"
+  },
+  "total": 38,
+  "visible_compiled": 30,
+  "visible_pass_rate": 0.5,
+  "visible_passed": 19
+}

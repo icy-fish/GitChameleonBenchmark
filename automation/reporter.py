@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import csv
 import json
+import shlex
 import shutil
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
 from automation.agent_specs import load_agent_spec
+from automation.backends.codex import CodexBackend
 from automation.backends.opencode import OpencodeBackend
 
 
@@ -38,9 +40,7 @@ def _agent_version_from_spec(agent_name: str, image_name: str | None) -> str:
 
 def _model_from_raw_records(raw_records: list[dict]) -> str | None:
     for record in raw_records:
-        command = record.get("command") or []
-        if not isinstance(command, list):
-            continue
+        command = _command_tokens(record)
         for index, arg in enumerate(command[:-1]):
             if arg in {"-m", "--model"}:
                 candidate = command[index + 1]
@@ -49,16 +49,43 @@ def _model_from_raw_records(raw_records: list[dict]) -> str | None:
     return None
 
 
+def _provider_from_raw_records(raw_records: list[dict]) -> str | None:
+    for record in raw_records:
+        command = _command_tokens(record)
+        for index, arg in enumerate(command[:-1]):
+            if arg == "-c":
+                candidate = command[index + 1]
+                if isinstance(candidate, str) and candidate.startswith("model_provider="):
+                    value = candidate.split("=", 1)[1].strip().strip("\"'")
+                    if value:
+                        return value
+    return None
+
+
+def _command_tokens(record: dict) -> list[str]:
+    command = record.get("command") or []
+    if not isinstance(command, list):
+        return []
+    if len(command) >= 3 and command[0] == "bash" and command[1] == "-lc" and isinstance(command[2], str):
+        try:
+            return shlex.split(command[2])
+        except ValueError:
+            return command
+    return command
+
+
 def build_run_setup(benchmark_root: Path, agent_name: str, raw_output_path: Path | None) -> dict[str, str]:
     agent_spec = load_agent_spec(benchmark_root, agent_name)
     raw_records = _load_raw_run_records(raw_output_path)
     model_name = _model_from_raw_records(raw_records) or (agent_spec.default_model if agent_spec else "") or "unknown"
+    provider_name = _provider_from_raw_records(raw_records) or ("openai" if agent_name == "codex" else "")
     image_name = agent_spec.image_name if agent_spec else None
     return {
         "identifier": f"{agent_name}:{model_name}",
         "agent_name": agent_name,
         "agent_version": _agent_version_from_spec(agent_name, image_name),
         "model_name": model_name,
+        "provider_name": provider_name,
         "initial_prompt": agent_spec.prompt_template.strip() if agent_spec and agent_spec.prompt_template else "",
     }
 
@@ -73,21 +100,32 @@ def _load_raw_run_records(raw_output_path: Path | None) -> list[dict]:
 def _summarize_runtime_metrics(raw_records: list[dict]) -> dict:
     durations = [float(record["duration_sec"]) for record in raw_records if record.get("duration_sec") is not None]
     opencode_backend = OpencodeBackend()
+    codex_backend = CodexBackend()
     token_usage_records: list[dict] = []
     for record in raw_records:
         metrics = record.get("metrics")
         if isinstance(metrics, dict) and isinstance(metrics.get("token_usage"), dict):
             token_usage_records.append(metrics["token_usage"])
             continue
-        if record.get("agent") != "opencode":
+        agent_name = record.get("agent")
+        if agent_name == "opencode":
+            reparsed_metrics = opencode_backend.extract_metrics(
+                stdout=record.get("stdout", ""),
+                stderr=record.get("stderr", ""),
+                combined_output=record.get("combined_output", ""),
+                exit_code=int(record.get("exit_code", 0)),
+                timed_out=bool(record.get("timed_out", False)),
+            )
+        elif agent_name == "codex":
+            reparsed_metrics = codex_backend.extract_metrics(
+                stdout=record.get("stdout", ""),
+                stderr=record.get("stderr", ""),
+                combined_output=record.get("combined_output", ""),
+                exit_code=int(record.get("exit_code", 0)),
+                timed_out=bool(record.get("timed_out", False)),
+            )
+        else:
             continue
-        reparsed_metrics = opencode_backend.extract_metrics(
-            stdout=record.get("stdout", ""),
-            stderr=record.get("stderr", ""),
-            combined_output=record.get("combined_output", ""),
-            exit_code=int(record.get("exit_code", 0)),
-            timed_out=bool(record.get("timed_out", False)),
-        )
         token_usage = reparsed_metrics.get("token_usage")
         if isinstance(token_usage, dict):
             token_usage_records.append(token_usage)
@@ -204,6 +242,7 @@ def write_agent_report(report_dir: Path, agent_name: str, summary: dict) -> tupl
         f"- Agent: {run_setup.get('agent_name', agent_name)}",
         f"- Agent version: {run_setup.get('agent_version', 'unknown')}",
         f"- Model: {run_setup.get('model_name', 'unknown')}",
+        f"- Provider: {run_setup.get('provider_name', 'n/a') or 'n/a'}",
         "",
         "### Initial Prompt",
         "",
@@ -304,6 +343,8 @@ def update_project_history(
             record["initial_prompt"] = ""
         if "model_name" not in record:
             record["model_name"] = "unknown"
+        if "provider_name" not in record:
+            record["provider_name"] = ""
 
     retained_records = existing_records[:]
 
@@ -323,6 +364,7 @@ def update_project_history(
                 "agent": agent_name,
                 "agent_version": run_setup.get("agent_version", agent_name),
                 "model_name": run_setup.get("model_name", "unknown"),
+                "provider_name": run_setup.get("provider_name", ""),
                 "initial_prompt": run_setup.get("initial_prompt", ""),
                 "updated_at": updated_at,
                 "run_dir": str(run_dir.relative_to(project_report_dir.parent)),
@@ -405,6 +447,7 @@ def update_project_history(
                 f"- Agent: {record['agent']}",
                 f"- Agent version: {record['agent_version']}",
                 f"- Model: {record['model_name']}",
+                f"- Provider: {record.get('provider_name') or 'n/a'}",
                 f"- Run ID: {record['run_id']}",
                 "",
                 "```text",

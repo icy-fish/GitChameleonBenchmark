@@ -82,6 +82,12 @@ Run an agent with its folder-defined defaults:
 python3 -m automation.cli run-agent --run-id <run_id> --agent <agent_name>
 ```
 
+When an agent supports provider selection, pass it explicitly at runtime:
+
+```bash
+python3 -m automation.cli run-agent --run-id <run_id> --agent codex --provider openrouter --model <provider_model_name>
+```
+
 Evaluate results:
 
 ```bash

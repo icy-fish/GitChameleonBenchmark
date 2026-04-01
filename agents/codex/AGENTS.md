@@ -32,6 +32,16 @@ The harness reads the final answer from the edited `sample_{i}.py`.
 - output mode: `codex exec --json`
 - execution mode: full-auto, non-interactive
 - auth source: the worker reuses the operator's local Codex home, including `auth.json`
+- provider: `openai` by default; the harness can override this to `openrouter`
+
+## Provider Overrides
+
+Codex benchmark runs can target either:
+
+- `openai`: default Codex provider behavior
+- `openrouter`: injected at runtime with `codex exec -c ...` provider config overrides
+
+OpenRouter runs require `OPENROUTER_API_KEY` in the benchmark worker environment. The harness also mirrors that value into `OPENAI_API_KEY` when needed so Codex versions that still consult the OpenAI env key can run against OpenRouter.
 
 ## Canonical Commands
 
@@ -45,6 +55,12 @@ Run Codex with folder-defined defaults:
 
 ```bash
 python3 -m automation.cli run-agent --run-id codex-smoke --agent codex
+```
+
+Run Codex through OpenRouter:
+
+```bash
+python3 -m automation.cli run-agent --run-id codex-smoke --agent codex --provider openrouter --model openai/gpt-5.4
 ```
 
 Evaluate results:

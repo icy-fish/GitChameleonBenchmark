@@ -6,6 +6,6 @@
   "command": [
     "bash",
     "-lc",
-    "source \"$HOME/.nvm/nvm.sh\" >/dev/null 2>&1 || true; codex exec --json --skip-git-repo-check --full-auto -C {workspace} -m {model} --add-dir {workspace} -"
+    "source \"$HOME/.nvm/nvm.sh\" >/dev/null 2>&1 || true; if [ \"${{GC_AGENT_PROVIDER:-openai}}\" = \"openrouter\" ] && [ -n \"${{OPENROUTER_API_KEY:-}}\" ] && [ -z \"${{OPENAI_API_KEY:-}}\" ]; then export OPENAI_API_KEY=\"$OPENROUTER_API_KEY\"; fi; codex exec --json --skip-git-repo-check --full-auto {provider_config_args} -C {workspace} -m {model} --add-dir {workspace} -"
   ]
 }

@@ -101,7 +101,7 @@ class AgentBackend:
                 solution_text=solution_text,
             )
         except subprocess.TimeoutExpired as exc:
-            combined_output = exc.stdout or ""
+            combined_output = self._coerce_text(exc.stdout)
             completed_at = datetime.now(timezone.utc)
             duration_sec = time.monotonic() - started_monotonic
             return AgentRunResult(
@@ -271,6 +271,13 @@ class AgentBackend:
         if not result_path.is_file():
             return None
         return result_path.read_text(encoding="utf-8")
+
+    def _coerce_text(self, value: Any) -> str:
+        if value is None:
+            return ""
+        if isinstance(value, bytes):
+            return value.decode("utf-8", errors="replace")
+        return str(value)
 
     def extract_metrics(
         self,
