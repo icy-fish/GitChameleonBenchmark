@@ -1,0 +1,47 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.6578947368421053,
+  "hidden_passed": 25,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.5,
+      "passed": 5,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.6818181818181818,
+      "passed": 15,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.8333333333333334,
+      "passed": 5,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 37.85449124015806,
+      "count": 38,
+      "total_seconds": 1438.4706671260064
+    },
+    "token_usage": {
+      "average_tokens": 0.0,
+      "completion_tokens": 0,
+      "count": 0,
+      "prompt_tokens": 0,
+      "total_tokens": 0
+    }
+  },
+  "run_setup": {
+    "agent_name": "codex",
+    "agent_version": "codex",
+    "identifier": "codex:gpt-5.4",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file. Only modify that sample file.",
+    "model_name": "gpt-5.4"
+  },
+  "total": 38,
+  "visible_compiled": 38,
+  "visible_pass_rate": 0.7105263157894737,
+  "visible_passed": 27
+}

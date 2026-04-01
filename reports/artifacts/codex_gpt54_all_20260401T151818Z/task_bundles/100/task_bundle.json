@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "100",
+  "library": "django",
+  "problem": "\nComplete the function that returns a datetime object with time zone settings to utc for the given datetime. If needed, use another library. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import django\nfrom django.conf import settings\nfrom django.utils import timezone\n\nsettings.configure()\ndef get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:\n",
+  "version": "4.0.0"
+}

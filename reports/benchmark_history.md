@@ -4,10 +4,22 @@
 
 | Identifier | Run ID | Hidden Pass | Visible Pass | Avg Runtime (s) | Total Tokens | Run Report |
 | --- | --- | --- | --- | --- | --- | --- |
+| codex:gpt-5.4 | codex_gpt54_all_20260401T151818Z | 25/38 (65.79%) | 27/38 (71.05%) | 37.85 | n/a | [report](artifacts/codex_gpt54_all_20260401T151818Z/reports/codex_report.md) |
 | opencode:opencode/minimax-m2.5-free | opencode_all_20260331T194900Z | 22/38 (57.89%) | 19/38 (50.00%) | 43.06 | 390286 | [report](artifacts/opencode_all_20260331T194900Z/reports/opencode_report.md) |
 | opencode:opencode/qwen3.6-plus-free | opencode_qwen36plusfree_all_20260401T094100Z | 24/38 (63.16%) | 21/38 (55.26%) | 95.08 | 557220 | [report](artifacts/opencode_qwen36plusfree_all_20260401T094100Z/reports/opencode_report.md) |
 
 ## Run Setup
+
+### codex:gpt-5.4
+
+- Agent: codex
+- Agent version: codex
+- Model: gpt-5.4
+- Run ID: codex_gpt54_all_20260401T151818Z
+
+```text
+Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file. Only modify that sample file.
+```
 
 ### opencode:opencode/minimax-m2.5-free
 
@@ -40,3 +52,4 @@ You should only modify that sample file. Always verify the edited sample file wi
 | --- | --- | --- | --- | --- | --- | --- |
 | opencode:opencode/qwen3.6-plus-free | opencode_qwen36plusfree_all_20260401T094100Z | 24/38 (63.16%) | 21/38 (55.26%) | 95.08 | 557220 | 2026-04-01T09:59:24.666915+00:00 |
 | opencode:opencode/minimax-m2.5-free | opencode_all_20260331T194900Z | 22/38 (57.89%) | 19/38 (50.00%) | 43.06 | 390286 | 2026-04-01T09:32:29.839741+00:00 |
+| codex:gpt-5.4 | codex_gpt54_all_20260401T151818Z | 25/38 (65.79%) | 27/38 (71.05%) | 37.85 | n/a | 2026-04-01T15:44:43.582094+00:00 |

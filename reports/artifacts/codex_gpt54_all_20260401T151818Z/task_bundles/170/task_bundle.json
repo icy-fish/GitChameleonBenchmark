@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "scipy==1.8.1 Werkzeug==2.0.0",
+  "example_id": "170",
+  "library": "flask",
+  "problem": " \nComplete the app set-up so that, when given a batch of matrix,\nthe json encoding compute the determinants of each matrix, \nbefore flattening and converting the result to a list, we are using scipy 1.8.1. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import flask\nimport json\nimport numpy as np\nfrom scipy import linalg\n\napp = flask.Flask('test1')\n@app.route('/data')\ndef data(num_arr):\n    return flask.jsonify({'numbers': num_arr})\n\ndef eval(app, data_fn, num_arr):\n    with app.test_request_context():\n        response = data_fn(num_arr)\n        return response.get_data(as_text=False)\n\nclass MyCustomJSONHandler(json.JSONEncoder):\n    def default(self, obj: object) -> object:\n        if isinstance(obj, np.ndarray) and len(obj.shape)==3 and obj.shape[-1]==obj.shape[-2] :",
+  "version": "2.0.0"
+}

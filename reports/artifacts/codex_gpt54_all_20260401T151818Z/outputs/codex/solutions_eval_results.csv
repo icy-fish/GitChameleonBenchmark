@@ -1,0 +1,995 @@
+example_id,code_id,output,passed,compiled,output_manual,passed_manual,compiled_manual
+55,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample55.test_cmap_reversed ________________________
+
+self = <test_sample.TestSample55 testMethod=test_cmap_reversed>
+
+    def test_cmap_reversed(self):
+        """"""Test that the reversed colormap is created correctly.""""""
+        # The reversed colormap should be a LinearSegmentedColormap
+>       self.assertIsInstance(sample_55.cmap_reversed, LinearSegmentedColormap)
+E       AssertionError: {'blue': [(-1.0, 1, 2), (0.0, 2, 2)], 'red': [(0.0, 0, 0), (1.0, 0, 0)], 'green': [(0.0, 0, 0), (1.0, 0, 0)]} is not an instance of <class 'matplotlib.colors.LinearSegmentedColormap'>
+
+/tmp/tmpskc3y5sl/test_sample.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpskc3y5sl/test_sample.py::TestSample55::test_cmap_reversed - ...
+1 failed, 27 warnings in 1.97s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpbwmal0c3/visible_test_sample_55.py"", line 15, in <module>
+    reversed_cmap_dict = cmap_reversed._segmentdata
+AttributeError: 'dict' object has no attribute '_segmentdata'",False,True
+99,solution_code,"FFF                                                                      [100%]
+=================================== FAILURES ===================================
+________ TestGetTimeInUTC.test_get_time_in_utc_has_zero_time_components ________
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_has_zero_time_components>
+
+    def test_get_time_in_utc_has_zero_time_components(self):
+        # Verify that hours, minutes, seconds are all zero
+>       result = get_time_in_utc(2023, 1, 1)
+
+/tmp/tmpuzao4qex/test_sample.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2023, month = 1, day = 1
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        naive_datetime = timezone.datetime(year, month, day)
+>       return timezone.make_aware(naive_datetime, timezone=timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmpuzao4qex/sample_99.py:8: AttributeError
+___ TestGetTimeInUTC.test_get_time_in_utc_returns_datetime_with_utc_timezone ___
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_returns_datetime_with_utc_timezone>
+
+    def test_get_time_in_utc_returns_datetime_with_utc_timezone(self):
+        # Arrange
+        year, month, day = 2023, 12, 31
+    
+        # Act
+>       result = get_time_in_utc(year, month, day)
+
+/tmp/tmpuzao4qex/test_sample.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2023, month = 12, day = 31
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        naive_datetime = timezone.datetime(year, month, day)
+>       return timezone.make_aware(naive_datetime, timezone=timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmpuzao4qex/sample_99.py:8: AttributeError
+__________ TestGetTimeInUTC.test_get_time_in_utc_with_different_dates __________
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_with_different_dates>
+
+    def test_get_time_in_utc_with_different_dates(self):
+        # Test with a few different dates
+        test_cases = [
+            (2020, 1, 1),
+            (2022, 6, 15),
+            (2024, 2, 29),  # Leap year
+        ]
+    
+        for year, month, day in test_cases:
+            with self.subTest(year=year, month=month, day=day):
+>               result = get_time_in_utc(year, month, day)
+
+/tmp/tmpuzao4qex/test_sample.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2020, month = 1, day = 1
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        naive_datetime = timezone.datetime(year, month, day)
+>       return timezone.make_aware(naive_datetime, timezone=timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmpuzao4qex/sample_99.py:8: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpuzao4qex/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_has_zero_time_components
+FAILED ../tmp/tmpuzao4qex/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_returns_datetime_with_utc_timezone
+FAILED ../tmp/tmpuzao4qex/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_with_different_dates
+3 failed in 0.17s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpzzjjyeo1/visible_test_sample_99.py"", line 14, in <module>
+    utc_time = get_time_in_utc(year, month, day)
+  File ""/tmp/tmpzzjjyeo1/visible_test_sample_99.py"", line 8, in get_time_in_utc
+    return timezone.make_aware(naive_datetime, timezone=timezone.utc)
+AttributeError: module 'django.utils.timezone' has no attribute 'utc'",False,True
+100,solution_code,"..                                                                       [100%]
+2 passed in 0.12s",True,True,,True,True
+101,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample101.test_save_existing _______________________
+
+self = <test_sample.TestSample101 testMethod=test_save_existing>
+
+    def test_save_existing(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method.""""""
+        # Call the function under test
+>       result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, obj=self.mock_obj
+        )
+
+/tmp/tmprcu81gj_/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmprcu81gj_/sample_101.py:9: in save_existing
+    return form.save(commit=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock spec='Form' id='131492906094160'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmprcu81gj_/test_sample.py::TestSample101::test_save_existing
+1 failed in 0.53s",False,True,,True,True
+102,solution_code,"FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ TestSaveExisting.test_save_existing_calls_formset_method ___________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_calls_formset_method>
+
+    def test_save_existing_calls_formset_method(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method with the right parameters.""""""
+        # Call the function under test
+>       result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=self.instance
+        )
+
+/tmp/tmpf64bi6bp/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpf64bi6bp/sample_102.py:8: in save_existing
+    form.save()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock spec='Form' id='140362720461440'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+_________ TestSaveExisting.test_save_existing_with_different_instance __________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_with_different_instance>
+
+    def test_save_existing_with_different_instance(self):
+        """"""Test save_existing with a different instance value.""""""
+        different_instance = ""different_instance""
+    
+        # Call the function under test with a different instance
+>       save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=different_instance
+        )
+
+/tmp/tmpf64bi6bp/test_sample.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpf64bi6bp/sample_102.py:8: in save_existing
+    form.save()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock spec='Form' id='140362722398688'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpf64bi6bp/test_sample.py::TestSaveExisting::test_save_existing_calls_formset_method
+FAILED ../tmp/tmpf64bi6bp/test_sample.py::TestSaveExisting::test_save_existing_with_different_instance
+2 failed in 1.10s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpg06gkm6n/visible_test_sample_102.py"", line 22, in <module>
+    assert assertion_result
+AssertionError",False,True
+103,solution_code,"...F                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample103.test_render_output _______________________
+
+self = <test_sample.TestSample103 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Remove whitespace for easier comparison
+        cleaned_html = re.sub(r""\s+"", "" "", rendered_html).strip()
+    
+        # Check that all expected elements are in the rendered HTML
+        for pattern in self.expected_elements:
+            with self.subTest(pattern=pattern):
+>               self.assertTrue(
+                    re.search(pattern, cleaned_html, re.IGNORECASE),
+                    f""Pattern '{pattern}' not found in rendered HTML: {cleaned_html}"",
+                )
+E               AssertionError: None is not true : Pattern '<div>' not found in rendered HTML: <form> <label for=""id_name"">Name:</label> <div class=""helptext"" id=""id_name_helptext"">Enter your name</div> <input type=""text"" name=""name"" required aria-describedby=""id_name_helptext"" id=""id_name""> </form>
+
+/tmp/tmpxlep85k8/test_sample.py:50: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpxlep85k8/test_sample.py::TestSample103::test_render_output
+1 failed, 3 passed in 1.18s",False,True,,True,True
+104,solution_code,".FFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample104.test_render_output _______________________
+
+self = <test_sample.TestSample104 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check for label
+>       self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+E       AssertionError: '<label for=""id_name"">Name:</label>' not found in ""<form>\n  <div>\n    <label for='id_name'>Name:</label>\n\n<div class='helptext' id='id_name_helptext'>Enter your name</div>\n\n<input type='text' name='name' required aria-describedby='id_name_helptext' id='id_name'>\n  </div>\n</form>""
+
+/tmp/tmpy5p4yah0/test_sample.py:37: AssertionError
+______________ TestSample104.test_rendered_output_matches_target _______________
+
+self = <test_sample.TestSample104 testMethod=test_rendered_output_matches_target>
+
+    def test_rendered_output_matches_target(self):
+        """"""Test that the rendered output matches the target HTML structure""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Normalize whitespace for comparison
+        def normalize_whitespace(text):
+            # Replace multiple whitespace with a single space
+            return re.sub(r""\s+"", "" "", text.strip())
+    
+        # Check that all expected elements are present in the correct order
+        normalized_html = normalize_whitespace(rendered_html)
+    
+        # Check for the basic structure
+        self.assertIn(""<form>"", normalized_html)
+        self.assertIn(""<div>"", normalized_html)
+        self.assertIn(""</div>"", normalized_html)
+        self.assertIn(""</form>"", normalized_html)
+    
+        # Check for the correct order of elements
+        label_pos = normalized_html.find('<label for=""id_name"">Name:</label>')
+        helptext_pos = normalized_html.find(
+            '<div class=""helptext"" id=""id_name_helptext"">'
+        )
+        input_pos = normalized_html.find('<input type=""text"" name=""name""')
+    
+>       self.assertGreater(label_pos, 0, ""Label tag not found"")
+E       AssertionError: -1 not greater than 0 : Label tag not found
+
+/tmp/tmpy5p4yah0/test_sample.py:77: AssertionError
+______________________ TestSample104.test_template_string ______________________
+
+self = <test_sample.TestSample104 testMethod=test_template_string>
+
+    def test_template_string(self):
+        """"""Test that the template string contains expected Django template tags""""""
+>       self.assertIn(""{{ form.name.label_tag }}"", self.template_string)
+E       AssertionError: '{{ form.name.label_tag }}' not found in ""<form>\n  <div>\n    <label for='{{ form.name.id_for_label }}'>{{ form.name.label }}:</label>\n\n<div class='helptext' id='{{ form.name.id_for_label }}_helptext'>{{ form.name.help_text }}</div>\n\n<input type='text' name='{{ form.name.html_name }}' required aria-describedby='{{ form.name.id_for_label }}_helptext' id='{{ form.name.id_for_label }}'>\n  </div>\n</form>""
+
+/tmp/tmpy5p4yah0/test_sample.py:26: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpy5p4yah0/test_sample.py::TestSample104::test_render_output
+FAILED ../tmp/tmpy5p4yah0/test_sample.py::TestSample104::test_rendered_output_matches_target
+FAILED ../tmp/tmpy5p4yah0/test_sample.py::TestSample104::test_template_string
+3 failed, 1 passed in 1.02s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpi_7goha5/visible_test_sample_104.py"", line 71, in <module>
+    assert assertion_result
+AssertionError",False,True
+105,solution_code,".....                                                                    [100%]
+5 passed in 0.93s",True,True,,True,True
+106,solution_code,".....                                                                    [100%]
+5 passed in 0.96s",True,True,,True,True
+107,solution_code,"....                                                                     [100%]
+4 passed in 0.91s",True,True,,True,True
+108,solution_code,"....                                                                     [100%]
+4 passed in 0.82s",True,True,,True,True
+143,solution_code,".                                                                        [100%]
+1 passed in 0.67s",True,True,,True,True
+144,solution_code,"...                                                                      [100%]
+3 passed in 0.65s",True,True,,True,True
+145,solution_code,"...                                                                      [100%]
+3 passed in 0.62s",True,True,,True,True
+146,solution_code,"..                                                                       [100%]
+2 passed in 0.54s",True,True,,True,True
+147,solution_code,".                                                                        [100%]
+1 passed in 0.70s",True,True,,True,True
+148,solution_code,"..                                                                       [100%]
+2 passed in 0.51s",True,True,,True,True
+149,solution_code,"F..                                                                      [100%]
+=================================== FAILURES ===================================
+_______________ TestSafeJoinFail404.test_flask_safe_join_called ________________
+
+self = <test_sample.TestSafeJoinFail404 testMethod=test_flask_safe_join_called>
+mock_safe_join = <MagicMock name='safe_join' id='140263693012848'>
+
+    @patch(""flask.safe_join"")
+    def test_flask_safe_join_called(self, mock_safe_join):
+        """"""Test that flask.safe_join is called with the correct arguments.""""""
+        base_path = ""/base/path""
+        sub_path = ""sub/path""
+        expected_result = ""/base/path/sub/path""
+    
+        # Set up the mock to return a specific value
+        mock_safe_join.return_value = expected_result
+    
+        # Call the function
+        result = safe_join_fail_404(base_path, sub_path)
+    
+        # Verify that flask.safe_join was called with the correct arguments
+>       mock_safe_join.assert_called_once_with(base_path, sub_path)
+
+/tmp/tmpyh2hv7a6/test_sample.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='safe_join' id='140263693012848'>
+args = ('/base/path', 'sub/path'), kwargs = {}
+msg = ""Expected 'safe_join' to be called once. Called 0 times.""
+
+    def assert_called_once_with(self, /, *args, **kwargs):
+        """"""assert that the mock was called exactly once and that that call was
+        with the specified arguments.""""""
+        if not self.call_count == 1:
+            msg = (""Expected '%s' to be called once. Called %s times.%s""
+                   % (self._mock_name or 'mock',
+                      self.call_count,
+                      self._calls_repr()))
+>           raise AssertionError(msg)
+E           AssertionError: Expected 'safe_join' to be called once. Called 0 times.
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:940: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpyh2hv7a6/test_sample.py::TestSafeJoinFail404::test_flask_safe_join_called
+1 failed, 2 passed in 0.72s",False,True,,True,True
+150,solution_code,"...                                                                      [100%]
+3 passed in 0.52s",True,True,,True,True
+151,solution_code,".                                                                        [100%]
+1 passed in 0.57s",True,True,,True,True
+152,solution_code,".                                                                        [100%]
+1 passed in 0.50s",True,True,,True,True
+163,solution_code,".                                                                        [100%]
+1 passed in 1.32s",True,True,,True,True
+164,solution_code,".....                                                                    [100%]
+5 passed in 1.34s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp2a4w9v76/visible_test_sample_164.py"", line 61, in <module>
+    assert assertion_results
+AssertionError",False,True
+165,solution_code,".....                                                                    [100%]
+5 passed in 1.00s",True,True,,True,True
+166,solution_code,".....                                                                    [100%]
+5 passed in 1.02s",True,True,,True,True
+167,solution_code,"F..F.                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ TestStackAndSave.test_mixed_array_types ____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_mixed_array_types>
+
+    def test_mixed_array_types(self):
+        """"""Test with mixed array types that can be safely cast.""""""
+        arrays = [
+            np.array([[1, 2]], dtype=np.int32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+        ]
+    
+        # Both int32 and float32 can be safely cast to float64
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float64)
+    
+        self.assertEqual(stacked.dtype, np.float64)
+>       self.assertEqual(stacked.shape, (2, 2))
+E       AssertionError: Tuples differ: (2, 1, 2) != (2, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (2, 1, 2)
+E       ?     ---
+E       
+E       + (2, 2)
+
+/tmp/tmpf6zhs8kv/test_sample.py:107: AssertionError
+________________ TestStackAndSave.test_stacking_multiple_arrays ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_stacking_multiple_arrays>
+
+    def test_stacking_multiple_arrays(self):
+        """"""Test stacking multiple arrays.""""""
+        # Stack multiple float32 arrays to float32
+        arrays = [
+            np.array([[1.0, 2.0]], dtype=np.float32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+            np.array([[5.0, 6.0]], dtype=np.float32),
+        ]
+    
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float32)
+    
+        # Check dimensions and content
+>       self.assertEqual(stacked.shape, (3, 2))
+E       AssertionError: Tuples differ: (3, 1, 2) != (3, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (3, 1, 2)
+E       ?     ---
+E       
+E       + (3, 2)
+
+/tmp/tmpf6zhs8kv/test_sample.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpf6zhs8kv/test_sample.py::TestStackAndSave::test_mixed_array_types
+FAILED ../tmp/tmpf6zhs8kv/test_sample.py::TestStackAndSave::test_stacking_multiple_arrays
+2 failed, 3 passed in 1.18s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp8sd3v56n/visible_test_sample_167.py"", line 56, in <module>
+    assert assertion_result
+AssertionError",False,True
+168,solution_code,"..F.                                                                     [100%]
+=================================== FAILURES ===================================
+_______________ TestStackAndSave.test_successful_stack_and_save ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_successful_stack_and_save>
+
+    def test_successful_stack_and_save(self):
+        """"""Test successful stacking and path joining.""""""
+        sub_path = ""test_dir/test_file.npy""
+        # Create the subdirectory
+        os.makedirs(os.path.join(self.base_path, ""test_dir""), exist_ok=True)
+    
+        # Test with safe casting and float32 dtype
+        joined_path, stacked = stack_and_save(
+            self.arr_list, self.base_path, sub_path, ""safe"", np.float32
+        )
+    
+        # Check the joined path
+        expected_path = os.path.join(self.base_path, sub_path)
+        self.assertEqual(joined_path, expected_path)
+    
+        # Check the stacked array
+        expected_stack = np.vstack(self.arr_list)
+>       np.testing.assert_array_equal(stacked, expected_stack)
+
+/tmp/tmpufa_xmzp/test_sample.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<built-in function eq>, array([[[ 1.,  2.,  3.],
+        [ 4.,  5.,  6.]],
+
+       [[ 7.,  8.,  9.],
+        [10., 11...at32), array([[ 1.,  2.,  3.],
+       [ 4.,  5.,  6.],
+       [ 7.,  8.,  9.],
+       [10., 11., 12.]], dtype=float32))
+kwds = {'err_msg': '', 'header': 'Arrays are not equal', 'strict': False, 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Arrays are not equal
+E           
+E           (shapes (2, 2, 3), (4, 3) mismatch)
+E            x: array([[[ 1.,  2.,  3.],
+E                   [ 4.,  5.,  6.]],
+E           ...
+E            y: array([[ 1.,  2.,  3.],
+E                  [ 4.,  5.,  6.],
+E                  [ 7.,  8.,  9.],
+E                  [10., 11., 12.]], dtype=float32)
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpufa_xmzp/test_sample.py::TestStackAndSave::test_successful_stack_and_save
+1 failed, 3 passed in 1.15s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp78a6yslt/visible_test_sample_168.py"", line 38, in <module>
+    assert assertion_result
+AssertionError",False,True
+169,solution_code,"........                                                                 [100%]
+8 passed in 2.44s",True,True,,True,True
+170,solution_code,"..                                                                       [100%]
+2 passed in 1.60s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmpt4g9txjr/visible_test_sample_170.py"", line 48, in <module>
+    assertion_results = eval(app2, data2,a) == eval(app, data,a)
+  File ""/tmp/tmpt4g9txjr/visible_test_sample_170.py"", line 14, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmpt4g9txjr/visible_test_sample_170.py"", line 10, in data
+    return flask.jsonify({'numbers': num_arr})
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 348, in jsonify
+    f""{dumps(data, indent=indent, separators=separators)}\n"",
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmpt4g9txjr/visible_test_sample_170.py"", line 24, in default
+    determinants = linalg.det(obj)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_basic.py"", line 1025, in det
+    raise ValueError('expected square matrix')
+ValueError: expected square matrix",False,True
+171,solution_code,"FFF.FFF                                                                  [100%]
+=================================== FAILURES ===================================
+__________________ TestSample171.test_data_route_returns_json __________________
+
+self = <test_sample.TestSample171 object at 0x73341984ada0>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_data_route_returns_json(self, setup_app, sample_data):
+        """"""Test that the data route returns JSON with the provided numbers.""""""
+        with setup_app.test_request_context():
+            response = data(sample_data.tolist())
+            response_data = json.loads(response.get_data(as_text=True))
+    
+            assert ""numbers"" in response_data
+>           assert response_data[""numbers""] == sample_data.tolist()
+E           assert [1.6363636363...6230366492147] == [[1, 2, 3], [...6], [7, 8, 9]]
+E             At index 0 diff: 1.6363636363636365 != [1, 2, 3]
+E             Use -v to get more diff
+
+/tmp/tmp2b9qbc23/test_sample.py:38: AssertionError
+_____________________ TestSample171.test_eval_app_function _____________________
+
+self = <test_sample.TestSample171 object at 0x733419849660>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_eval_app_function(self, setup_app, sample_data):
+        """"""Test that eval_app correctly processes the request and returns data.""""""
+        result = eval_app(setup_app, data, sample_data.tolist())
+        response_data = json.loads(result)
+    
+        assert ""numbers"" in response_data
+>       assert response_data[""numbers""] == sample_data.tolist()
+E       assert [1.6363636363...6230366492147] == [[1, 2, 3], [...6], [7, 8, 9]]
+E         At index 0 diff: 1.6363636363636365 != [1, 2, 3]
+E         Use -v to get more diff
+
+/tmp/tmp2b9qbc23/test_sample.py:46: AssertionError
+_____________ TestSample171.test_custom_json_handler_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x733419848850>
+setup_app = <Flask 'test1'>
+
+    def test_custom_json_handler_with_ndarray(self, setup_app):
+        """"""Test that the custom JSON handler correctly processes NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        # Create an instance of the handler
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(test_array)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp2b9qbc23/test_sample.py:57: AssertionError
+______________ TestSample171.test_json_serialization_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x733419848d90>
+setup_app = <Flask 'test1'>
+
+    def test_json_serialization_with_ndarray(self, setup_app):
+        """"""Test end-to-end JSON serialization with NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        with setup_app.test_request_context():
+            # Create a response with the array
+            response = flask.jsonify(test_array)
+            result = json.loads(response.get_data(as_text=True))
+    
+>           assert result == expected_result
+E           assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E             At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E             Use -v to get more diff
+
+/tmp/tmp2b9qbc23/test_sample.py:77: AssertionError
+_____________________ TestSample171.test_with_empty_array ______________________
+
+self = <test_sample.TestSample171 object at 0x733419848100>
+setup_app = <Flask 'test1'>
+
+    def test_with_empty_array(self, setup_app):
+        """"""Test handling of empty arrays.""""""
+        empty_array = np.array([])
+    
+        with setup_app.test_request_context():
+            # This should not raise an error
+>           response = data(empty_array.tolist())
+
+/tmp/tmp2b9qbc23/test_sample.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp2b9qbc23/sample_171.py:9: in data
+    harmonic_means = hmean(np.asarray(num_list, dtype=float), axis=1, nan_policy='omit')
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:476: in axis_nan_policy_wrapper
+    samples = _broadcast_arrays(samples, axis=axis)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:18: in _broadcast_arrays
+    new_shapes = _broadcast_array_shapes(arrays, axis=axis)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:30: in _broadcast_array_shapes
+    return _broadcast_shapes(shapes, axis)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+shapes = [(0,)], axis = array([1])
+
+    def _broadcast_shapes(shapes, axis=None):
+        """"""
+        Broadcast shapes, ignoring incompatibility of specified axes
+        """"""
+        if not shapes:
+            return shapes
+    
+        # input validation
+        if axis is not None:
+            axis = np.atleast_1d(axis)
+            axis_int = axis.astype(int)
+            if not np.array_equal(axis_int, axis):
+                raise np.AxisError('`axis` must be an integer, a '
+                                   'tuple of integers, or `None`.')
+            axis = axis_int
+    
+        # First, ensure all shapes have same number of dimensions by prepending 1s.
+        n_dims = max([len(shape) for shape in shapes])
+        new_shapes = np.ones((len(shapes), n_dims), dtype=int)
+        for row, shape in zip(new_shapes, shapes):
+            row[len(row)-len(shape):] = shape  # can't use negative indices (-0:)
+    
+        # Remove the shape elements of the axes to be ignored, but remember them.
+        if axis is not None:
+            axis[axis < 0] = n_dims + axis[axis < 0]
+            axis = np.sort(axis)
+            if axis[-1] >= n_dims or axis[0] < 0:
+                message = (f""`axis` is out of bounds ""
+                           f""for array of dimension {n_dims}"")
+>               raise np.AxisError(message)
+E               numpy.AxisError: `axis` is out of bounds for array of dimension 1
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:62: AxisError
+___________________ TestSample171.test_with_single_row_array ___________________
+
+self = <test_sample.TestSample171 object at 0x733419849d80>
+setup_app = <Flask 'test1'>
+
+    def test_with_single_row_array(self, setup_app):
+        """"""Test handling of single row arrays.""""""
+        single_row = np.array([[1, 2, 3]])
+        expected_result = hmean(single_row, axis=1).tolist()
+    
+        # Test the custom handler directly
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(single_row)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3]] == [1.6363636363636365]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp2b9qbc23/test_sample.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp2b9qbc23/test_sample.py::TestSample171::test_data_route_returns_json
+FAILED ../tmp/tmp2b9qbc23/test_sample.py::TestSample171::test_eval_app_function
+FAILED ../tmp/tmp2b9qbc23/test_sample.py::TestSample171::test_custom_json_handler_with_ndarray
+FAILED ../tmp/tmp2b9qbc23/test_sample.py::TestSample171::test_json_serialization_with_ndarray
+FAILED ../tmp/tmp2b9qbc23/test_sample.py::TestSample171::test_with_empty_array
+FAILED ../tmp/tmp2b9qbc23/test_sample.py::TestSample171::test_with_single_row_array
+6 failed, 1 passed in 3.37s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpefffmoom/visible_test_sample_171.py"", line 46, in <module>
+    assert assertion_results
+AssertionError",False,True
+172,solution_code,"F.FFF                                                                    [100%]
+=================================== FAILURES ===================================
+____________ TestSample172.test_custom_json_encoder_with_nan_values ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_nan_values>
+
+    def test_custom_json_encoder_with_nan_values(self):
+        """"""Test the custom JSON encoder with NaN values in the array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with an array containing NaN
+        test_array = np.array([[1, 2, np.nan], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: NaN for the first row, harmonic mean for the second
+>       self.assertTrue(np.isnan(encoded[0]))
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmp6n_dkbyy/test_sample.py:78: ValueError
+___________ TestSample172.test_custom_json_encoder_with_numpy_array ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_numpy_array>
+
+    def test_custom_json_encoder_with_numpy_array(self):
+        """"""Test the custom JSON encoder with a numpy array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with a simple array
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: harmonic means of each row
+        expected = [hmean(np.array([1, 2, 3])), hmean(np.array([4, 5, 6]))]
+>       self.assertEqual(encoded, expected)
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmp6n_dkbyy/test_sample.py:67: ValueError
+________________________ TestSample172.test_data_route _________________________
+
+self = <test_sample.TestSample172 testMethod=test_data_route>
+
+    def test_data_route(self):
+        """"""Test the /data route with a valid numpy array""""""
+        with self.app.test_request_context():
+            # Test with a simple array
+            test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>           response = data(test_array)
+
+/tmp/tmp6n_dkbyy/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1., 2., 3.],
+       [4., 5., 6.]])
+
+    @app.route('/data')
+    def data(num_arr):
+        num_arr = np.asarray(num_arr, dtype=float)
+>       means = hmean(num_arr, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmp6n_dkbyy/sample_172.py:12: TypeError
+_______________________ TestSample172.test_eval_function _______________________
+
+self = <test_sample.TestSample172 testMethod=test_eval_function>
+
+    def test_eval_function(self):
+        """"""Test the eval function with a valid numpy array""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>       result = eval(app, data, test_array)
+
+/tmp/tmp6n_dkbyy/test_sample.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp6n_dkbyy/sample_172.py:19: in eval
+    response = data_fn(num_arr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1., 2., 3.],
+       [4., 5., 6.]])
+
+    @app.route('/data')
+    def data(num_arr):
+        num_arr = np.asarray(num_arr, dtype=float)
+>       means = hmean(num_arr, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmp6n_dkbyy/sample_172.py:12: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp6n_dkbyy/test_sample.py::TestSample172::test_custom_json_encoder_with_nan_values
+FAILED ../tmp/tmp6n_dkbyy/test_sample.py::TestSample172::test_custom_json_encoder_with_numpy_array
+FAILED ../tmp/tmp6n_dkbyy/test_sample.py::TestSample172::test_data_route - Ty...
+FAILED ../tmp/tmp6n_dkbyy/test_sample.py::TestSample172::test_eval_function
+4 failed, 1 passed in 2.91s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpmac74vhz/visible_test_sample_172.py"", line 49, in <module>
+    assertion_results = eval(app2, data2,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]])) == eval(app, data,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]]))
+  File ""/tmp/tmpmac74vhz/visible_test_sample_172.py"", line 19, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmpmac74vhz/visible_test_sample_172.py"", line 12, in data
+    means = hmean(num_arr, axis=1, nan_policy='omit')
+TypeError: hmean() got an unexpected keyword argument 'nan_policy'",False,True
+173,solution_code,"..F..                                                                    [100%]
+=================================== FAILURES ===================================
+____________________ TestSaveExponential.test_none_subpath _____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_none_subpath>
+
+    def test_none_subpath(self):
+        """"""Test with None as sub path should raise TypeError.""""""
+        A = np.array([[[0.0, 0.0], [0.0, 0.0]]])
+    
+>       with self.assertRaises(TypeError):
+E       AssertionError: TypeError not raised
+
+/tmp/tmpbeutulsc/test_sample.py:107: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpbeutulsc/test_sample.py::TestSaveExponential::test_none_subpath
+1 failed, 4 passed in 1.38s",False,True,,True,True
+174,solution_code,"F.FF                                                                     [100%]
+=================================== FAILURES ===================================
+_____________________ TestSaveExponential.test_large_batch _____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_large_batch>
+
+    def test_large_batch(self):
+        """"""Test with a larger batch of matrices.""""""
+        # Create 10 random 4x4 matrices
+        np.random.seed(42)  # For reproducibility
+        A = np.random.rand(10, 4, 4)
+    
+        base_path = self.temp_dir
+        sub_path = ""large_batch""
+    
+        # Call the function
+>       joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+
+/tmp/tmpegrtaxa2/test_sample.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpegrtaxa2/sample_174.py:17: in save_exponential
+    matrix_exponential = linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py:255: in expm
+    return scipy.sparse.linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:590: in expm
+    return _expm(A, use_exact_onenorm='auto')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+A = array([[[0.37454012, 0.95071431, 0.73199394, 0.59865848],
+        [0.15601864, 0.15599452, 0.05808361, 0.86617615],
+  ...,
+        [0.14489487, 0.48945276, 0.98565045, 0.24205527],
+        [0.67213555, 0.76161962, 0.23763754, 0.72821635]]])
+use_exact_onenorm = 'auto'
+
+    def _expm(A, use_exact_onenorm):
+        # Core of expm, separated to allow testing exact and approximate
+        # algorithms.
+    
+        # Avoid indiscriminate asarray() to allow sparse or other strange arrays.
+        if isinstance(A, (list, tuple, np.matrix)):
+            A = np.asarray(A)
+        if len(A.shape) != 2 or A.shape[0] != A.shape[1]:
+>           raise ValueError('expected a square matrix')
+E           ValueError: expected a square matrix
+
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:601: ValueError
+_______________ TestSaveExponential.test_save_exponential_basic ________________
+
+self = <test_sample.TestSaveExponential testMethod=test_save_exponential_basic>
+
+    def test_save_exponential_basic(self):
+        """"""Test basic functionality of save_exponential.""""""
+        # Create a simple 2x2x2 array (2 matrices of size 2x2)
+        A = np.array(
+            [
+                [[1.0, 0.0], [0.0, 1.0]],  # Identity matrix
+                [[0.0, 1.0], [1.0, 0.0]],  # Swap matrix
+            ]
+        )
+    
+        base_path = self.temp_dir
+        sub_path = ""test_folder""
+    
+        # Call the function
+>       joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+
+/tmp/tmpegrtaxa2/test_sample.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpegrtaxa2/sample_174.py:17: in save_exponential
+    matrix_exponential = linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py:255: in expm
+    return scipy.sparse.linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:590: in expm
+    return _expm(A, use_exact_onenorm='auto')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+A = array([[[1., 0.],
+        [0., 1.]],
+
+       [[0., 1.],
+        [1., 0.]]])
+use_exact_onenorm = 'auto'
+
+    def _expm(A, use_exact_onenorm):
+        # Core of expm, separated to allow testing exact and approximate
+        # algorithms.
+    
+        # Avoid indiscriminate asarray() to allow sparse or other strange arrays.
+        if isinstance(A, (list, tuple, np.matrix)):
+            A = np.asarray(A)
+        if len(A.shape) != 2 or A.shape[0] != A.shape[1]:
+>           raise ValueError('expected a square matrix')
+E           ValueError: expected a square matrix
+
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:601: ValueError
+____________ TestSaveExponential.test_save_exponential_zero_matrix _____________
+
+self = <test_sample.TestSaveExponential testMethod=test_save_exponential_zero_matrix>
+
+    def test_save_exponential_zero_matrix(self):
+        """"""Test save_exponential with zero matrices.""""""
+        # Create a 2x3x3 array of zeros (2 zero matrices of size 3x3)
+        A = np.zeros((2, 3, 3))
+    
+        base_path = self.temp_dir
+        sub_path = ""zeros""
+    
+        # Call the function
+>       joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+
+/tmp/tmpegrtaxa2/test_sample.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpegrtaxa2/sample_174.py:17: in save_exponential
+    matrix_exponential = linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py:255: in expm
+    return scipy.sparse.linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:590: in expm
+    return _expm(A, use_exact_onenorm='auto')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+A = array([[[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]]])
+use_exact_onenorm = 'auto'
+
+    def _expm(A, use_exact_onenorm):
+        # Core of expm, separated to allow testing exact and approximate
+        # algorithms.
+    
+        # Avoid indiscriminate asarray() to allow sparse or other strange arrays.
+        if isinstance(A, (list, tuple, np.matrix)):
+            A = np.asarray(A)
+        if len(A.shape) != 2 or A.shape[0] != A.shape[1]:
+>           raise ValueError('expected a square matrix')
+E           ValueError: expected a square matrix
+
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:601: ValueError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpegrtaxa2/test_sample.py::TestSaveExponential::test_large_batch
+FAILED ../tmp/tmpegrtaxa2/test_sample.py::TestSaveExponential::test_save_exponential_basic
+FAILED ../tmp/tmpegrtaxa2/test_sample.py::TestSaveExponential::test_save_exponential_zero_matrix
+3 failed, 1 passed in 1.45s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmphmm9_phk/visible_test_sample_174.py"", line 41, in <module>
+    joined, results = save_exponential(a,base_path, sub_path)
+  File ""/tmp/tmphmm9_phk/visible_test_sample_174.py"", line 17, in save_exponential
+    matrix_exponential = linalg.expm(A)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py"", line 255, in expm
+    return scipy.sparse.linalg.expm(A)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py"", line 590, in expm
+    return _expm(A, use_exact_onenorm='auto')
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py"", line 601, in _expm
+    raise ValueError('expected a square matrix')
+ValueError: expected a square matrix",False,True
+326,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 2.49s",True,True,,True,True
+327,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 2.24s",True,True,,True,True
+328,solution_code,"..                                                                       [100%]
+2 passed, 3 warnings in 2.69s",True,True,,True,True
+329,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 2.13s",True,True,,True,True
+330,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 2.44s",True,True,,True,True

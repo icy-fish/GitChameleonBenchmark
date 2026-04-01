@@ -1,0 +1,1 @@
+Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file. Only modify that sample file.
