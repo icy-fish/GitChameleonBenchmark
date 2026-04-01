@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "numpy==1.18.1 pyparsing==2.3.1",
+  "example_id": "328",
+  "library": "matplotlib",
+  "problem": "Implement the function to modify the axis of the figure to not visualize major and minor ticks on the x and y axis, with no labels.",
+  "python_version": "3.7",
+  "starting_code": "import matplotlib.pyplot as plt\nfrom matplotlib.figure import Figure\nfrom matplotlib.axes import Axes\n\ndef modify(fig: Figure, ax: Axes) -> None:\n",
+  "version": "3.5.0"
+}

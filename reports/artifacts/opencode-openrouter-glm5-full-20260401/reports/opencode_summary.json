@@ -1,0 +1,48 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.631578947368421,
+  "hidden_passed": 24,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.6,
+      "passed": 6,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.6363636363636364,
+      "passed": 14,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.6666666666666666,
+      "passed": 4,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 56.45356029600034,
+      "count": 38,
+      "total_seconds": 2145.235291248013
+    },
+    "token_usage": {
+      "average_tokens": 5440.1578947368425,
+      "completion_tokens": 14794,
+      "count": 38,
+      "prompt_tokens": 191932,
+      "total_tokens": 206726
+    }
+  },
+  "run_setup": {
+    "agent_name": "opencode",
+    "agent_version": "1.1",
+    "identifier": "opencode:openrouter/z-ai/glm-5",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.\nYou should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.",
+    "model_name": "openrouter/z-ai/glm-5",
+    "provider_name": "openrouter"
+  },
+  "total": 38,
+  "visible_compiled": 38,
+  "visible_pass_rate": 0.631578947368421,
+  "visible_passed": 24
+}

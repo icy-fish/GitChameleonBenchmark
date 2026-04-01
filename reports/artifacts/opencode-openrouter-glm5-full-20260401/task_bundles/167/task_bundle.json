@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "numpy==1.21.6 werkzeug==2.0.0",
+  "example_id": "167",
+  "library": "flask",
+  "problem": " \nComplete the stack_and_save function, we are using numpy 1.21.6. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import flask\nimport werkzeug\nimport numpy as np\n\nerror404 = werkzeug.exceptions.NotFound\n\ndef stack_and_save(arr_list: list[np.ndarray],base_path : str,sub_path : str, casting_policy: str, out_dtype: type) -> tuple[str, np.ndarray]:\n    # Attempt to join the base path and sub path.\n    # If the joined path is outside the base path, raise a 404 error.\n    # stack the arrays in arr_list with the casting policy and the out_dtype.\n    # if the out_dtype is not compatible with the casting policy, raise a TypeError\n    # and out_dtype could be np.float32 or np.float64\n    # casting policy could be safe or unsafe\n    # Return the joined path and the stacked array to be saved ",
+  "version": "2.0.0"
+}

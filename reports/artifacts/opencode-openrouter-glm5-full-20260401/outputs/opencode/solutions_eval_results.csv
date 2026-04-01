@@ -1,0 +1,1401 @@
+example_id,code_id,output,passed,compiled,output_manual,passed_manual,compiled_manual
+55,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample55.test_cmap_reversed ________________________
+
+self = <test_sample.TestSample55 testMethod=test_cmap_reversed>
+
+    def test_cmap_reversed(self):
+        """"""Test that the reversed colormap is created correctly.""""""
+        # The reversed colormap should be a LinearSegmentedColormap
+>       self.assertIsInstance(sample_55.cmap_reversed, LinearSegmentedColormap)
+E       AssertionError: {((1, 2, 2), (2, 2, 1)): 'blue', ((0, 0, 0), (1, 0, 0)): 'green'} is not an instance of <class 'matplotlib.colors.LinearSegmentedColormap'>
+
+/tmp/tmp3k6wov34/test_sample.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp3k6wov34/test_sample.py::TestSample55::test_cmap_reversed - ...
+1 failed, 27 warnings in 4.63s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp41dhrovl/visible_test_sample_55.py"", line 14, in <module>
+    reversed_cmap_dict = cmap_reversed._segmentdata
+AttributeError: 'dict' object has no attribute '_segmentdata'",False,True
+99,solution_code,"...                                                                      [100%]
+3 passed in 0.23s",True,True,,True,True
+100,solution_code,"..                                                                       [100%]
+2 passed in 0.23s",True,True,,True,True
+101,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample101.test_save_existing _______________________
+
+self = <test_sample.TestSample101 testMethod=test_save_existing>
+
+    def test_save_existing(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method.""""""
+        # Call the function under test
+        result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, obj=self.mock_obj
+        )
+    
+        # Assert that the formset's save_existing method was called with the correct parameters
+>       self.mock_formset.save_existing.assert_called_once_with(
+            form=self.mock_form, instance=self.mock_obj
+        )
+
+/tmp/tmpg2dnvf1q/test_sample.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='mock.save_existing' id='125574699043760'>, args = ()
+kwargs = {'form': <MagicMock spec='Form' id='125574699043664'>, 'instance': 'test_instance'}
+msg = ""Expected 'save_existing' to be called once. Called 0 times.""
+
+    def assert_called_once_with(self, /, *args, **kwargs):
+        """"""assert that the mock was called exactly once and that that call was
+        with the specified arguments.""""""
+        if not self.call_count == 1:
+            msg = (""Expected '%s' to be called once. Called %s times.%s""
+                   % (self._mock_name or 'mock',
+                      self.call_count,
+                      self._calls_repr()))
+>           raise AssertionError(msg)
+E           AssertionError: Expected 'save_existing' to be called once. Called 0 times.
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:940: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpg2dnvf1q/test_sample.py::TestSample101::test_save_existing
+1 failed in 1.16s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmptbrrcqql/visible_test_sample_101.py"", line 25, in <module>
+    assert assertion_result
+AssertionError",False,True
+102,solution_code,"FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ TestSaveExisting.test_save_existing_calls_formset_method ___________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_calls_formset_method>
+
+    def test_save_existing_calls_formset_method(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method with the right parameters.""""""
+        # Call the function under test
+>       result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=self.instance
+        )
+
+/tmp/tmp359vctrg/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp359vctrg/sample_102.py:8: in save_existing
+    form.save(commit=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock spec='Form' id='131837705830752'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+_________ TestSaveExisting.test_save_existing_with_different_instance __________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_with_different_instance>
+
+    def test_save_existing_with_different_instance(self):
+        """"""Test save_existing with a different instance value.""""""
+        different_instance = ""different_instance""
+    
+        # Call the function under test with a different instance
+>       save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=different_instance
+        )
+
+/tmp/tmp359vctrg/test_sample.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp359vctrg/sample_102.py:8: in save_existing
+    form.save(commit=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock spec='Form' id='131837704081600'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp359vctrg/test_sample.py::TestSaveExisting::test_save_existing_calls_formset_method
+FAILED ../tmp/tmp359vctrg/test_sample.py::TestSaveExisting::test_save_existing_with_different_instance
+2 failed in 2.50s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpf3p1iqi_/visible_test_sample_102.py"", line 22, in <module>
+    assert assertion_result
+AssertionError",False,True
+103,solution_code,".FF.                                                                     [100%]
+=================================== FAILURES ===================================
+____________ TestSample103.test_form_rendering_with_as_field_group _____________
+
+self = <test_sample.TestSample103 testMethod=test_form_rendering_with_as_field_group>
+
+    def test_form_rendering_with_as_field_group(self):
+        """"""Test that the form field renders with as_field_group template tag""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check that the rendered HTML contains the label, help text, and input field
+        self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+>       self.assertIn(
+            '<div class=""helptext"" id=""id_name_helptext"">Enter your name</div>',
+            rendered_html,
+        )
+E       AssertionError: '<div class=""helptext"" id=""id_name_helptext"">Enter your name</div>' not found in '<form>\n\n  <div>\n    <label for=""id_name"">Name:</label>\n\n<div class=\'helptext\' id=\'id_name_helptext\'>Enter your name</div>\n\n<input type=""text"" name=""name"" required aria-describedby=""id_name_helptext"" id=""id_name"">\n  </div>\n\n</form>'
+
+/tmp/tmp92chiij9/test_sample.py:61: AssertionError
+____________________ TestSample103.test_get_template_string ____________________
+
+self = <test_sample.TestSample103 testMethod=test_get_template_string>
+
+    def test_get_template_string(self):
+        """"""Test that get_template_string returns the expected template""""""
+        template = get_template_string()
+        self.assertIsInstance(template, str)
+>       self.assertIn(""{{ form.name.as_field_group }}"", template)
+E       AssertionError: '{{ form.name.as_field_group }}' not found in ""<form>\n{% for field in form %}\n  <div>\n    {{ field.label_tag }}\n\n<div class='helptext' id='{{ field.id_for_label }}_helptext'>{{ field.help_text }}</div>\n\n{{ field }}\n  </div>\n{% endfor %}\n</form>""
+
+/tmp/tmp92chiij9/test_sample.py:38: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp92chiij9/test_sample.py::TestSample103::test_form_rendering_with_as_field_group
+FAILED ../tmp/tmp92chiij9/test_sample.py::TestSample103::test_get_template_string
+2 failed, 2 passed in 2.75s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp0_lxf3zh/visible_test_sample_103.py"", line 73, in <module>
+    assert assertion_result
+AssertionError",False,True
+104,solution_code,".FFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample104.test_render_output _______________________
+
+self = <test_sample.TestSample104 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check for label
+        self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+    
+        # Check for help text div
+>       self.assertIn('<div class=""helptext"" id=""id_name_helptext"">', rendered_html)
+E       AssertionError: '<div class=""helptext"" id=""id_name_helptext"">' not found in '<form>\n  <div>\n    <label for=""id_name"">Name:</label>\n\n<div class=\'helptext\' id=\'id_name_helptext\'>Enter your name</div>\n\n<input type=""text"" name=""name"" required id=""id_name"">\n  </div>\n</form>'
+
+/tmp/tmp4tls1qty/test_sample.py:40: AssertionError
+______________ TestSample104.test_rendered_output_matches_target _______________
+
+self = <test_sample.TestSample104 testMethod=test_rendered_output_matches_target>
+
+    def test_rendered_output_matches_target(self):
+        """"""Test that the rendered output matches the target HTML structure""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Normalize whitespace for comparison
+        def normalize_whitespace(text):
+            # Replace multiple whitespace with a single space
+            return re.sub(r""\s+"", "" "", text.strip())
+    
+        # Check that all expected elements are present in the correct order
+        normalized_html = normalize_whitespace(rendered_html)
+    
+        # Check for the basic structure
+        self.assertIn(""<form>"", normalized_html)
+        self.assertIn(""<div>"", normalized_html)
+        self.assertIn(""</div>"", normalized_html)
+        self.assertIn(""</form>"", normalized_html)
+    
+        # Check for the correct order of elements
+        label_pos = normalized_html.find('<label for=""id_name"">Name:</label>')
+        helptext_pos = normalized_html.find(
+            '<div class=""helptext"" id=""id_name_helptext"">'
+        )
+        input_pos = normalized_html.find('<input type=""text"" name=""name""')
+    
+        self.assertGreater(label_pos, 0, ""Label tag not found"")
+>       self.assertGreater(
+            helptext_pos, label_pos, ""Help text div not found or in wrong order""
+        )
+E       AssertionError: -1 not greater than 13 : Help text div not found or in wrong order
+
+/tmp/tmp4tls1qty/test_sample.py:78: AssertionError
+______________________ TestSample104.test_template_string ______________________
+
+self = <test_sample.TestSample104 testMethod=test_template_string>
+
+    def test_template_string(self):
+        """"""Test that the template string contains expected Django template tags""""""
+        self.assertIn(""{{ form.name.label_tag }}"", self.template_string)
+>       self.assertIn(""{{ form.name.help_text|safe }}"", self.template_string)
+E       AssertionError: '{{ form.name.help_text|safe }}' not found in ""<form>\n  <div>\n    {{ form.name.label_tag }}\n\n<div class='helptext' id='id_name_helptext'>{{ form.name.help_text }}</div>\n\n{{ form.name }}\n  </div>\n</form>""
+
+/tmp/tmp4tls1qty/test_sample.py:27: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp4tls1qty/test_sample.py::TestSample104::test_render_output
+FAILED ../tmp/tmp4tls1qty/test_sample.py::TestSample104::test_rendered_output_matches_target
+FAILED ../tmp/tmp4tls1qty/test_sample.py::TestSample104::test_template_string
+3 failed, 1 passed in 2.32s",False,True,,True,True
+105,solution_code,".....                                                                    [100%]
+5 passed in 2.19s",True,True,,True,True
+106,solution_code,".....                                                                    [100%]
+5 passed in 2.53s",True,True,,True,True
+107,solution_code,"....                                                                     [100%]
+4 passed in 2.18s",True,True,,True,True
+108,solution_code,"....                                                                     [100%]
+4 passed in 1.98s",True,True,,True,True
+143,solution_code,".                                                                        [100%]
+1 passed in 1.62s",True,True,,True,True
+144,solution_code,"...                                                                      [100%]
+3 passed in 1.44s",True,True,,True,True
+145,solution_code,"...                                                                      [100%]
+3 passed in 1.46s",True,True,,True,True
+146,solution_code,"..                                                                       [100%]
+2 passed in 1.40s",True,True,,True,True
+147,solution_code,".                                                                        [100%]
+1 passed in 1.50s",True,True,,True,True
+148,solution_code,"..                                                                       [100%]
+2 passed in 1.32s",True,True,,True,True
+149,solution_code,"F..                                                                      [100%]
+=================================== FAILURES ===================================
+_______________ TestSafeJoinFail404.test_flask_safe_join_called ________________
+
+self = <test_sample.TestSafeJoinFail404 testMethod=test_flask_safe_join_called>
+mock_safe_join = <MagicMock name='safe_join' id='135567341008832'>
+
+    @patch(""flask.safe_join"")
+    def test_flask_safe_join_called(self, mock_safe_join):
+        """"""Test that flask.safe_join is called with the correct arguments.""""""
+        base_path = ""/base/path""
+        sub_path = ""sub/path""
+        expected_result = ""/base/path/sub/path""
+    
+        # Set up the mock to return a specific value
+        mock_safe_join.return_value = expected_result
+    
+        # Call the function
+        result = safe_join_fail_404(base_path, sub_path)
+    
+        # Verify that flask.safe_join was called with the correct arguments
+>       mock_safe_join.assert_called_once_with(base_path, sub_path)
+
+/tmp/tmpqbc43lui/test_sample.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='safe_join' id='135567341008832'>
+args = ('/base/path', 'sub/path'), kwargs = {}
+msg = ""Expected 'safe_join' to be called once. Called 0 times.""
+
+    def assert_called_once_with(self, /, *args, **kwargs):
+        """"""assert that the mock was called exactly once and that that call was
+        with the specified arguments.""""""
+        if not self.call_count == 1:
+            msg = (""Expected '%s' to be called once. Called %s times.%s""
+                   % (self._mock_name or 'mock',
+                      self.call_count,
+                      self._calls_repr()))
+>           raise AssertionError(msg)
+E           AssertionError: Expected 'safe_join' to be called once. Called 0 times.
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:940: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpqbc43lui/test_sample.py::TestSafeJoinFail404::test_flask_safe_join_called
+1 failed, 2 passed in 1.72s",False,True,,True,True
+150,solution_code,"...                                                                      [100%]
+3 passed in 1.44s",True,True,,True,True
+151,solution_code,".                                                                        [100%]
+1 passed in 1.25s",True,True,,True,True
+152,solution_code,".                                                                        [100%]
+1 passed in 1.23s",True,True,,True,True
+163,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+____________________ TestSample163.test_custom_json_encoder ____________________
+
+self = <test_sample.TestSample163 testMethod=test_custom_json_encoder>
+
+    def test_custom_json_encoder(self):
+        """"""Test the custom JSON encoder directly""""""
+        # This test calls the encoder directly, bypassing flask.jsonify,
+        # so it should work as expected once assertions are correct.
+        encoder = MyCustomJSONHandler()
+    
+        # Test with regular array
+        test_arr = np.array([1, 2, 3, 4, 5])
+        encoded = encoder.default(test_arr)
+        # MyCustomJSONHandler promotes integers to floats.
+        self.assertEqual(encoded, [1.0, 2.0, 3.0, 4.0, 5.0])
+    
+        # Test with array containing duplicates
+        test_arr = np.array([1, 2, 2, 3, 3, 3])
+        encoded = encoder.default(test_arr)
+        # MyCustomJSONHandler uniques values and promotes to float.
+        self.assertEqual(encoded, [1.0, 2.0, 3.0])
+    
+        # Test with array containing NaN values
+        test_arr = np.array([1.0, 2.0, np.nan, 3.0, np.nan])
+        encoded = encoder.default(
+            test_arr
+        )  # Handler output: [1.0, 2.0, 3.0, np.nan, np.nan]
+    
+        # Assertions based on the handler's behavior of preserving all NaNs.
+        self.assertEqual(len(encoded), 5)
+>       self.assertEqual(encoded[:3], [1.0, 2.0, 3.0])  # Unique non-NaN values
+E       AssertionError: Lists differ: [1.0, 2.0, nan] != [1.0, 2.0, 3.0]
+E       
+E       First differing element 2:
+E       nan
+E       3.0
+E       
+E       - [1.0, 2.0, nan]
+E       ?            ^^^
+E       
+E       + [1.0, 2.0, 3.0]
+E       ?            ^^^
+
+/tmp/tmp1pqospjd/test_sample.py:45: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp1pqospjd/test_sample.py::TestSample163::test_custom_json_encoder
+1 failed in 2.67s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp9l495boz/visible_test_sample_163.py"", line 47, in <module>
+    assert assertion_results
+AssertionError",False,True
+164,solution_code,"FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+____________________ TestSample164.test_custom_json_handler ____________________
+
+self = <test_sample.TestSample164 testMethod=test_custom_json_handler>
+
+    def test_custom_json_handler(self):
+        """"""Test the MyCustomJSONHandler directly""""""
+        handler = MyCustomJSONHandler(self.app)
+    
+        # Test with numpy array
+        test_array = np.array([4, 4, 5, 6, 6])
+        result = handler.default(test_array)
+>       self.assertEqual(result, [4, 5, 6])
+E       AssertionError: Lists differ: [4, 4, 5, 6, 6] != [4, 5, 6]
+E       
+E       First differing element 1:
+E       4
+E       5
+E       
+E       First list contains 2 additional elements.
+E       First extra element 3:
+E       6
+E       
+E       - [4, 4, 5, 6, 6]
+E       ?     ---   ---
+E       
+E       + [4, 5, 6]
+
+/tmp/tmpwuibabt_/test_sample.py:67: AssertionError
+________________________ TestSample164.test_data_route _________________________
+
+self = <test_sample.TestSample164 testMethod=test_data_route>
+
+    def test_data_route(self):
+        """"""Test the /data route with various numpy arrays""""""
+        # Test with regular numpy array
+        test_array = np.array([1, 2, 3, 2, 1])
+        with self.app.test_request_context():
+>           response = data(test_array)
+
+/tmp/tmpwuibabt_/test_sample.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpwuibabt_/sample_164.py:8: in data
+    return flask.jsonify({'numbers': num_arr})
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py:170: in jsonify
+    return current_app.json.response(*args, **kwargs)
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([1, 2, 3, 2, 1])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+________________ TestSample164.test_data_route_with_duplicates _________________
+
+self = <test_sample.TestSample164 testMethod=test_data_route_with_duplicates>
+
+    def test_data_route_with_duplicates(self):
+        """"""Test that the custom JSON handler removes duplicates""""""
+        test_array = np.array([5, 5, 5, 10, 10, 15])
+        with self.app.test_request_context():
+>           response = data(test_array)
+
+/tmp/tmpwuibabt_/test_sample.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpwuibabt_/sample_164.py:8: in data
+    return flask.jsonify({'numbers': num_arr})
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py:170: in jsonify
+    return current_app.json.response(*args, **kwargs)
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([ 5,  5,  5, 10, 10, 15])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+____________________ TestSample164.test_data_route_with_nan ____________________
+
+self = <test_sample.TestSample164 testMethod=test_data_route_with_nan>
+
+    def test_data_route_with_nan(self):
+        """"""Test handling of NaN values in numpy arrays""""""
+        test_array = np.array([1.0, np.nan, 2.0, np.nan, 3.0])
+        with self.app.test_request_context():
+>           response = data(test_array)
+
+/tmp/tmpwuibabt_/test_sample.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpwuibabt_/sample_164.py:8: in data
+    return flask.jsonify({'numbers': num_arr})
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py:170: in jsonify
+    return current_app.json.response(*args, **kwargs)
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([ 1., nan,  2., nan,  3.])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+_____________________ TestSample164.test_eval_app_function _____________________
+
+self = <test_sample.TestSample164 testMethod=test_eval_app_function>
+
+    def test_eval_app_function(self):
+        """"""Test the eval_app function""""""
+        test_array = np.array([7, 7, 8, 9, 9])
+>       result = eval_app(self.app, data, test_array)
+
+/tmp/tmpwuibabt_/test_sample.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpwuibabt_/sample_164.py:12: in eval_app
+    response = data_fn(num_arr)
+/tmp/tmpwuibabt_/sample_164.py:8: in data
+    return flask.jsonify({'numbers': num_arr})
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py:170: in jsonify
+    return current_app.json.response(*args, **kwargs)
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:215: in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:180: in dumps
+    return json.dumps(obj, **kwargs)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:199: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py:257: in iterencode
+    return _iterencode(o, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([7, 7, 8, 9, 9])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpwuibabt_/test_sample.py::TestSample164::test_custom_json_handler
+FAILED ../tmp/tmpwuibabt_/test_sample.py::TestSample164::test_data_route - Ty...
+FAILED ../tmp/tmpwuibabt_/test_sample.py::TestSample164::test_data_route_with_duplicates
+FAILED ../tmp/tmpwuibabt_/test_sample.py::TestSample164::test_data_route_with_nan
+FAILED ../tmp/tmpwuibabt_/test_sample.py::TestSample164::test_eval_app_function
+5 failed in 3.26s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp335z0dwo/visible_test_sample_164.py"", line 50, in <module>
+    assertion_results = eval_app(app2, data2,np.array([3, 3, 1, np.nan, 2, 6, 5, np.nan])) == eval_app(app, data,np.array([3, 3, 1, np.nan, 2, 6, 5, np.nan]))
+  File ""/tmp/tmp335z0dwo/visible_test_sample_164.py"", line 12, in eval_app
+    response = data_fn(num_arr)
+  File ""/tmp/tmp335z0dwo/visible_test_sample_164.py"", line 8, in data
+    return flask.jsonify({'numbers': num_arr})
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 120, in _default
+    raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+TypeError: Object of type ndarray is not JSON serializable",False,True
+165,solution_code,".....                                                                    [100%]
+5 passed in 2.45s",True,True,,True,True
+166,solution_code,".....                                                                    [100%]
+5 passed, 2 warnings in 2.54s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp184x9xfm/visible_test_sample_166.py"", line 46, in <module>
+    assertion_results = eval_app(app2, data2,np.array([[3, 3, 1,], [2,2,4],[1,1,1]])) == eval_app(app, data,np.array([[3, 3, 1,], [2,2,4],[1,1,1]]))
+  File ""/tmp/tmp184x9xfm/visible_test_sample_166.py"", line 17, in eval_app
+    response = data_fn(num_arr)
+  File ""/tmp/tmp184x9xfm/visible_test_sample_166.py"", line 13, in data
+    return flask.jsonify({'numbers': num_list})
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmp184x9xfm/visible_test_sample_166.py"", line 23, in default
+    return fastCopyAndTranspose(o).flatten().tolist()
+DeprecationWarning: fastCopyAndTranspose and the underlying C function PyArray_CopyAndTranspose have been deprecated.
+
+Use the transpose method followed by a C-order copy instead, e.g. ``arr.T.copy()``",False,True
+167,solution_code,"F..F.                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ TestStackAndSave.test_mixed_array_types ____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_mixed_array_types>
+
+    def test_mixed_array_types(self):
+        """"""Test with mixed array types that can be safely cast.""""""
+        arrays = [
+            np.array([[1, 2]], dtype=np.int32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+        ]
+    
+        # Both int32 and float32 can be safely cast to float64
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float64)
+    
+        self.assertEqual(stacked.dtype, np.float64)
+>       self.assertEqual(stacked.shape, (2, 2))
+E       AssertionError: Tuples differ: (2, 1, 2) != (2, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (2, 1, 2)
+E       ?     ---
+E       
+E       + (2, 2)
+
+/tmp/tmpa0l68yi5/test_sample.py:107: AssertionError
+________________ TestStackAndSave.test_stacking_multiple_arrays ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_stacking_multiple_arrays>
+
+    def test_stacking_multiple_arrays(self):
+        """"""Test stacking multiple arrays.""""""
+        # Stack multiple float32 arrays to float32
+        arrays = [
+            np.array([[1.0, 2.0]], dtype=np.float32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+            np.array([[5.0, 6.0]], dtype=np.float32),
+        ]
+    
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float32)
+    
+        # Check dimensions and content
+>       self.assertEqual(stacked.shape, (3, 2))
+E       AssertionError: Tuples differ: (3, 1, 2) != (3, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (3, 1, 2)
+E       ?     ---
+E       
+E       + (3, 2)
+
+/tmp/tmpa0l68yi5/test_sample.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpa0l68yi5/test_sample.py::TestStackAndSave::test_mixed_array_types
+FAILED ../tmp/tmpa0l68yi5/test_sample.py::TestStackAndSave::test_stacking_multiple_arrays
+2 failed, 3 passed in 2.52s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpxlm18xat/visible_test_sample_167.py"", line 43, in <module>
+    assert assertion_result
+AssertionError",False,True
+168,solution_code,"..F.                                                                     [100%]
+=================================== FAILURES ===================================
+_______________ TestStackAndSave.test_successful_stack_and_save ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_successful_stack_and_save>
+
+    def test_successful_stack_and_save(self):
+        """"""Test successful stacking and path joining.""""""
+        sub_path = ""test_dir/test_file.npy""
+        # Create the subdirectory
+        os.makedirs(os.path.join(self.base_path, ""test_dir""), exist_ok=True)
+    
+        # Test with safe casting and float32 dtype
+        joined_path, stacked = stack_and_save(
+            self.arr_list, self.base_path, sub_path, ""safe"", np.float32
+        )
+    
+        # Check the joined path
+        expected_path = os.path.join(self.base_path, sub_path)
+        self.assertEqual(joined_path, expected_path)
+    
+        # Check the stacked array
+        expected_stack = np.vstack(self.arr_list)
+>       np.testing.assert_array_equal(stacked, expected_stack)
+
+/tmp/tmplpi5i2vq/test_sample.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<built-in function eq>, array([[[ 1.,  2.,  3.],
+        [ 4.,  5.,  6.]],
+
+       [[ 7.,  8.,  9.],
+        [10., 11...at32), array([[ 1.,  2.,  3.],
+       [ 4.,  5.,  6.],
+       [ 7.,  8.,  9.],
+       [10., 11., 12.]], dtype=float32))
+kwds = {'err_msg': '', 'header': 'Arrays are not equal', 'strict': False, 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Arrays are not equal
+E           
+E           (shapes (2, 2, 3), (4, 3) mismatch)
+E            x: array([[[ 1.,  2.,  3.],
+E                   [ 4.,  5.,  6.]],
+E           ...
+E            y: array([[ 1.,  2.,  3.],
+E                  [ 4.,  5.,  6.],
+E                  [ 7.,  8.,  9.],
+E                  [10., 11., 12.]], dtype=float32)
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmplpi5i2vq/test_sample.py::TestStackAndSave::test_successful_stack_and_save
+1 failed, 3 passed in 2.33s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmphkom6wv4/visible_test_sample_168.py"", line 45, in <module>
+    assert assertion_result
+AssertionError",False,True
+169,solution_code,"........                                                                 [100%]
+8 passed in 3.15s",True,True,,True,True
+170,solution_code,"..                                                                       [100%]
+2 passed in 3.64s",True,True,,True,True
+171,solution_code,"FFF.FFF                                                                  [100%]
+=================================== FAILURES ===================================
+__________________ TestSample171.test_data_route_returns_json __________________
+
+self = <test_sample.TestSample171 object at 0x796c355bfc10>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_data_route_returns_json(self, setup_app, sample_data):
+        """"""Test that the data route returns JSON with the provided numbers.""""""
+        with setup_app.test_request_context():
+            response = data(sample_data.tolist())
+            response_data = json.loads(response.get_data(as_text=True))
+    
+            assert ""numbers"" in response_data
+>           assert response_data[""numbers""] == sample_data.tolist()
+E           assert [1.6363636363...6230366492147] == [[1, 2, 3], [...6], [7, 8, 9]]
+E             At index 0 diff: 1.6363636363636365 != [1, 2, 3]
+E             Use -v to get more diff
+
+/tmp/tmps8681ac4/test_sample.py:38: AssertionError
+_____________________ TestSample171.test_eval_app_function _____________________
+
+self = <test_sample.TestSample171 object at 0x796c355bfcd0>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_eval_app_function(self, setup_app, sample_data):
+        """"""Test that eval_app correctly processes the request and returns data.""""""
+        result = eval_app(setup_app, data, sample_data.tolist())
+        response_data = json.loads(result)
+    
+        assert ""numbers"" in response_data
+>       assert response_data[""numbers""] == sample_data.tolist()
+E       assert [1.6363636363...6230366492147] == [[1, 2, 3], [...6], [7, 8, 9]]
+E         At index 0 diff: 1.6363636363636365 != [1, 2, 3]
+E         Use -v to get more diff
+
+/tmp/tmps8681ac4/test_sample.py:46: AssertionError
+_____________ TestSample171.test_custom_json_handler_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x796c355bfb20>
+setup_app = <Flask 'test1'>
+
+    def test_custom_json_handler_with_ndarray(self, setup_app):
+        """"""Test that the custom JSON handler correctly processes NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        # Create an instance of the handler
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(test_array)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmps8681ac4/test_sample.py:57: AssertionError
+______________ TestSample171.test_json_serialization_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x796c355bed40>
+setup_app = <Flask 'test1'>
+
+    def test_json_serialization_with_ndarray(self, setup_app):
+        """"""Test end-to-end JSON serialization with NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        with setup_app.test_request_context():
+            # Create a response with the array
+            response = flask.jsonify(test_array)
+            result = json.loads(response.get_data(as_text=True))
+    
+>           assert result == expected_result
+E           assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E             At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E             Use -v to get more diff
+
+/tmp/tmps8681ac4/test_sample.py:77: AssertionError
+_____________________ TestSample171.test_with_empty_array ______________________
+
+self = <test_sample.TestSample171 object at 0x796c355bec20>
+setup_app = <Flask 'test1'>
+
+    def test_with_empty_array(self, setup_app):
+        """"""Test handling of empty arrays.""""""
+        empty_array = np.array([])
+    
+        with setup_app.test_request_context():
+            # This should not raise an error
+>           response = data(empty_array.tolist())
+
+/tmp/tmps8681ac4/test_sample.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmps8681ac4/sample_171.py:17: in data
+    result = hmean(num_list, axis=1, nan_policy='omit')
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:476: in axis_nan_policy_wrapper
+    samples = _broadcast_arrays(samples, axis=axis)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:18: in _broadcast_arrays
+    new_shapes = _broadcast_array_shapes(arrays, axis=axis)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:30: in _broadcast_array_shapes
+    return _broadcast_shapes(shapes, axis)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+shapes = [(0,)], axis = array([1])
+
+    def _broadcast_shapes(shapes, axis=None):
+        """"""
+        Broadcast shapes, ignoring incompatibility of specified axes
+        """"""
+        if not shapes:
+            return shapes
+    
+        # input validation
+        if axis is not None:
+            axis = np.atleast_1d(axis)
+            axis_int = axis.astype(int)
+            if not np.array_equal(axis_int, axis):
+                raise np.AxisError('`axis` must be an integer, a '
+                                   'tuple of integers, or `None`.')
+            axis = axis_int
+    
+        # First, ensure all shapes have same number of dimensions by prepending 1s.
+        n_dims = max([len(shape) for shape in shapes])
+        new_shapes = np.ones((len(shapes), n_dims), dtype=int)
+        for row, shape in zip(new_shapes, shapes):
+            row[len(row)-len(shape):] = shape  # can't use negative indices (-0:)
+    
+        # Remove the shape elements of the axes to be ignored, but remember them.
+        if axis is not None:
+            axis[axis < 0] = n_dims + axis[axis < 0]
+            axis = np.sort(axis)
+            if axis[-1] >= n_dims or axis[0] < 0:
+                message = (f""`axis` is out of bounds ""
+                           f""for array of dimension {n_dims}"")
+>               raise np.AxisError(message)
+E               numpy.AxisError: `axis` is out of bounds for array of dimension 1
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:62: AxisError
+___________________ TestSample171.test_with_single_row_array ___________________
+
+self = <test_sample.TestSample171 object at 0x796c355bf1c0>
+setup_app = <Flask 'test1'>
+
+    def test_with_single_row_array(self, setup_app):
+        """"""Test handling of single row arrays.""""""
+        single_row = np.array([[1, 2, 3]])
+        expected_result = hmean(single_row, axis=1).tolist()
+    
+        # Test the custom handler directly
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(single_row)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3]] == [1.6363636363636365]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmps8681ac4/test_sample.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmps8681ac4/test_sample.py::TestSample171::test_data_route_returns_json
+FAILED ../tmp/tmps8681ac4/test_sample.py::TestSample171::test_eval_app_function
+FAILED ../tmp/tmps8681ac4/test_sample.py::TestSample171::test_custom_json_handler_with_ndarray
+FAILED ../tmp/tmps8681ac4/test_sample.py::TestSample171::test_json_serialization_with_ndarray
+FAILED ../tmp/tmps8681ac4/test_sample.py::TestSample171::test_with_empty_array
+FAILED ../tmp/tmps8681ac4/test_sample.py::TestSample171::test_with_single_row_array
+6 failed, 1 passed in 6.97s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpbzf_fzty/visible_test_sample_171.py"", line 42, in <module>
+    assert assertion_results
+AssertionError",False,True
+172,solution_code,"F.FFF                                                                    [100%]
+=================================== FAILURES ===================================
+____________ TestSample172.test_custom_json_encoder_with_nan_values ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_nan_values>
+
+    def test_custom_json_encoder_with_nan_values(self):
+        """"""Test the custom JSON encoder with NaN values in the array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with an array containing NaN
+        test_array = np.array([[1, 2, np.nan], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: NaN for the first row, harmonic mean for the second
+>       self.assertTrue(np.isnan(encoded[0]))
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmp77zvwq3t/test_sample.py:78: ValueError
+___________ TestSample172.test_custom_json_encoder_with_numpy_array ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_numpy_array>
+
+    def test_custom_json_encoder_with_numpy_array(self):
+        """"""Test the custom JSON encoder with a numpy array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with a simple array
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: harmonic means of each row
+        expected = [hmean(np.array([1, 2, 3])), hmean(np.array([4, 5, 6]))]
+>       self.assertEqual(encoded, expected)
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmp77zvwq3t/test_sample.py:67: ValueError
+________________________ TestSample172.test_data_route _________________________
+
+self = <test_sample.TestSample172 testMethod=test_data_route>
+
+    def test_data_route(self):
+        """"""Test the /data route with a valid numpy array""""""
+        with self.app.test_request_context():
+            # Test with a simple array
+            test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>           response = data(test_array)
+
+/tmp/tmp77zvwq3t/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1, 2, 3],
+       [4, 5, 6]])
+
+    @app.route('/data')
+    def data(num_arr):
+>       result = hmean(num_arr, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmp77zvwq3t/sample_172.py:9: TypeError
+_______________________ TestSample172.test_eval_function _______________________
+
+self = <test_sample.TestSample172 testMethod=test_eval_function>
+
+    def test_eval_function(self):
+        """"""Test the eval function with a valid numpy array""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>       result = eval(app, data, test_array)
+
+/tmp/tmp77zvwq3t/test_sample.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp77zvwq3t/sample_172.py:14: in eval
+    response = data_fn(num_arr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1, 2, 3],
+       [4, 5, 6]])
+
+    @app.route('/data')
+    def data(num_arr):
+>       result = hmean(num_arr, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmp77zvwq3t/sample_172.py:9: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp77zvwq3t/test_sample.py::TestSample172::test_custom_json_encoder_with_nan_values
+FAILED ../tmp/tmp77zvwq3t/test_sample.py::TestSample172::test_custom_json_encoder_with_numpy_array
+FAILED ../tmp/tmp77zvwq3t/test_sample.py::TestSample172::test_data_route - Ty...
+FAILED ../tmp/tmp77zvwq3t/test_sample.py::TestSample172::test_eval_function
+4 failed, 1 passed in 7.27s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpmx8k346p/visible_test_sample_172.py"", line 44, in <module>
+    assertion_results = eval(app2, data2,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]])) == eval(app, data,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]]))
+  File ""/tmp/tmpmx8k346p/visible_test_sample_172.py"", line 14, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmpmx8k346p/visible_test_sample_172.py"", line 9, in data
+    result = hmean(num_arr, axis=1, nan_policy='omit')
+TypeError: hmean() got an unexpected keyword argument 'nan_policy'",False,True
+173,solution_code,".....                                                                    [100%]
+5 passed in 2.97s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmpl7j5_h6v/visible_test_sample_173.py"", line 29, in <module>
+    joined, results = save_exponential(a,base_path, sub_path)
+  File ""/tmp/tmpl7j5_h6v/visible_test_sample_173.py"", line 14, in save_exponential
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmpl7j5_h6v/visible_test_sample_173.py"", line 30, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+174,solution_code,"F...                                                                     [100%]
+=================================== FAILURES ===================================
+_____________________ TestSaveExponential.test_large_batch _____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_large_batch>
+
+    def test_large_batch(self):
+        """"""Test with a larger batch of matrices.""""""
+        # Create 10 random 4x4 matrices
+        np.random.seed(42)  # For reproducibility
+        A = np.random.rand(10, 4, 4)
+    
+        base_path = self.temp_dir
+        sub_path = ""large_batch""
+    
+        # Call the function
+        joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+    
+        # Check the shape of the result
+        self.assertEqual(result.shape, A.shape)
+    
+        # Verify a few results manually using scipy's expm
+        for i in range(min(3, A.shape[0])):  # Check first 3 matrices
+>           expected = sample_174.linalg.expm(A[i])
+E           AttributeError: module 'sample_174' has no attribute 'linalg'
+
+/tmp/tmptvxrstr2/test_sample.py:110: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmptvxrstr2/test_sample.py::TestSaveExponential::test_large_batch
+1 failed, 3 passed in 3.37s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmplz1_sza4/visible_test_sample_174.py"", line 27, in <module>
+    expected[i] = linalg.expm(a[i])
+NameError: name 'linalg' is not defined",False,True
+326,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 5.17s",True,True,,True,True
+327,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 4.76s",True,True,,True,True
+328,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 5.66s",True,True,,True,True
+329,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 5.43s",True,True,,True,True
+330,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+________________________ TestSample330.test_use_seaborn ________________________
+
+style = 'seaborn'
+
+    @_docstring.Substitution(
+        ""\n"".join(map(""- {}"".format, sorted(STYLE_BLACKLIST, key=str.lower)))
+    )
+    def use(style):
+        """"""
+        Use Matplotlib style settings from a style specification.
+    
+        The style name of 'default' is reserved for reverting back to
+        the default style settings.
+    
+        .. note::
+    
+           This updates the `.rcParams` with the settings from the style.
+           `.rcParams` not defined in the style are kept.
+    
+        Parameters
+        ----------
+        style : str, dict, Path or list
+    
+            A style specification. Valid options are:
+    
+            str
+                - One of the style names in `.style.available` (a builtin style or
+                  a style installed in the user library path).
+    
+                - A dotted name of the form ""package.style_name""; in that case,
+                  ""package"" should be an importable Python package name, e.g. at
+                  ``/path/to/package/__init__.py``; the loaded style file is
+                  ``/path/to/package/style_name.mplstyle``.  (Style files in
+                  subpackages are likewise supported.)
+    
+                - The path or URL to a style file, which gets loaded by
+                  `.rc_params_from_file`.
+    
+            dict
+                A mapping of key/value pairs for `matplotlib.rcParams`.
+    
+            Path
+                The path to a style file, which gets loaded by
+                `.rc_params_from_file`.
+    
+            list
+                A list of style specifiers (str, Path or dict), which are applied
+                from first to last in the list.
+    
+        Notes
+        -----
+        The following `.rcParams` are not related to style and will be ignored if
+        found in a style specification:
+    
+        %s
+        """"""
+        if isinstance(style, (str, Path)) or hasattr(style, 'keys'):
+            # If name is a single str, Path or dict, make it a single element list.
+            styles = [style]
+        else:
+            styles = style
+    
+        style_alias = {'mpl20': 'default', 'mpl15': 'classic'}
+    
+        for style in styles:
+            if isinstance(style, str):
+                style = style_alias.get(style, style)
+                if style == ""default"":
+                    # Deprecation warnings were already handled when creating
+                    # rcParamsDefault, no need to reemit them here.
+                    with _api.suppress_matplotlib_deprecation_warning():
+                        # don't trigger RcParams.__getitem__('backend')
+                        style = {k: rcParamsDefault[k] for k in rcParamsDefault
+                                 if k not in STYLE_BLACKLIST}
+                elif style in library:
+                    style = library[style]
+                elif ""."" in style:
+                    pkg, _, name = style.rpartition(""."")
+                    try:
+                        path = (importlib_resources.files(pkg)
+                                / f""{name}.{STYLE_EXTENSION}"")
+                        style = _rc_params_in_file(path)
+                    except (ModuleNotFoundError, OSError, TypeError) as exc:
+                        # There is an ambiguity whether a dotted name refers to a
+                        # package.style_name or to a dotted file path.  Currently,
+                        # we silently try the first form and then the second one;
+                        # in the future, we may consider forcing file paths to
+                        # either use Path objects or be prepended with ""./"" and use
+                        # the slash as marker for file paths.
+                        pass
+            if isinstance(style, (str, Path)):
+                try:
+>                   style = _rc_params_in_file(style)
+
+.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/style/core.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fname = 'seaborn', transform = <function <lambda> at 0x72bf52c10d30>
+fail_on_error = False
+
+    def _rc_params_in_file(fname, transform=lambda x: x, fail_on_error=False):
+        """"""
+        Construct a `RcParams` instance from file *fname*.
+    
+        Unlike `rc_params_from_file`, the configuration class only contains the
+        parameters specified in the file (i.e. default values are not filled in).
+    
+        Parameters
+        ----------
+        fname : path-like
+            The loaded file.
+        transform : callable, default: the identity function
+            A function called on each individual line of the file to transform it,
+            before further parsing.
+        fail_on_error : bool, default: False
+            Whether invalid entries should result in an exception or a warning.
+        """"""
+        import matplotlib as mpl
+        rc_temp = {}
+>       with _open_file_or_url(fname) as fd:
+
+.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/__init__.py:866: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x72bf5453cb20>
+
+    def __enter__(self):
+        # do not keep args and kwds alive unnecessarily
+        # they are only needed for recreation, which is not possible anymore
+        del self.args, self.kwds, self.func
+        try:
+>           return next(self.gen)
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/contextlib.py:135: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fname = 'seaborn'
+
+    @contextlib.contextmanager
+    def _open_file_or_url(fname):
+        if (isinstance(fname, str)
+                and fname.startswith(('http://', 'https://', 'ftp://', 'file:'))):
+            import urllib.request
+            ssl_ctx = _get_ssl_context()
+            if ssl_ctx is None:
+                _log.debug(
+                    ""Could not get certifi ssl context, https may not work.""
+                )
+            with urllib.request.urlopen(fname, context=ssl_ctx) as f:
+                yield (line.decode('utf-8') for line in f)
+        else:
+            fname = os.path.expanduser(fname)
+>           with open(fname, encoding='utf-8') as f:
+E           FileNotFoundError: [Errno 2] No such file or directory: 'seaborn'
+
+.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/__init__.py:843: FileNotFoundError
+
+The above exception was the direct cause of the following exception:
+
+self = <test_sample.TestSample330 testMethod=test_use_seaborn>
+
+    def test_use_seaborn(self):
+        # Call the function that should set style to seaborn-v0_8
+>       use_seaborn()
+
+/tmp/tmpj38p0rnu/test_sample.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpj38p0rnu/sample_330.py:4: in use_seaborn
+    plt.style.use('seaborn')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+style = 'seaborn'
+
+    @_docstring.Substitution(
+        ""\n"".join(map(""- {}"".format, sorted(STYLE_BLACKLIST, key=str.lower)))
+    )
+    def use(style):
+        """"""
+        Use Matplotlib style settings from a style specification.
+    
+        The style name of 'default' is reserved for reverting back to
+        the default style settings.
+    
+        .. note::
+    
+           This updates the `.rcParams` with the settings from the style.
+           `.rcParams` not defined in the style are kept.
+    
+        Parameters
+        ----------
+        style : str, dict, Path or list
+    
+            A style specification. Valid options are:
+    
+            str
+                - One of the style names in `.style.available` (a builtin style or
+                  a style installed in the user library path).
+    
+                - A dotted name of the form ""package.style_name""; in that case,
+                  ""package"" should be an importable Python package name, e.g. at
+                  ``/path/to/package/__init__.py``; the loaded style file is
+                  ``/path/to/package/style_name.mplstyle``.  (Style files in
+                  subpackages are likewise supported.)
+    
+                - The path or URL to a style file, which gets loaded by
+                  `.rc_params_from_file`.
+    
+            dict
+                A mapping of key/value pairs for `matplotlib.rcParams`.
+    
+            Path
+                The path to a style file, which gets loaded by
+                `.rc_params_from_file`.
+    
+            list
+                A list of style specifiers (str, Path or dict), which are applied
+                from first to last in the list.
+    
+        Notes
+        -----
+        The following `.rcParams` are not related to style and will be ignored if
+        found in a style specification:
+    
+        %s
+        """"""
+        if isinstance(style, (str, Path)) or hasattr(style, 'keys'):
+            # If name is a single str, Path or dict, make it a single element list.
+            styles = [style]
+        else:
+            styles = style
+    
+        style_alias = {'mpl20': 'default', 'mpl15': 'classic'}
+    
+        for style in styles:
+            if isinstance(style, str):
+                style = style_alias.get(style, style)
+                if style == ""default"":
+                    # Deprecation warnings were already handled when creating
+                    # rcParamsDefault, no need to reemit them here.
+                    with _api.suppress_matplotlib_deprecation_warning():
+                        # don't trigger RcParams.__getitem__('backend')
+                        style = {k: rcParamsDefault[k] for k in rcParamsDefault
+                                 if k not in STYLE_BLACKLIST}
+                elif style in library:
+                    style = library[style]
+                elif ""."" in style:
+                    pkg, _, name = style.rpartition(""."")
+                    try:
+                        path = (importlib_resources.files(pkg)
+                                / f""{name}.{STYLE_EXTENSION}"")
+                        style = _rc_params_in_file(path)
+                    except (ModuleNotFoundError, OSError, TypeError) as exc:
+                        # There is an ambiguity whether a dotted name refers to a
+                        # package.style_name or to a dotted file path.  Currently,
+                        # we silently try the first form and then the second one;
+                        # in the future, we may consider forcing file paths to
+                        # either use Path objects or be prepended with ""./"" and use
+                        # the slash as marker for file paths.
+                        pass
+            if isinstance(style, (str, Path)):
+                try:
+                    style = _rc_params_in_file(style)
+                except OSError as err:
+>                   raise OSError(
+                        f""{style!r} is not a valid package style, path of style ""
+                        f""file, URL of style file, or library style name (library ""
+                        f""styles are listed in `style.available`)"") from err
+E                   OSError: 'seaborn' is not a valid package style, path of style file, URL of style file, or library style name (library styles are listed in `style.available`)
+
+.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/style/core.py:139: OSError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpj38p0rnu/test_sample.py::TestSample330::test_use_seaborn - O...
+1 failed, 1 warning in 3.63s",False,True,"Traceback (most recent call last):
+  File ""/app/.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/style/core.py"", line 137, in use
+    style = _rc_params_in_file(style)
+  File ""/app/.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/__init__.py"", line 866, in _rc_params_in_file
+    with _open_file_or_url(fname) as fd:
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/contextlib.py"", line 135, in __enter__
+    return next(self.gen)
+  File ""/app/.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/__init__.py"", line 843, in _open_file_or_url
+    with open(fname, encoding='utf-8') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'seaborn'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""/tmp/tmpgzkjbtvd/visible_test_sample_330.py"", line 6, in <module>
+    use_seaborn()
+  File ""/tmp/tmpgzkjbtvd/visible_test_sample_330.py"", line 4, in use_seaborn
+    plt.style.use('seaborn')
+  File ""/app/.dataset_venvs/gcham_venv_68e74ae12a63/lib/python3.10/site-packages/matplotlib/style/core.py"", line 139, in use
+    raise OSError(
+OSError: 'seaborn' is not a valid package style, path of style file, URL of style file, or library style name (library styles are listed in `style.available`)",False,True
