@@ -1,21 +1,11 @@
 {
   "default_model": "gpt-5-codex",
   "workspace_dir": ".",
-  "use_stdin_prompt": false,
+  "use_stdin_prompt": true,
   "result_file_template": "sample_{example_id}.py",
   "command": [
-    "/home/keith/.nvm/versions/node/v24.14.1/bin/node",
-    "/home/keith/.nvm/versions/node/v24.14.1/lib/node_modules/@openai/codex/bin/codex.js",
-    "exec",
-    "--json",
-    "--skip-git-repo-check",
-    "--full-auto",
-    "-C",
-    "{workspace}",
-    "-m",
-    "{model}",
-    "--add-dir",
-    "{workspace}",
-    "{prompt}"
+    "bash",
+    "-lc",
+    "source \"$HOME/.nvm/nvm.sh\" >/dev/null 2>&1 || true; codex exec --json --skip-git-repo-check --full-auto -C {workspace} -m {model} --add-dir {workspace} -"
   ]
 }

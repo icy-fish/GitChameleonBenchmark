@@ -221,6 +221,8 @@ class BenchmarkOrchestrator:
             model=model,
             agent_spec=agent_spec,
         )
+        if task_config.use_stdin_prompt and task_config.format_vars.get("prompt"):
+            (workspace / "prompt.md").write_text(task_config.format_vars["prompt"], encoding="utf-8")
         result = backend.run(workspace=workspace, config=task_config)
         answer = extract_code(result.solution_text or result.stdout)
         raw_record = {

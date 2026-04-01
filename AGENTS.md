@@ -7,6 +7,7 @@ When asked to run a benchmark for an agent:
 1. Inspect `agents/{agent_name}` first.
 2. Derive runtime behavior from the files in that folder instead of relying on automation defaults.
 3. Only use explicit CLI overrides when the user asks for them.
+4. Avoid committing workspace-specific absolute paths in checked-in benchmark files; prefer relative paths or PATH-resolved executables.
 
 ## Agent Folder Contract
 
