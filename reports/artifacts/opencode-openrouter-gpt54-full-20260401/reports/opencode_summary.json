@@ -1,0 +1,48 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.5789473684210527,
+  "hidden_passed": 22,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.4,
+      "passed": 4,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.6363636363636364,
+      "passed": 14,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.6666666666666666,
+      "passed": 4,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 40.51305869484158,
+      "count": 38,
+      "total_seconds": 1539.49623040398
+    },
+    "token_usage": {
+      "average_tokens": 1204.1842105263158,
+      "completion_tokens": 6906,
+      "count": 38,
+      "prompt_tokens": 38853,
+      "total_tokens": 45759
+    }
+  },
+  "run_setup": {
+    "agent_name": "opencode",
+    "agent_version": "1.1",
+    "identifier": "opencode:openrouter/openai/gpt-5.4",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.\nYou should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.",
+    "model_name": "openrouter/openai/gpt-5.4",
+    "provider_name": "openrouter"
+  },
+  "total": 38,
+  "visible_compiled": 38,
+  "visible_pass_rate": 0.5526315789473685,
+  "visible_passed": 21
+}

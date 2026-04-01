@@ -1,0 +1,1343 @@
+example_id,code_id,output,passed,compiled,output_manual,passed_manual,compiled_manual
+55,solution_code,".                                                                        [100%]
+1 passed, 27 warnings in 2.83s",True,True,,True,True
+99,solution_code,"FFF                                                                      [100%]
+=================================== FAILURES ===================================
+________ TestGetTimeInUTC.test_get_time_in_utc_has_zero_time_components ________
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_has_zero_time_components>
+
+    def test_get_time_in_utc_has_zero_time_components(self):
+        # Verify that hours, minutes, seconds are all zero
+>       result = get_time_in_utc(2023, 1, 1)
+
+/tmp/tmpxir8s8na/test_sample.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2023, month = 1, day = 1
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        naive_datetime = timezone.datetime(year, month, day)
+>       return timezone.make_aware(naive_datetime, timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmpxir8s8na/sample_99.py:8: AttributeError
+___ TestGetTimeInUTC.test_get_time_in_utc_returns_datetime_with_utc_timezone ___
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_returns_datetime_with_utc_timezone>
+
+    def test_get_time_in_utc_returns_datetime_with_utc_timezone(self):
+        # Arrange
+        year, month, day = 2023, 12, 31
+    
+        # Act
+>       result = get_time_in_utc(year, month, day)
+
+/tmp/tmpxir8s8na/test_sample.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2023, month = 12, day = 31
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        naive_datetime = timezone.datetime(year, month, day)
+>       return timezone.make_aware(naive_datetime, timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmpxir8s8na/sample_99.py:8: AttributeError
+__________ TestGetTimeInUTC.test_get_time_in_utc_with_different_dates __________
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_with_different_dates>
+
+    def test_get_time_in_utc_with_different_dates(self):
+        # Test with a few different dates
+        test_cases = [
+            (2020, 1, 1),
+            (2022, 6, 15),
+            (2024, 2, 29),  # Leap year
+        ]
+    
+        for year, month, day in test_cases:
+            with self.subTest(year=year, month=month, day=day):
+>               result = get_time_in_utc(year, month, day)
+
+/tmp/tmpxir8s8na/test_sample.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2020, month = 1, day = 1
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        naive_datetime = timezone.datetime(year, month, day)
+>       return timezone.make_aware(naive_datetime, timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmpxir8s8na/sample_99.py:8: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpxir8s8na/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_has_zero_time_components
+FAILED ../tmp/tmpxir8s8na/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_returns_datetime_with_utc_timezone
+FAILED ../tmp/tmpxir8s8na/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_with_different_dates
+3 failed in 0.26s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpjyollbfb/visible_test_sample_99.py"", line 14, in <module>
+    utc_time = get_time_in_utc(year, month, day)
+  File ""/tmp/tmpjyollbfb/visible_test_sample_99.py"", line 8, in get_time_in_utc
+    return timezone.make_aware(naive_datetime, timezone.utc)
+AttributeError: module 'django.utils.timezone' has no attribute 'utc'",False,True
+100,solution_code,"..                                                                       [100%]
+2 passed in 0.15s",True,True,,True,True
+101,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample101.test_save_existing _______________________
+
+self = <test_sample.TestSample101 testMethod=test_save_existing>
+
+    def test_save_existing(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method.""""""
+        # Call the function under test
+>       result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, obj=self.mock_obj
+        )
+
+/tmp/tmp9cyyotg7/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp9cyyotg7/sample_101.py:11: in save_existing
+    form.save()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock spec='Form' id='136469461944400'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp9cyyotg7/test_sample.py::TestSample101::test_save_existing
+1 failed in 0.68s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp6sark42z/visible_test_sample_101.py"", line 26, in <module>
+    result = save_existing(formset=fs5,form=DummyForm(), obj='dummy_str')
+  File ""/tmp/tmp6sark42z/visible_test_sample_101.py"", line 12, in save_existing
+    if form in formset.initial_forms:
+  File ""/app/.dataset_venvs/gcham_venv_a8c070a631dc/lib/python3.10/site-packages/django/forms/formsets.py"", line 206, in initial_forms
+    return self.forms[:self.initial_form_count()]
+  File ""/app/.dataset_venvs/gcham_venv_a8c070a631dc/lib/python3.10/site-packages/django/utils/functional.py"", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File ""/app/.dataset_venvs/gcham_venv_a8c070a631dc/lib/python3.10/site-packages/django/forms/formsets.py"", line 162, in forms
+    for i in range(self.total_form_count())
+  File ""/app/.dataset_venvs/gcham_venv_a8c070a631dc/lib/python3.10/site-packages/django/forms/formsets.py"", line 137, in total_form_count
+    initial_forms = self.initial_form_count()
+  File ""/app/.dataset_venvs/gcham_venv_a8c070a631dc/lib/python3.10/site-packages/django/forms/models.py"", line 584, in initial_form_count
+    return len(self.get_queryset())
+  File ""/app/.dataset_venvs/gcham_venv_a8c070a631dc/lib/python3.10/site-packages/django/forms/models.py"", line 645, in get_queryset
+    if not qs.ordered:
+AttributeError: 'list' object has no attribute 'ordered'",False,True
+102,solution_code,"FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ TestSaveExisting.test_save_existing_calls_formset_method ___________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_calls_formset_method>
+
+    def test_save_existing_calls_formset_method(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method with the right parameters.""""""
+        # Call the function under test
+>       result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=self.instance
+        )
+
+/tmp/tmpo8jmtfc_/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpo8jmtfc_/sample_102.py:14: in save_existing
+    obj = form.save(commit=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock spec='Form' id='124021900331424'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+_________ TestSaveExisting.test_save_existing_with_different_instance __________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_with_different_instance>
+
+    def test_save_existing_with_different_instance(self):
+        """"""Test save_existing with a different instance value.""""""
+        different_instance = ""different_instance""
+    
+        # Call the function under test with a different instance
+>       save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=different_instance
+        )
+
+/tmp/tmpo8jmtfc_/test_sample.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpo8jmtfc_/sample_102.py:14: in save_existing
+    obj = form.save(commit=False)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock spec='Form' id='124021899104208'>, name = 'save'
+
+    def __getattr__(self, name):
+        if name in {'_mock_methods', '_mock_unsafe'}:
+            raise AttributeError(name)
+        elif self._mock_methods is not None:
+            if name not in self._mock_methods or name in _all_magics:
+>               raise AttributeError(""Mock object has no attribute %r"" % name)
+E               AttributeError: Mock object has no attribute 'save'
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:643: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpo8jmtfc_/test_sample.py::TestSaveExisting::test_save_existing_calls_formset_method
+FAILED ../tmp/tmpo8jmtfc_/test_sample.py::TestSaveExisting::test_save_existing_with_different_instance
+2 failed in 1.68s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpnb5wlh8d/visible_test_sample_102.py"", line 35, in <module>
+    result = save_existing(formset=fs5,form=DummyForm(), instance='dummy_str')
+  File ""/tmp/tmpnb5wlh8d/visible_test_sample_102.py"", line 18, in save_existing
+    obj.pk = instance.pk
+AttributeError: 'str' object has no attribute 'pk'",False,True
+103,solution_code,".FFF                                                                     [100%]
+=================================== FAILURES ===================================
+____________ TestSample103.test_form_rendering_with_as_field_group _____________
+
+self = <test_sample.TestSample103 testMethod=test_form_rendering_with_as_field_group>
+
+    def test_form_rendering_with_as_field_group(self):
+        """"""Test that the form field renders with as_field_group template tag""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check that the rendered HTML contains the label, help text, and input field
+        self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+>       self.assertIn(
+            '<div class=""helptext"" id=""id_name_helptext"">Enter your name</div>',
+            rendered_html,
+        )
+E       AssertionError: '<div class=""helptext"" id=""id_name_helptext"">Enter your name</div>' not found in '<form>\n  <div>\n    <label for=""id_name"">Name:</label>\n\n    Enter your name\n\n    <input type=""text"" name=""name"" required aria-describedby=""id_name_helptext"" id=""id_name"">\n  </div>\n</form>'
+
+/tmp/tmp_5uy8bri/test_sample.py:61: AssertionError
+____________________ TestSample103.test_get_template_string ____________________
+
+self = <test_sample.TestSample103 testMethod=test_get_template_string>
+
+    def test_get_template_string(self):
+        """"""Test that get_template_string returns the expected template""""""
+        template = get_template_string()
+        self.assertIsInstance(template, str)
+>       self.assertIn(""{{ form.name.as_field_group }}"", template)
+E       AssertionError: '{{ form.name.as_field_group }}' not found in '<form>\n  <div>\n    {{ form.name.label_tag }}\n\n    {{ form.name.help_text|safe }}\n\n    {{ form.name }}\n  </div>\n</form>'
+
+/tmp/tmp_5uy8bri/test_sample.py:38: AssertionError
+_______________________ TestSample103.test_render_output _______________________
+
+self = <test_sample.TestSample103 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Remove whitespace for easier comparison
+        cleaned_html = re.sub(r""\s+"", "" "", rendered_html).strip()
+    
+        # Check that all expected elements are in the rendered HTML
+        for pattern in self.expected_elements:
+            with self.subTest(pattern=pattern):
+>               self.assertTrue(
+                    re.search(pattern, cleaned_html, re.IGNORECASE),
+                    f""Pattern '{pattern}' not found in rendered HTML: {cleaned_html}"",
+                )
+E               AssertionError: None is not true : Pattern '<div class=[\'""]helptext[\'""] id=[\'""]id_name_helptext[\'""]>Enter your name</div>' not found in rendered HTML: <form> <div> <label for=""id_name"">Name:</label> Enter your name <input type=""text"" name=""name"" required aria-describedby=""id_name_helptext"" id=""id_name""> </div> </form>
+
+/tmp/tmp_5uy8bri/test_sample.py:50: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp_5uy8bri/test_sample.py::TestSample103::test_form_rendering_with_as_field_group
+FAILED ../tmp/tmp_5uy8bri/test_sample.py::TestSample103::test_get_template_string
+FAILED ../tmp/tmp_5uy8bri/test_sample.py::TestSample103::test_render_output
+3 failed, 1 passed in 1.81s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp8of3enc9/visible_test_sample_103.py"", line 73, in <module>
+    assert assertion_result
+AssertionError",False,True
+104,solution_code,".FFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample104.test_render_output _______________________
+
+self = <test_sample.TestSample104 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check for label
+        self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+    
+        # Check for help text div
+>       self.assertIn('<div class=""helptext"" id=""id_name_helptext"">', rendered_html)
+E       AssertionError: '<div class=""helptext"" id=""id_name_helptext"">' not found in '<form>\n  <div>\n    <label for=""id_name"">Name:</label>\n\n<div class=\'helptext\' id=\'id_name_helptext\'>Enter your name</div>\n\n<input type=""text"" name=""name"" required id=""id_name"">\n  </div>\n</form>'
+
+/tmp/tmpzufueq4b/test_sample.py:40: AssertionError
+______________ TestSample104.test_rendered_output_matches_target _______________
+
+self = <test_sample.TestSample104 testMethod=test_rendered_output_matches_target>
+
+    def test_rendered_output_matches_target(self):
+        """"""Test that the rendered output matches the target HTML structure""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Normalize whitespace for comparison
+        def normalize_whitespace(text):
+            # Replace multiple whitespace with a single space
+            return re.sub(r""\s+"", "" "", text.strip())
+    
+        # Check that all expected elements are present in the correct order
+        normalized_html = normalize_whitespace(rendered_html)
+    
+        # Check for the basic structure
+        self.assertIn(""<form>"", normalized_html)
+        self.assertIn(""<div>"", normalized_html)
+        self.assertIn(""</div>"", normalized_html)
+        self.assertIn(""</form>"", normalized_html)
+    
+        # Check for the correct order of elements
+        label_pos = normalized_html.find('<label for=""id_name"">Name:</label>')
+        helptext_pos = normalized_html.find(
+            '<div class=""helptext"" id=""id_name_helptext"">'
+        )
+        input_pos = normalized_html.find('<input type=""text"" name=""name""')
+    
+        self.assertGreater(label_pos, 0, ""Label tag not found"")
+>       self.assertGreater(
+            helptext_pos, label_pos, ""Help text div not found or in wrong order""
+        )
+E       AssertionError: -1 not greater than 13 : Help text div not found or in wrong order
+
+/tmp/tmpzufueq4b/test_sample.py:78: AssertionError
+______________________ TestSample104.test_template_string ______________________
+
+self = <test_sample.TestSample104 testMethod=test_template_string>
+
+    def test_template_string(self):
+        """"""Test that the template string contains expected Django template tags""""""
+        self.assertIn(""{{ form.name.label_tag }}"", self.template_string)
+>       self.assertIn(""{{ form.name.help_text|safe }}"", self.template_string)
+E       AssertionError: '{{ form.name.help_text|safe }}' not found in ""<form>\n  <div>\n    {{ form.name.label_tag }}\n\n<div class='helptext' id='{{ form.name.auto_id }}_helptext'>{{ form.name.help_text }}</div>\n\n{{ form.name }}\n  </div>\n</form>""
+
+/tmp/tmpzufueq4b/test_sample.py:27: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpzufueq4b/test_sample.py::TestSample104::test_render_output
+FAILED ../tmp/tmpzufueq4b/test_sample.py::TestSample104::test_rendered_output_matches_target
+FAILED ../tmp/tmpzufueq4b/test_sample.py::TestSample104::test_template_string
+3 failed, 1 passed in 1.55s",False,True,,True,True
+105,solution_code,"==================================== ERRORS ====================================
+_______________________ ERROR collecting test_sample.py ________________________
+/tmp/tmpnxhdzvvp/test_sample.py:18: in <module>
+    from sample_105 import Square, create_square, display_side_and_area
+/tmp/tmpnxhdzvvp/sample_105.py:20: in <module>
+    class Square(models.Model):
+/tmp/tmpnxhdzvvp/sample_105.py:24: in Square
+    area = models.GeneratedField(
+E   AttributeError: module 'django.db.models' has no attribute 'GeneratedField'
+=========================== short test summary info ============================
+ERROR ../tmp/tmpnxhdzvvp/test_sample.py - AttributeError: module 'django.db.m...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.69s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpk5wc2590/visible_test_sample_105.py"", line 20, in <module>
+    class Square(models.Model):
+  File ""/tmp/tmpk5wc2590/visible_test_sample_105.py"", line 24, in Square
+    area = models.GeneratedField(
+AttributeError: module 'django.db.models' has no attribute 'GeneratedField'",False,True
+106,solution_code,".....                                                                    [100%]
+5 passed in 1.93s",True,True,,True,True
+107,solution_code,"....                                                                     [100%]
+4 passed in 1.73s",True,True,,True,True
+108,solution_code,"....                                                                     [100%]
+4 passed in 1.70s",True,True,,True,True
+143,solution_code,".                                                                        [100%]
+1 passed in 1.22s",True,True,,True,True
+144,solution_code,"...                                                                      [100%]
+3 passed in 1.03s",True,True,,True,True
+145,solution_code,"...                                                                      [100%]
+3 passed, 3 warnings in 1.13s",True,True,"/tmp/tmpvhmj7yr1/visible_test_sample_145.py:16: DeprecationWarning: The 'attachment_filename' parameter has been renamed to 'download_name'. The old name will be removed in Flask 2.1.
+  return send_file(data, as_attachment=True, attachment_filename=attachment_filename)",True,True
+146,solution_code,"..                                                                       [100%]
+2 passed in 1.02s",True,True,,True,True
+147,solution_code,".                                                                        [100%]
+1 passed in 1.07s",True,True,,True,True
+148,solution_code,"..                                                                       [100%]
+2 passed in 1.02s",True,True,,True,True
+149,solution_code,"F..                                                                      [100%]
+=================================== FAILURES ===================================
+_______________ TestSafeJoinFail404.test_flask_safe_join_called ________________
+
+self = <test_sample.TestSafeJoinFail404 testMethod=test_flask_safe_join_called>
+mock_safe_join = <MagicMock name='safe_join' id='124753316729792'>
+
+    @patch(""flask.safe_join"")
+    def test_flask_safe_join_called(self, mock_safe_join):
+        """"""Test that flask.safe_join is called with the correct arguments.""""""
+        base_path = ""/base/path""
+        sub_path = ""sub/path""
+        expected_result = ""/base/path/sub/path""
+    
+        # Set up the mock to return a specific value
+        mock_safe_join.return_value = expected_result
+    
+        # Call the function
+        result = safe_join_fail_404(base_path, sub_path)
+    
+        # Verify that flask.safe_join was called with the correct arguments
+>       mock_safe_join.assert_called_once_with(base_path, sub_path)
+
+/tmp/tmpsl1ld9ux/test_sample.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='safe_join' id='124753316729792'>
+args = ('/base/path', 'sub/path'), kwargs = {}
+msg = ""Expected 'safe_join' to be called once. Called 0 times.""
+
+    def assert_called_once_with(self, /, *args, **kwargs):
+        """"""assert that the mock was called exactly once and that that call was
+        with the specified arguments.""""""
+        if not self.call_count == 1:
+            msg = (""Expected '%s' to be called once. Called %s times.%s""
+                   % (self._mock_name or 'mock',
+                      self.call_count,
+                      self._calls_repr()))
+>           raise AssertionError(msg)
+E           AssertionError: Expected 'safe_join' to be called once. Called 0 times.
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:940: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpsl1ld9ux/test_sample.py::TestSafeJoinFail404::test_flask_safe_join_called
+1 failed, 2 passed in 1.37s",False,True,,True,True
+150,solution_code,"...                                                                      [100%]
+3 passed in 1.02s",True,True,,True,True
+151,solution_code,".                                                                        [100%]
+1 passed in 1.04s",True,True,,True,True
+152,solution_code,".                                                                        [100%]
+1 passed in 0.90s",True,True,,True,True
+163,solution_code,"==================================== ERRORS ====================================
+_______________________ ERROR collecting test_sample.py ________________________
+/tmp/tmpghlq8gxi/test_sample.py:15: in <module>
+    from sample_163 import MyCustomJSONHandler
+/tmp/tmpghlq8gxi/sample_163.py:28: in <module>
+    class CustomJSONProvider(flask.json.provider.DefaultJSONProvider):
+E   AttributeError: module 'flask.json' has no attribute 'provider'
+=========================== short test summary info ============================
+ERROR ../tmp/tmpghlq8gxi/test_sample.py - AttributeError: module 'flask.json'...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 2.08s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp7p3mcjrj/visible_test_sample_163.py"", line 28, in <module>
+    class CustomJSONProvider(flask.json.provider.DefaultJSONProvider):
+AttributeError: module 'flask.json' has no attribute 'provider'",False,True
+164,solution_code,".....                                                                    [100%]
+5 passed in 1.79s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmpo2udrxfg/visible_test_sample_164.py"", line 60, in <module>
+    assert assertion_results
+AssertionError",False,True
+165,solution_code,".....                                                                    [100%]
+5 passed in 1.89s",True,True,,True,True
+166,solution_code,".....                                                                    [100%]
+5 passed, 2 warnings in 1.79s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmpsf1bpz3a/visible_test_sample_166.py"", line 47, in <module>
+    assertion_results = eval_app(app2, data2,np.array([[3, 3, 1,], [2,2,4],[1,1,1]])) == eval_app(app, data,np.array([[3, 3, 1,], [2,2,4],[1,1,1]]))
+  File ""/tmp/tmpsf1bpz3a/visible_test_sample_166.py"", line 17, in eval_app
+    response = data_fn(num_arr)
+  File ""/tmp/tmpsf1bpz3a/visible_test_sample_166.py"", line 13, in data
+    return flask.jsonify({'numbers': num_list})
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmpsf1bpz3a/visible_test_sample_166.py"", line 23, in default
+    transposed = fastCopyAndTranspose(obj)
+DeprecationWarning: fastCopyAndTranspose and the underlying C function PyArray_CopyAndTranspose have been deprecated.
+
+Use the transpose method followed by a C-order copy instead, e.g. ``arr.T.copy()``",False,True
+167,solution_code,"F..F.                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ TestStackAndSave.test_mixed_array_types ____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_mixed_array_types>
+
+    def test_mixed_array_types(self):
+        """"""Test with mixed array types that can be safely cast.""""""
+        arrays = [
+            np.array([[1, 2]], dtype=np.int32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+        ]
+    
+        # Both int32 and float32 can be safely cast to float64
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float64)
+    
+        self.assertEqual(stacked.dtype, np.float64)
+>       self.assertEqual(stacked.shape, (2, 2))
+E       AssertionError: Tuples differ: (2, 1, 2) != (2, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (2, 1, 2)
+E       ?     ---
+E       
+E       + (2, 2)
+
+/tmp/tmplby2e81z/test_sample.py:107: AssertionError
+________________ TestStackAndSave.test_stacking_multiple_arrays ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_stacking_multiple_arrays>
+
+    def test_stacking_multiple_arrays(self):
+        """"""Test stacking multiple arrays.""""""
+        # Stack multiple float32 arrays to float32
+        arrays = [
+            np.array([[1.0, 2.0]], dtype=np.float32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+            np.array([[5.0, 6.0]], dtype=np.float32),
+        ]
+    
+        _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float32)
+    
+        # Check dimensions and content
+>       self.assertEqual(stacked.shape, (3, 2))
+E       AssertionError: Tuples differ: (3, 1, 2) != (3, 2)
+E       
+E       First differing element 1:
+E       1
+E       2
+E       
+E       First tuple contains 1 additional elements.
+E       First extra element 2:
+E       2
+E       
+E       - (3, 1, 2)
+E       ?     ---
+E       
+E       + (3, 2)
+
+/tmp/tmplby2e81z/test_sample.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmplby2e81z/test_sample.py::TestStackAndSave::test_mixed_array_types
+FAILED ../tmp/tmplby2e81z/test_sample.py::TestStackAndSave::test_stacking_multiple_arrays
+2 failed, 3 passed in 1.99s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpkm1nqd7p/visible_test_sample_167.py"", line 49, in <module>
+    assert assertion_result
+AssertionError",False,True
+168,solution_code,"FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+________________ TestStackAndSave.test_incompatible_dtype_error ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_incompatible_dtype_error>
+
+    def test_incompatible_dtype_error(self):
+        """"""Test that incompatible dtype with casting policy raises TypeError.""""""
+        sub_path = ""test_file.npy""
+    
+        # Create arrays with int dtype
+        int_arr1 = np.array([[1, 2, 3], [4, 5, 6]], dtype=np.int32)
+        int_arr2 = np.array([[7, 8, 9], [10, 11, 12]], dtype=np.int32)
+        int_arr_list = [int_arr1, int_arr2]
+    
+        # Using safe casting with float32 should raise TypeError when casting from int to float
+        with self.assertRaises(TypeError):
+>           stack_and_save(
+                int_arr_list,
+                self.base_path,
+                sub_path,
+                ""safe"",
+                np.float16,  # Using float16 to potentially trigger casting error
+            )
+
+/tmp/tmpdvl4b__c/test_sample.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpdvl4b__c/sample_168.py:15: in stack_and_save
+    joined_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+__________________ TestStackAndSave.test_path_traversal_error __________________
+
+self = <test_sample.TestStackAndSave testMethod=test_path_traversal_error>
+
+    def test_path_traversal_error(self):
+        """"""Test that path traversal attempts raise a 404 error.""""""
+        # Try to access a path outside the base directory
+        with self.assertRaises(error404):
+>           stack_and_save(
+                self.arr_list, self.base_path, ""../../../etc/passwd"", ""safe"", np.float32
+            )
+
+/tmp/tmpdvl4b__c/test_sample.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpdvl4b__c/sample_168.py:15: in stack_and_save
+    joined_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+_______________ TestStackAndSave.test_successful_stack_and_save ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_successful_stack_and_save>
+
+    def test_successful_stack_and_save(self):
+        """"""Test successful stacking and path joining.""""""
+        sub_path = ""test_dir/test_file.npy""
+        # Create the subdirectory
+        os.makedirs(os.path.join(self.base_path, ""test_dir""), exist_ok=True)
+    
+        # Test with safe casting and float32 dtype
+>       joined_path, stacked = stack_and_save(
+            self.arr_list, self.base_path, sub_path, ""safe"", np.float32
+        )
+
+/tmp/tmpdvl4b__c/test_sample.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpdvl4b__c/sample_168.py:15: in stack_and_save
+    joined_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'safe_join'
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+_____________________ TestStackAndSave.test_unsafe_casting _____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_unsafe_casting>
+
+    def test_unsafe_casting(self):
+        """"""Test with unsafe casting policy.""""""
+        sub_path = ""test_file.npy""
+    
+        # Test with unsafe casting and float64 dtype
+>       joined_path, stacked = stack_and_save(
+            self.arr_list, self.base_path, sub_path, ""unsafe"", np.float64
+        )
+
+/tmp/tmpdvl4b__c/test_sample.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpdvl4b__c/sample_168.py:15: in stack_and_save
+    joined_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'safe_join'
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpdvl4b__c/test_sample.py::TestStackAndSave::test_incompatible_dtype_error
+FAILED ../tmp/tmpdvl4b__c/test_sample.py::TestStackAndSave::test_path_traversal_error
+FAILED ../tmp/tmpdvl4b__c/test_sample.py::TestStackAndSave::test_successful_stack_and_save
+FAILED ../tmp/tmpdvl4b__c/test_sample.py::TestStackAndSave::test_unsafe_casting
+4 failed in 1.99s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpvonb6k64/visible_test_sample_168.py"", line 38, in <module>
+    joined, stacked = stack_and_save(arr_list,base_path, sub_path,  casting_policy,out_dtype)
+  File ""/tmp/tmpvonb6k64/visible_test_sample_168.py"", line 15, in stack_and_save
+    joined_path = flask.safe_join(base_path, sub_path)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/__init__.py"", line 60, in __getattr__
+    raise AttributeError(name)
+AttributeError: safe_join",False,True
+169,solution_code,"........                                                                 [100%]
+8 passed in 2.38s",True,True,,True,True
+170,solution_code,"..                                                                       [100%]
+2 passed in 2.16s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmpjrrqa74l/visible_test_sample_170.py"", line 43, in <module>
+    assertion_results = eval(app2, data2,a) == eval(app, data,a)
+  File ""/tmp/tmpjrrqa74l/visible_test_sample_170.py"", line 13, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmpjrrqa74l/visible_test_sample_170.py"", line 9, in data
+    return flask.jsonify({'numbers': num_arr})
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 348, in jsonify
+    f""{dumps(data, indent=indent, separators=separators)}\n"",
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmpjrrqa74l/visible_test_sample_170.py"", line 19, in default
+    determinants = linalg.det(obj)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_basic.py"", line 1025, in det
+    raise ValueError('expected square matrix')
+ValueError: expected square matrix",False,True
+171,solution_code,"..F.F.F                                                                  [100%]
+=================================== FAILURES ===================================
+_____________ TestSample171.test_custom_json_handler_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x7769a3fbab30>
+setup_app = <Flask 'test1'>
+
+    def test_custom_json_handler_with_ndarray(self, setup_app):
+        """"""Test that the custom JSON handler correctly processes NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        # Create an instance of the handler
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(test_array)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp3s80nv5j/test_sample.py:57: AssertionError
+______________ TestSample171.test_json_serialization_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x7769a3fbb010>
+setup_app = <Flask 'test1'>
+
+    def test_json_serialization_with_ndarray(self, setup_app):
+        """"""Test end-to-end JSON serialization with NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        with setup_app.test_request_context():
+            # Create a response with the array
+            response = flask.jsonify(test_array)
+            result = json.loads(response.get_data(as_text=True))
+    
+>           assert result == expected_result
+E           assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E             At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E             Use -v to get more diff
+
+/tmp/tmp3s80nv5j/test_sample.py:77: AssertionError
+___________________ TestSample171.test_with_single_row_array ___________________
+
+self = <test_sample.TestSample171 object at 0x7769a3fbb9a0>
+setup_app = <Flask 'test1'>
+
+    def test_with_single_row_array(self, setup_app):
+        """"""Test handling of single row arrays.""""""
+        single_row = np.array([[1, 2, 3]])
+        expected_result = hmean(single_row, axis=1).tolist()
+    
+        # Test the custom handler directly
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(single_row)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3]] == [1.6363636363636365]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp3s80nv5j/test_sample.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp3s80nv5j/test_sample.py::TestSample171::test_custom_json_handler_with_ndarray
+FAILED ../tmp/tmp3s80nv5j/test_sample.py::TestSample171::test_json_serialization_with_ndarray
+FAILED ../tmp/tmp3s80nv5j/test_sample.py::TestSample171::test_with_single_row_array
+3 failed, 4 passed in 5.16s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpxhmj50mz/visible_test_sample_171.py"", line 54, in <module>
+    assert assertion_results
+AssertionError",False,True
+172,solution_code,"F.FFF                                                                    [100%]
+=================================== FAILURES ===================================
+____________ TestSample172.test_custom_json_encoder_with_nan_values ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_nan_values>
+
+    def test_custom_json_encoder_with_nan_values(self):
+        """"""Test the custom JSON encoder with NaN values in the array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with an array containing NaN
+        test_array = np.array([[1, 2, np.nan], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: NaN for the first row, harmonic mean for the second
+>       self.assertTrue(np.isnan(encoded[0]))
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmpyr9zk6_p/test_sample.py:78: ValueError
+___________ TestSample172.test_custom_json_encoder_with_numpy_array ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_numpy_array>
+
+    def test_custom_json_encoder_with_numpy_array(self):
+        """"""Test the custom JSON encoder with a numpy array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with a simple array
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: harmonic means of each row
+        expected = [hmean(np.array([1, 2, 3])), hmean(np.array([4, 5, 6]))]
+>       self.assertEqual(encoded, expected)
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmpyr9zk6_p/test_sample.py:67: ValueError
+________________________ TestSample172.test_data_route _________________________
+
+self = <test_sample.TestSample172 testMethod=test_data_route>
+
+    def test_data_route(self):
+        """"""Test the /data route with a valid numpy array""""""
+        with self.app.test_request_context():
+            # Test with a simple array
+            test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>           response = data(test_array)
+
+/tmp/tmpyr9zk6_p/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpyr9zk6_p/sample_172.py:37: in data
+    return flask.jsonify({'numbers': prepare_numbers(num_arr)})
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1, 2, 3],
+       [4, 5, 6]])
+
+    def prepare_numbers(num_arr):
+        values = np.asarray(num_arr, dtype=float)
+>       means = hmean(values, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmpyr9zk6_p/sample_172.py:25: TypeError
+_______________________ TestSample172.test_eval_function _______________________
+
+self = <test_sample.TestSample172 testMethod=test_eval_function>
+
+    def test_eval_function(self):
+        """"""Test the eval function with a valid numpy array""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>       result = eval(app, data, test_array)
+
+/tmp/tmpyr9zk6_p/test_sample.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpyr9zk6_p/sample_172.py:13: in eval
+    response = data_fn(num_arr)
+/tmp/tmpyr9zk6_p/sample_172.py:37: in data
+    return flask.jsonify({'numbers': prepare_numbers(num_arr)})
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1, 2, 3],
+       [4, 5, 6]])
+
+    def prepare_numbers(num_arr):
+        values = np.asarray(num_arr, dtype=float)
+>       means = hmean(values, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmpyr9zk6_p/sample_172.py:25: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpyr9zk6_p/test_sample.py::TestSample172::test_custom_json_encoder_with_nan_values
+FAILED ../tmp/tmpyr9zk6_p/test_sample.py::TestSample172::test_custom_json_encoder_with_numpy_array
+FAILED ../tmp/tmpyr9zk6_p/test_sample.py::TestSample172::test_data_route - Ty...
+FAILED ../tmp/tmpyr9zk6_p/test_sample.py::TestSample172::test_eval_function
+4 failed, 1 passed in 4.79s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp7y9_m59v/visible_test_sample_172.py"", line 61, in <module>
+    assertion_results = eval(app2, data2,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]])) == eval(app, data,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]]))
+  File ""/tmp/tmp7y9_m59v/visible_test_sample_172.py"", line 13, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmp7y9_m59v/visible_test_sample_172.py"", line 37, in data
+    return flask.jsonify({'numbers': prepare_numbers(num_arr)})
+  File ""/tmp/tmp7y9_m59v/visible_test_sample_172.py"", line 25, in prepare_numbers
+    means = hmean(values, axis=1, nan_policy='omit')
+TypeError: hmean() got an unexpected keyword argument 'nan_policy'",False,True
+173,solution_code,"FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+____________________ TestSaveExponential.test_empty_subpath ____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_empty_subpath>
+
+    def test_empty_subpath(self):
+        """"""Test with an empty sub path.""""""
+        A = np.array([[[0.0, 0.0], [0.0, 0.0]]])
+    
+>       joined_path, result = save_exponential(A, self.temp_dir, """")
+
+/tmp/tmplmr6yodo/test_sample.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmplmr6yodo/sample_173.py:13: in save_exponential
+    save_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'safe_join'
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+__________________ TestSaveExponential.test_multiple_matrices __________________
+
+self = <test_sample.TestSaveExponential testMethod=test_multiple_matrices>
+
+    def test_multiple_matrices(self):
+        """"""Test with multiple matrices in the batch.""""""
+        # Create a batch of 3 matrices
+        A = np.array(
+            [
+                [[1.0, 0.0], [0.0, 1.0]],  # Identity matrix
+                [[0.0, 1.0], [1.0, 0.0]],  # Pauli X matrix
+                [[0.0, -1j], [1j, 0.0]],  # Pauli Y matrix
+            ]
+        )
+    
+>       joined_path, result = save_exponential(A, self.temp_dir, ""batch"")
+
+/tmp/tmplmr6yodo/test_sample.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmplmr6yodo/sample_173.py:13: in save_exponential
+    save_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'safe_join'
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+____________________ TestSaveExponential.test_none_subpath _____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_none_subpath>
+
+    def test_none_subpath(self):
+        """"""Test with None as sub path should raise TypeError.""""""
+        A = np.array([[[0.0, 0.0], [0.0, 0.0]]])
+    
+        with self.assertRaises(TypeError):
+>           save_exponential(A, self.temp_dir, None)
+
+/tmp/tmplmr6yodo/test_sample.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmplmr6yodo/sample_173.py:13: in save_exponential
+    save_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+_______________ TestSaveExponential.test_path_traversal_attempt ________________
+
+self = <test_sample.TestSaveExponential testMethod=test_path_traversal_attempt>
+
+    def test_path_traversal_attempt(self):
+        """"""Test that path traversal attempts raise a 404 error.""""""
+        A = np.array([[[1.0, 0.0], [0.0, 1.0]]])
+    
+        # Try a path traversal attack
+        with self.assertRaises(NotFound):
+>           save_exponential(A, self.temp_dir, ""../../../etc/passwd"")
+
+/tmp/tmplmr6yodo/test_sample.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmplmr6yodo/sample_173.py:13: in save_exponential
+    save_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+___________________ TestSaveExponential.test_valid_path_join ___________________
+
+self = <test_sample.TestSaveExponential testMethod=test_valid_path_join>
+
+    def test_valid_path_join(self):
+        """"""Test that valid paths are joined correctly.""""""
+        # Create a simple 2x2 matrix
+        A = np.array([[[1.0, 2.0], [3.0, 4.0]]])
+    
+        # Test with a valid sub path
+        sub_path = ""valid_folder""
+>       joined_path, result = save_exponential(A, self.temp_dir, sub_path)
+
+/tmp/tmplmr6yodo/test_sample.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmplmr6yodo/sample_173.py:13: in save_exponential
+    save_path = flask.safe_join(base_path, sub_path)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'safe_join'
+
+    def __getattr__(name: str) -> t.Any:
+        if name == ""__version__"":
+            import importlib.metadata
+            import warnings
+    
+            warnings.warn(
+                ""The '__version__' attribute is deprecated and will be removed in""
+                "" Flask 3.1. Use feature detection or""
+                "" 'importlib.metadata.version(\""flask\"")' instead."",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return importlib.metadata.version(""flask"")
+    
+>       raise AttributeError(name)
+E       AttributeError: safe_join
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/__init__.py:60: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmplmr6yodo/test_sample.py::TestSaveExponential::test_empty_subpath
+FAILED ../tmp/tmplmr6yodo/test_sample.py::TestSaveExponential::test_multiple_matrices
+FAILED ../tmp/tmplmr6yodo/test_sample.py::TestSaveExponential::test_none_subpath
+FAILED ../tmp/tmplmr6yodo/test_sample.py::TestSaveExponential::test_path_traversal_attempt
+FAILED ../tmp/tmplmr6yodo/test_sample.py::TestSaveExponential::test_valid_path_join
+5 failed in 2.61s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp9jq_tn9r/visible_test_sample_173.py"", line 31, in <module>
+    joined, results = save_exponential(a,base_path, sub_path)
+  File ""/tmp/tmp9jq_tn9r/visible_test_sample_173.py"", line 13, in save_exponential
+    save_path = flask.safe_join(base_path, sub_path)
+  File ""/app/.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/flask/__init__.py"", line 60, in __getattr__
+    raise AttributeError(name)
+AttributeError: safe_join",False,True
+174,solution_code,"F.FF                                                                     [100%]
+=================================== FAILURES ===================================
+_____________________ TestSaveExponential.test_large_batch _____________________
+
+self = <test_sample.TestSaveExponential testMethod=test_large_batch>
+
+    def test_large_batch(self):
+        """"""Test with a larger batch of matrices.""""""
+        # Create 10 random 4x4 matrices
+        np.random.seed(42)  # For reproducibility
+        A = np.random.rand(10, 4, 4)
+    
+        base_path = self.temp_dir
+        sub_path = ""large_batch""
+    
+        # Call the function
+>       joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+
+/tmp/tmpk8ygvh__/test_sample.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpk8ygvh__/sample_174.py:17: in save_exponential
+    exp_matrices = linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py:255: in expm
+    return scipy.sparse.linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:590: in expm
+    return _expm(A, use_exact_onenorm='auto')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+A = array([[[0.37454012, 0.95071431, 0.73199394, 0.59865848],
+        [0.15601864, 0.15599452, 0.05808361, 0.86617615],
+  ...,
+        [0.14489487, 0.48945276, 0.98565045, 0.24205527],
+        [0.67213555, 0.76161962, 0.23763754, 0.72821635]]])
+use_exact_onenorm = 'auto'
+
+    def _expm(A, use_exact_onenorm):
+        # Core of expm, separated to allow testing exact and approximate
+        # algorithms.
+    
+        # Avoid indiscriminate asarray() to allow sparse or other strange arrays.
+        if isinstance(A, (list, tuple, np.matrix)):
+            A = np.asarray(A)
+        if len(A.shape) != 2 or A.shape[0] != A.shape[1]:
+>           raise ValueError('expected a square matrix')
+E           ValueError: expected a square matrix
+
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:601: ValueError
+_______________ TestSaveExponential.test_save_exponential_basic ________________
+
+self = <test_sample.TestSaveExponential testMethod=test_save_exponential_basic>
+
+    def test_save_exponential_basic(self):
+        """"""Test basic functionality of save_exponential.""""""
+        # Create a simple 2x2x2 array (2 matrices of size 2x2)
+        A = np.array(
+            [
+                [[1.0, 0.0], [0.0, 1.0]],  # Identity matrix
+                [[0.0, 1.0], [1.0, 0.0]],  # Swap matrix
+            ]
+        )
+    
+        base_path = self.temp_dir
+        sub_path = ""test_folder""
+    
+        # Call the function
+>       joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+
+/tmp/tmpk8ygvh__/test_sample.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpk8ygvh__/sample_174.py:17: in save_exponential
+    exp_matrices = linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py:255: in expm
+    return scipy.sparse.linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:590: in expm
+    return _expm(A, use_exact_onenorm='auto')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+A = array([[[1., 0.],
+        [0., 1.]],
+
+       [[0., 1.],
+        [1., 0.]]])
+use_exact_onenorm = 'auto'
+
+    def _expm(A, use_exact_onenorm):
+        # Core of expm, separated to allow testing exact and approximate
+        # algorithms.
+    
+        # Avoid indiscriminate asarray() to allow sparse or other strange arrays.
+        if isinstance(A, (list, tuple, np.matrix)):
+            A = np.asarray(A)
+        if len(A.shape) != 2 or A.shape[0] != A.shape[1]:
+>           raise ValueError('expected a square matrix')
+E           ValueError: expected a square matrix
+
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:601: ValueError
+____________ TestSaveExponential.test_save_exponential_zero_matrix _____________
+
+self = <test_sample.TestSaveExponential testMethod=test_save_exponential_zero_matrix>
+
+    def test_save_exponential_zero_matrix(self):
+        """"""Test save_exponential with zero matrices.""""""
+        # Create a 2x3x3 array of zeros (2 zero matrices of size 3x3)
+        A = np.zeros((2, 3, 3))
+    
+        base_path = self.temp_dir
+        sub_path = ""zeros""
+    
+        # Call the function
+>       joined_path, result = sample_174.save_exponential(A, base_path, sub_path)
+
+/tmp/tmpk8ygvh__/test_sample.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmpk8ygvh__/sample_174.py:17: in save_exponential
+    exp_matrices = linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py:255: in expm
+    return scipy.sparse.linalg.expm(A)
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:590: in expm
+    return _expm(A, use_exact_onenorm='auto')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+A = array([[[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]]])
+use_exact_onenorm = 'auto'
+
+    def _expm(A, use_exact_onenorm):
+        # Core of expm, separated to allow testing exact and approximate
+        # algorithms.
+    
+        # Avoid indiscriminate asarray() to allow sparse or other strange arrays.
+        if isinstance(A, (list, tuple, np.matrix)):
+            A = np.asarray(A)
+        if len(A.shape) != 2 or A.shape[0] != A.shape[1]:
+>           raise ValueError('expected a square matrix')
+E           ValueError: expected a square matrix
+
+.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py:601: ValueError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpk8ygvh__/test_sample.py::TestSaveExponential::test_large_batch
+FAILED ../tmp/tmpk8ygvh__/test_sample.py::TestSaveExponential::test_save_exponential_basic
+FAILED ../tmp/tmpk8ygvh__/test_sample.py::TestSaveExponential::test_save_exponential_zero_matrix
+3 failed, 1 passed, 4 warnings in 2.71s",False,True,"/tmp/tmp9ow4o_7f/visible_test_sample_174.py:13: DeprecationWarning: 'flask.helpers.safe_join' is deprecated and will be removed in Flask 2.1. Use 'werkzeug.utils.safe_join' instead.
+  save_path = flask.safe_join(base_path, sub_path)
+Traceback (most recent call last):
+  File ""/tmp/tmp9ow4o_7f/visible_test_sample_174.py"", line 41, in <module>
+    joined, results = save_exponential(a,base_path, sub_path)
+  File ""/tmp/tmp9ow4o_7f/visible_test_sample_174.py"", line 17, in save_exponential
+    exp_matrices = linalg.expm(A)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/linalg/_matfuncs.py"", line 255, in expm
+    return scipy.sparse.linalg.expm(A)
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py"", line 590, in expm
+    return _expm(A, use_exact_onenorm='auto')
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/scipy/sparse/linalg/_matfuncs.py"", line 601, in _expm
+    raise ValueError('expected a square matrix')
+ValueError: expected a square matrix",False,True
+326,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 5.82s",True,True,,True,True
+327,solution_code,"F.                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ TestSample327.test_modify_clears_ticks ____________________
+
+self = <test_sample.TestSample327 testMethod=test_modify_clears_ticks>
+
+    def test_modify_clears_ticks(self):
+        """"""Test that modify function clears both x and y ticks""""""
+        # Verify initial state has ticks
+        self.assertEqual(len(self.ax.get_xticks()), 3)
+        self.assertEqual(len(self.ax.get_yticks()), 3)
+    
+        # Call the function to test
+        modify(self.fig, self.ax)
+    
+        # Verify ticks are cleared
+>       self.assertEqual(len(self.ax.get_xticks()), 0)
+E       AssertionError: 3 != 0
+
+/tmp/tmpxje5y5j5/test_sample.py:40: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpxje5y5j5/test_sample.py::TestSample327::test_modify_clears_ticks
+1 failed, 1 passed, 1 warning in 5.59s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp3gzw0owp/visible_test_sample_327.py"", line 24, in <module>
+    assert  assertion_value
+AssertionError",False,True
+328,solution_code,"F.                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ TestSample328.test_modify_clears_ticks ____________________
+
+self = <test_sample.TestSample328 testMethod=test_modify_clears_ticks>
+
+    def test_modify_clears_ticks(self):
+        """"""Test that the modify function clears both x and y ticks.""""""
+        # Verify initial state has ticks
+        self.assertEqual(len(self.ax.get_xticks()), 3)
+        self.assertEqual(len(self.ax.get_yticks()), 3)
+    
+        # Call the function to test
+        modify(self.fig, self.ax)
+    
+        # Verify that ticks are cleared
+>       self.assertEqual(len(self.ax.get_xticks()), 0)
+E       AssertionError: 3 != 0
+
+/tmp/tmpgqqi8635/test_sample.py:41: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpgqqi8635/test_sample.py::TestSample328::test_modify_clears_ticks
+1 failed, 1 passed, 1 warning in 8.27s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpt04ivzo2/visible_test_sample_328.py"", line 22, in <module>
+    assert assertion_value
+AssertionError",False,True
+329,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 7.57s",True,True,,True,True
+330,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 5.09s",True,True,,True,True
