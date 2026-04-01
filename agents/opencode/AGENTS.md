@@ -58,6 +58,14 @@ The problem statement is flattened onto one line by replacing `\n` with `;`.
 - writable OpenCode state under `/tmp/opencode-home`
 - result file: `sample_{example_id}.py`
 - output format: JSON events via `opencode run --format json`
+- runtime model/provider config: injected through `OPENCODE_CONFIG_CONTENT`
+
+For OpenRouter runs, the harness is expected to:
+
+- normalize the selected model to `openrouter/<model>` if needed
+- inject `OPENCODE_CONFIG_CONTENT` with an `openrouter` provider stanza
+- pass `OPENROUTER_API_KEY` through from the worker environment into the container
+- register the selected OpenRouter model in the injected config so non-default model ids can resolve
 
 The default command passes the rendered prompt to OpenCode. That prompt is built from `prompt.txt` with task-specific placeholders such as `{sample_path}`, `{result_path}`, and `{task_venv}`.
 

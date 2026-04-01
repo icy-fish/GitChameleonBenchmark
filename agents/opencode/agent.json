@@ -19,8 +19,6 @@
     "--thinking",
     "--dir",
     "{workspace}",
-    "-m",
-    "{model}",
     "{prompt}"
   ]
 }

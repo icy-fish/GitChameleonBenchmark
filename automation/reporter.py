@@ -46,6 +46,9 @@ def _model_from_raw_records(raw_records: list[dict]) -> str | None:
                 candidate = command[index + 1]
                 if isinstance(candidate, str) and candidate.strip():
                     return candidate
+        candidate = _docker_env_value(command, "GC_AGENT_MODEL")
+        if candidate:
+            return candidate
     return None
 
 
@@ -59,6 +62,23 @@ def _provider_from_raw_records(raw_records: list[dict]) -> str | None:
                     value = candidate.split("=", 1)[1].strip().strip("\"'")
                     if value:
                         return value
+        candidate = _docker_env_value(command, "GC_AGENT_PROVIDER")
+        if candidate:
+            return candidate
+    return None
+
+
+def _docker_env_value(command: list[str], name: str) -> str | None:
+    for index, arg in enumerate(command[:-1]):
+        if arg != "-e":
+            continue
+        candidate = command[index + 1]
+        if candidate == name:
+            return ""
+        if isinstance(candidate, str) and candidate.startswith(f"{name}="):
+            value = candidate.split("=", 1)[1].strip()
+            if value:
+                return value
     return None
 
 

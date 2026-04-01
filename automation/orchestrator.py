@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import shlex
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
@@ -304,10 +305,25 @@ class BenchmarkOrchestrator:
         resolved_provider = provider or ("openai" if agent_name == "codex" else "")
         if resolved_provider:
             task_config.env["GC_AGENT_PROVIDER"] = resolved_provider
+        resolved_model = self._resolve_model(agent_name, model, resolved_provider)
+        if resolved_model:
+            task_config.env["GC_AGENT_MODEL"] = resolved_model
+            task_config.format_vars["model"] = resolved_model
+        passthrough_env = self._provider_env_passthrough(agent_name, resolved_provider)
+        for env_name in passthrough_env:
+            if os.environ.get(env_name):
+                task_config.env_passthrough.append(env_name)
+        if agent_name == "opencode":
+            opencode_config = self._build_opencode_config_content(
+                model=resolved_model,
+                provider=resolved_provider,
+            )
+            if opencode_config:
+                task_config.env["OPENCODE_CONFIG_CONTENT"] = json.dumps(opencode_config, separators=(",", ":"))
         task_config.format_vars = {
             "agent_name": agent_name,
             "example_id": bundle.example_id,
-            "model": model,
+            "model": resolved_model,
             "provider": resolved_provider,
             "provider_config_args": self._provider_config_args(agent_name, resolved_provider),
             "sample_path": str(inner_workspace / bundle.sample_filename()),
@@ -319,6 +335,46 @@ class BenchmarkOrchestrator:
         if agent_spec is not None and agent_spec.prompt_template:
             task_config.format_vars["prompt"] = agent_spec.prompt_template.format(**task_config.format_vars)
         return task_config
+
+    def _resolve_model(self, agent_name: str, model: str, provider: str) -> str:
+        if not model:
+            return ""
+        if agent_name != "opencode" or not provider:
+            return model
+        if model.startswith(f"{provider}/"):
+            return model
+        return f"{provider}/{model}"
+
+    def _provider_env_passthrough(self, agent_name: str, provider: str) -> list[str]:
+        if provider == "openrouter":
+            return ["OPENROUTER_API_KEY"]
+        if agent_name == "codex" and provider == "openai":
+            return ["OPENAI_API_KEY"]
+        return []
+
+    def _build_opencode_config_content(self, model: str, provider: str) -> dict | None:
+        if not model and not provider:
+            return None
+        config: dict[str, object] = {
+            "$schema": "https://opencode.ai/config.json",
+        }
+        if model:
+            config["model"] = model
+        if provider == "openrouter":
+            openrouter_model = model.removeprefix("openrouter/") if model else ""
+            provider_config: dict[str, object] = {
+                "options": {
+                    "apiKey": "{env:OPENROUTER_API_KEY}",
+                },
+            }
+            if openrouter_model:
+                provider_config["models"] = {
+                    openrouter_model: {},
+                }
+            config["provider"] = {
+                "openrouter": provider_config,
+            }
+        return config
 
     def _provider_config_args(self, agent_name: str, provider: str) -> str:
         if agent_name != "codex" or not provider or provider == "openai":

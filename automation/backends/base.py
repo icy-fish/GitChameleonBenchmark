@@ -17,6 +17,7 @@ class AgentRunConfig:
     args: list[str] = field(default_factory=list)
     timeout_sec: int = 900
     env: dict[str, str] = field(default_factory=dict)
+    env_passthrough: list[str] = field(default_factory=list)
     use_stdin_prompt: bool = True
     container_image: str | None = None
     container_workdir: str = "/workspace"
@@ -223,6 +224,8 @@ class AgentBackend:
             command.extend(["-v", f"{host_path}:{container_path}"])
         for key, value in config.env.items():
             command.extend(["-e", f"{key}={value}"])
+        for key in config.env_passthrough:
+            command.extend(["-e", key])
         command.extend(
             [
                 "-e",
