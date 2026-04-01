@@ -1,0 +1,47 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.631578947368421,
+  "hidden_passed": 24,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.4,
+      "passed": 4,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.7727272727272727,
+      "passed": 17,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.5,
+      "passed": 3,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 95.07966393105362,
+      "count": 38,
+      "total_seconds": 3613.027229380037
+    },
+    "token_usage": {
+      "average_tokens": 14663.684210526315,
+      "completion_tokens": 21269,
+      "count": 38,
+      "prompt_tokens": 535951,
+      "total_tokens": 557220
+    }
+  },
+  "run_setup": {
+    "agent_name": "opencode",
+    "agent_version": "1.1",
+    "identifier": "opencode:opencode/qwen3.6-plus-free",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.\nYou should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.",
+    "model_name": "opencode/qwen3.6-plus-free"
+  },
+  "total": 38,
+  "visible_compiled": 38,
+  "visible_pass_rate": 0.5526315789473685,
+  "visible_passed": 21
+}

@@ -1,0 +1,1107 @@
+example_id,code_id,output,passed,compiled,output_manual,passed_manual,compiled_manual
+55,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample55.test_cmap_reversed ________________________
+
+self = <test_sample.TestSample55 testMethod=test_cmap_reversed>
+
+    def test_cmap_reversed(self):
+        """"""Test that the reversed colormap is created correctly.""""""
+        # The reversed colormap should be a LinearSegmentedColormap
+>       self.assertIsInstance(sample_55.cmap_reversed, LinearSegmentedColormap)
+E       AssertionError: {(1, 2, 2): 'blue', (2, 2, 1): 'blue', (0, 0, 0): 'green', (1, 0, 0): 'green'} is not an instance of <class 'matplotlib.colors.LinearSegmentedColormap'>
+
+/tmp/tmp5vl66zt9/test_sample.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp5vl66zt9/test_sample.py::TestSample55::test_cmap_reversed - ...
+1 failed, 27 warnings in 3.23s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpiiitp411/visible_test_sample_55.py"", line 14, in <module>
+    reversed_cmap_dict = cmap_reversed._segmentdata
+AttributeError: 'dict' object has no attribute '_segmentdata'",False,True
+99,solution_code,"FFF                                                                      [100%]
+=================================== FAILURES ===================================
+________ TestGetTimeInUTC.test_get_time_in_utc_has_zero_time_components ________
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_has_zero_time_components>
+
+    def test_get_time_in_utc_has_zero_time_components(self):
+        # Verify that hours, minutes, seconds are all zero
+>       result = get_time_in_utc(2023, 1, 1)
+
+/tmp/tmppo09yvg0/test_sample.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2023, month = 1, day = 1
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        dt = timezone.datetime(year, month, day)
+>       return timezone.make_aware(dt, timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmppo09yvg0/sample_99.py:8: AttributeError
+___ TestGetTimeInUTC.test_get_time_in_utc_returns_datetime_with_utc_timezone ___
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_returns_datetime_with_utc_timezone>
+
+    def test_get_time_in_utc_returns_datetime_with_utc_timezone(self):
+        # Arrange
+        year, month, day = 2023, 12, 31
+    
+        # Act
+>       result = get_time_in_utc(year, month, day)
+
+/tmp/tmppo09yvg0/test_sample.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2023, month = 12, day = 31
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        dt = timezone.datetime(year, month, day)
+>       return timezone.make_aware(dt, timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmppo09yvg0/sample_99.py:8: AttributeError
+__________ TestGetTimeInUTC.test_get_time_in_utc_with_different_dates __________
+
+self = <test_sample.TestGetTimeInUTC testMethod=test_get_time_in_utc_with_different_dates>
+
+    def test_get_time_in_utc_with_different_dates(self):
+        # Test with a few different dates
+        test_cases = [
+            (2020, 1, 1),
+            (2022, 6, 15),
+            (2024, 2, 29),  # Leap year
+        ]
+    
+        for year, month, day in test_cases:
+            with self.subTest(year=year, month=month, day=day):
+>               result = get_time_in_utc(year, month, day)
+
+/tmp/tmppo09yvg0/test_sample.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+year = 2020, month = 1, day = 1
+
+    def get_time_in_utc(year: int, month: int, day: int) -> timezone.datetime:
+        dt = timezone.datetime(year, month, day)
+>       return timezone.make_aware(dt, timezone.utc)
+E       AttributeError: module 'django.utils.timezone' has no attribute 'utc'
+
+/tmp/tmppo09yvg0/sample_99.py:8: AttributeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmppo09yvg0/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_has_zero_time_components
+FAILED ../tmp/tmppo09yvg0/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_returns_datetime_with_utc_timezone
+FAILED ../tmp/tmppo09yvg0/test_sample.py::TestGetTimeInUTC::test_get_time_in_utc_with_different_dates
+3 failed in 0.25s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpl9b88btd/visible_test_sample_99.py"", line 14, in <module>
+    utc_time = get_time_in_utc(year, month, day)
+  File ""/tmp/tmpl9b88btd/visible_test_sample_99.py"", line 8, in get_time_in_utc
+    return timezone.make_aware(dt, timezone.utc)
+AttributeError: module 'django.utils.timezone' has no attribute 'utc'",False,True
+100,solution_code,"..                                                                       [100%]
+2 passed in 0.15s",True,True,,True,True
+101,solution_code,"F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample101.test_save_existing _______________________
+
+self = <test_sample.TestSample101 testMethod=test_save_existing>
+
+    def test_save_existing(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method.""""""
+        # Call the function under test
+        result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, obj=self.mock_obj
+        )
+    
+        # Assert that the formset's save_existing method was called with the correct parameters
+>       self.mock_formset.save_existing.assert_called_once_with(
+            form=self.mock_form, instance=self.mock_obj
+        )
+
+/tmp/tmp2kmnms8f/test_sample.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:941: in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='mock.save_existing' id='126742502680672'>, args = ()
+kwargs = {'form': <MagicMock spec='Form' id='126742502679904'>, 'instance': 'test_instance'}
+expected = call(form=<MagicMock spec='Form' id='126742502679904'>, instance='test_instance')
+actual = call(<MagicMock spec='Form' id='126742502679904'>, 'test_instance', commit=True)
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7345897d5bd0>
+cause = None
+
+    def assert_called_with(self, /, *args, **kwargs):
+        """"""assert that the last call was made with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock.""""""
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            actual = 'not called.'
+            error_message = ('expected call not found.\nExpected: %s\nActual: %s'
+                    % (expected, actual))
+            raise AssertionError(error_message)
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher(_Call((args, kwargs), two=True))
+        actual = self._call_matcher(self.call_args)
+        if actual != expected:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: expected call not found.
+E           Expected: save_existing(form=<MagicMock spec='Form' id='126742502679904'>, instance='test_instance')
+E           Actual: save_existing(<MagicMock spec='Form' id='126742502679904'>, 'test_instance', commit=True)
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:929: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp2kmnms8f/test_sample.py::TestSample101::test_save_existing
+1 failed in 0.82s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpbcccsouw/visible_test_sample_101.py"", line 23, in <module>
+    assert assertion_result
+AssertionError",False,True
+102,solution_code,"FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ TestSaveExisting.test_save_existing_calls_formset_method ___________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_calls_formset_method>
+
+    def test_save_existing_calls_formset_method(self):
+        """"""Test that save_existing correctly calls the formset's save_existing method with the right parameters.""""""
+        # Call the function under test
+        result = save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=self.instance
+        )
+    
+        # Assert that the formset's save_existing method was called with the correct parameters
+>       self.mock_formset.save_existing.assert_called_once_with(
+            form=self.mock_form, obj=self.instance
+        )
+
+/tmp/tmpsyujv6_y/test_sample.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:941: in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock name='mock.save_existing' id='137782389711456'>, args = ()
+kwargs = {'form': <Mock spec='Form' id='137782389711888'>, 'obj': 'test_instance'}
+expected = call(form=<Mock spec='Form' id='137782389711888'>, obj='test_instance')
+actual = call(<Mock spec='Form' id='137782389711888'>, 'test_instance')
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7d4ff6e21bd0>
+cause = None
+
+    def assert_called_with(self, /, *args, **kwargs):
+        """"""assert that the last call was made with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock.""""""
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            actual = 'not called.'
+            error_message = ('expected call not found.\nExpected: %s\nActual: %s'
+                    % (expected, actual))
+            raise AssertionError(error_message)
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher(_Call((args, kwargs), two=True))
+        actual = self._call_matcher(self.call_args)
+        if actual != expected:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: expected call not found.
+E           Expected: save_existing(form=<Mock spec='Form' id='137782389711888'>, obj='test_instance')
+E           Actual: save_existing(<Mock spec='Form' id='137782389711888'>, 'test_instance')
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:929: AssertionError
+_________ TestSaveExisting.test_save_existing_with_different_instance __________
+
+self = <test_sample.TestSaveExisting testMethod=test_save_existing_with_different_instance>
+
+    def test_save_existing_with_different_instance(self):
+        """"""Test save_existing with a different instance value.""""""
+        different_instance = ""different_instance""
+    
+        # Call the function under test with a different instance
+        save_existing(
+            formset=self.mock_formset, form=self.mock_form, instance=different_instance
+        )
+    
+        # Assert that the formset's save_existing method was called with the correct parameters
+>       self.mock_formset.save_existing.assert_called_once_with(
+            form=self.mock_form, obj=different_instance
+        )
+
+/tmp/tmpsyujv6_y/test_sample.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:941: in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock name='mock.save_existing' id='137782386557808'>, args = ()
+kwargs = {'form': <Mock spec='Form' id='137782386558720'>, 'obj': 'different_instance'}
+expected = call(form=<Mock spec='Form' id='137782386558720'>, obj='different_instance')
+actual = call(<Mock spec='Form' id='137782386558720'>, 'different_instance')
+_error_message = <function NonCallableMock.assert_called_with.<locals>._error_message at 0x7d4ff63ebbe0>
+cause = None
+
+    def assert_called_with(self, /, *args, **kwargs):
+        """"""assert that the last call was made with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock.""""""
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            actual = 'not called.'
+            error_message = ('expected call not found.\nExpected: %s\nActual: %s'
+                    % (expected, actual))
+            raise AssertionError(error_message)
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher(_Call((args, kwargs), two=True))
+        actual = self._call_matcher(self.call_args)
+        if actual != expected:
+            cause = expected if isinstance(expected, Exception) else None
+>           raise AssertionError(_error_message()) from cause
+E           AssertionError: expected call not found.
+E           Expected: save_existing(form=<Mock spec='Form' id='137782386558720'>, obj='different_instance')
+E           Actual: save_existing(<Mock spec='Form' id='137782386558720'>, 'different_instance')
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/unittest/mock.py:929: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpsyujv6_y/test_sample.py::TestSaveExisting::test_save_existing_calls_formset_method
+FAILED ../tmp/tmpsyujv6_y/test_sample.py::TestSaveExisting::test_save_existing_with_different_instance
+2 failed in 1.91s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpq7488rua/visible_test_sample_102.py"", line 22, in <module>
+    assert assertion_result
+AssertionError",False,True
+103,solution_code,".FF.                                                                     [100%]
+=================================== FAILURES ===================================
+____________ TestSample103.test_form_rendering_with_as_field_group _____________
+
+self = <test_sample.TestSample103 testMethod=test_form_rendering_with_as_field_group>
+
+    def test_form_rendering_with_as_field_group(self):
+        """"""Test that the form field renders with as_field_group template tag""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check that the rendered HTML contains the label, help text, and input field
+>       self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+E       AssertionError: '<label for=""id_name"">Name:</label>' not found in '<form>\n  <div>\n    <label for=\'id_name\'>Name:</label>\n\n<div class=\'helptext\' id=\'id_name_helptext\'>Enter your name</div>\n\n<input type=""text"" name=""name"" required aria-describedby=""id_name_helptext"" id=""id_name"">\n  </div>\n</form>'
+
+/tmp/tmpy8c6q4es/test_sample.py:60: AssertionError
+____________________ TestSample103.test_get_template_string ____________________
+
+self = <test_sample.TestSample103 testMethod=test_get_template_string>
+
+    def test_get_template_string(self):
+        """"""Test that get_template_string returns the expected template""""""
+        template = get_template_string()
+        self.assertIsInstance(template, str)
+>       self.assertIn(""{{ form.name.as_field_group }}"", template)
+E       AssertionError: '{{ form.name.as_field_group }}' not found in ""<form>\n  <div>\n    <label for='{{ form.name.id_for_label }}'>{{ form.name.label }}:</label>\n\n<div class='helptext' id='{{ form.name.id_for_label }}_helptext'>{{ form.name.help_text }}</div>\n\n{{ form.name }}\n  </div>\n</form>""
+
+/tmp/tmpy8c6q4es/test_sample.py:38: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpy8c6q4es/test_sample.py::TestSample103::test_form_rendering_with_as_field_group
+FAILED ../tmp/tmpy8c6q4es/test_sample.py::TestSample103::test_get_template_string
+2 failed, 2 passed in 1.88s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpzal2ufcl/visible_test_sample_103.py"", line 71, in <module>
+    assert assertion_result
+AssertionError",False,True
+104,solution_code,".FFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ TestSample104.test_render_output _______________________
+
+self = <test_sample.TestSample104 testMethod=test_render_output>
+
+    def test_render_output(self):
+        """"""Test that render_output produces the expected HTML""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Check for label
+>       self.assertIn('<label for=""id_name"">Name:</label>', rendered_html)
+E       AssertionError: '<label for=""id_name"">Name:</label>' not found in ""<form>\n  <div>\n    <label for='id_name'>Name:</label>\n\n<div class='helptext' id='id_name_helptext'>Enter your name</div>\n\n<input type='text' name='name' required aria-describedby='id_name_helptext' id='id_name'>\n  </div>\n</form>""
+
+/tmp/tmpcinb34kk/test_sample.py:37: AssertionError
+______________ TestSample104.test_rendered_output_matches_target _______________
+
+self = <test_sample.TestSample104 testMethod=test_rendered_output_matches_target>
+
+    def test_rendered_output_matches_target(self):
+        """"""Test that the rendered output matches the target HTML structure""""""
+        rendered_html = render_output(self.template_string)
+    
+        # Normalize whitespace for comparison
+        def normalize_whitespace(text):
+            # Replace multiple whitespace with a single space
+            return re.sub(r""\s+"", "" "", text.strip())
+    
+        # Check that all expected elements are present in the correct order
+        normalized_html = normalize_whitespace(rendered_html)
+    
+        # Check for the basic structure
+        self.assertIn(""<form>"", normalized_html)
+        self.assertIn(""<div>"", normalized_html)
+        self.assertIn(""</div>"", normalized_html)
+        self.assertIn(""</form>"", normalized_html)
+    
+        # Check for the correct order of elements
+        label_pos = normalized_html.find('<label for=""id_name"">Name:</label>')
+        helptext_pos = normalized_html.find(
+            '<div class=""helptext"" id=""id_name_helptext"">'
+        )
+        input_pos = normalized_html.find('<input type=""text"" name=""name""')
+    
+>       self.assertGreater(label_pos, 0, ""Label tag not found"")
+E       AssertionError: -1 not greater than 0 : Label tag not found
+
+/tmp/tmpcinb34kk/test_sample.py:77: AssertionError
+______________________ TestSample104.test_template_string ______________________
+
+self = <test_sample.TestSample104 testMethod=test_template_string>
+
+    def test_template_string(self):
+        """"""Test that the template string contains expected Django template tags""""""
+>       self.assertIn(""{{ form.name.label_tag }}"", self.template_string)
+E       AssertionError: '{{ form.name.label_tag }}' not found in ""<form>\n  <div>\n    <label for='{{ form.name.id_for_label }}'>{{ form.name.label }}:</label>\n\n<div class='helptext' id='{{ form.name.id_for_label }}_helptext'>{{ form.name.help_text }}</div>\n\n<input type='text' name='{{ form.name.name }}' required aria-describedby='{{ form.name.id_for_label }}_helptext' id='{{ form.name.id_for_label }}'>\n  </div>\n</form>""
+
+/tmp/tmpcinb34kk/test_sample.py:26: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpcinb34kk/test_sample.py::TestSample104::test_render_output
+FAILED ../tmp/tmpcinb34kk/test_sample.py::TestSample104::test_rendered_output_matches_target
+FAILED ../tmp/tmpcinb34kk/test_sample.py::TestSample104::test_template_string
+3 failed, 1 passed in 1.64s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp6sp5gk39/visible_test_sample_104.py"", line 71, in <module>
+    assert assertion_result
+AssertionError",False,True
+105,solution_code,".....                                                                    [100%]
+5 passed in 1.64s",True,True,,True,True
+106,solution_code,".....                                                                    [100%]
+5 passed in 1.79s",True,True,,True,True
+107,solution_code,"==================================== ERRORS ====================================
+_______________________ ERROR collecting test_sample.py ________________________
+ImportError while importing test module '/tmp/tmp5mjhi6xj/test_sample.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/root/.pyenv/versions/3.10.14/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+/tmp/tmp5mjhi6xj/test_sample.py:9: in <module>
+    from sample_107 import MyModel, color
+E   ImportError: cannot import name 'color' from 'sample_107' (/tmp/tmp5mjhi6xj/sample_107.py)
+=========================== short test summary info ============================
+ERROR ../tmp/tmp5mjhi6xj/test_sample.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.84s",False,True,,True,True
+108,solution_code,"....                                                                     [100%]
+4 passed in 1.53s",True,True,,True,True
+143,solution_code,".                                                                        [100%]
+1 passed in 1.07s",True,True,,True,True
+144,solution_code,"...                                                                      [100%]
+3 passed in 1.12s",True,True,,True,True
+145,solution_code,"...                                                                      [100%]
+3 passed, 3 warnings in 1.16s",True,True,"/tmp/tmph6vygb1w/visible_test_sample_145.py:16: DeprecationWarning: The 'attachment_filename' parameter has been renamed to 'download_name'. The old name will be removed in Flask 2.1.
+  return send_file(data, as_attachment=True, attachment_filename=attachment_filename)",True,True
+146,solution_code,"..                                                                       [100%]
+2 passed in 1.12s",True,True,,True,True
+147,solution_code,".                                                                        [100%]
+1 passed in 1.07s",True,True,,True,True
+148,solution_code,"..                                                                       [100%]
+2 passed in 0.97s",True,True,,True,True
+149,solution_code,"...                                                                      [100%]
+3 passed, 2 warnings in 1.06s",True,True,"/tmp/tmpaxvty1su/visible_test_sample_149.py:9: DeprecationWarning: 'flask.helpers.safe_join' is deprecated and will be removed in Flask 2.1. Use 'werkzeug.utils.safe_join' instead.
+  joined = flask.safe_join(base_path, sub_path)
+Traceback (most recent call last):
+  File ""/tmp/tmpaxvty1su/visible_test_sample_149.py"", line 19, in <module>
+    joined = safe_join_fail_404(base_path, sub_path)
+  File ""/tmp/tmpaxvty1su/visible_test_sample_149.py"", line 9, in safe_join_fail_404
+    joined = flask.safe_join(base_path, sub_path)
+  File ""/app/.dataset_venvs/gcham_venv_368e61afd41a/lib/python3.10/site-packages/flask/helpers.py"", line 648, in safe_join
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmpaxvty1su/visible_test_sample_149.py"", line 20, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+150,solution_code,"...                                                                      [100%]
+3 passed in 0.96s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmph0gsd2ml/visible_test_sample_150.py"", line 20, in <module>
+    joined = safe_join_fail_404(base_path, sub_path)
+  File ""/tmp/tmph0gsd2ml/visible_test_sample_150.py"", line 12, in safe_join_fail_404
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmph0gsd2ml/visible_test_sample_150.py"", line 21, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+151,solution_code,".                                                                        [100%]
+1 passed in 1.05s",True,True,,True,True
+152,solution_code,".                                                                        [100%]
+1 passed in 0.96s",True,True,,True,True
+163,solution_code,".                                                                        [100%]
+1 passed in 2.00s",True,True,,True,True
+164,solution_code,"F....                                                                    [100%]
+=================================== FAILURES ===================================
+____________________ TestSample164.test_custom_json_handler ____________________
+
+self = <test_sample.TestSample164 testMethod=test_custom_json_handler>
+
+    def test_custom_json_handler(self):
+        """"""Test the MyCustomJSONHandler directly""""""
+        handler = MyCustomJSONHandler(self.app)
+    
+        # Test with numpy array
+        test_array = np.array([4, 4, 5, 6, 6])
+>       result = handler.default(test_array)
+
+/tmp/tmpatzp1vmm/test_sample.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+o = array([4, 4, 5, 6, 6])
+
+    def _default(o: t.Any) -> t.Any:
+        if isinstance(o, date):
+            return http_date(o)
+    
+        if isinstance(o, (decimal.Decimal, uuid.UUID)):
+            return str(o)
+    
+        if dataclasses and dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+    
+        if hasattr(o, ""__html__""):
+            return str(o.__html__())
+    
+>       raise TypeError(f""Object of type {type(o).__name__} is not JSON serializable"")
+E       TypeError: Object of type ndarray is not JSON serializable
+
+.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py:120: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpatzp1vmm/test_sample.py::TestSample164::test_custom_json_handler
+1 failed, 4 passed in 1.92s",False,True,,True,True
+165,solution_code,".....                                                                    [100%]
+5 passed in 1.97s",True,True,,True,True
+166,solution_code,".....                                                                    [100%]
+5 passed, 2 warnings in 1.80s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp37ibsi4m/visible_test_sample_166.py"", line 45, in <module>
+    assertion_results = eval_app(app2, data2,np.array([[3, 3, 1,], [2,2,4],[1,1,1]])) == eval_app(app, data,np.array([[3, 3, 1,], [2,2,4],[1,1,1]]))
+  File ""/tmp/tmp37ibsi4m/visible_test_sample_166.py"", line 15, in eval_app
+    response = data_fn(num_arr)
+  File ""/tmp/tmp37ibsi4m/visible_test_sample_166.py"", line 11, in data
+    return flask.jsonify({'numbers': num_list})
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/__init__.py"", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 215, in response
+    f""{self.dumps(obj, **dump_args)}\n"", mimetype=self.mimetype
+  File ""/app/.dataset_venvs/gcham_venv_fc0e8272140b/lib/python3.10/site-packages/flask/json/provider.py"", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmp37ibsi4m/visible_test_sample_166.py"", line 22, in default
+    return getattr(np, 'fastCopyAndTranspose')(o).flatten().tolist()
+DeprecationWarning: fastCopyAndTranspose and the underlying C function PyArray_CopyAndTranspose have been deprecated.
+
+Use the transpose method followed by a C-order copy instead, e.g. ``arr.T.copy()``",False,True
+167,solution_code,"FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ TestStackAndSave.test_mixed_array_types ____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_mixed_array_types>
+
+    def test_mixed_array_types(self):
+        """"""Test with mixed array types that can be safely cast.""""""
+        arrays = [
+            np.array([[1, 2]], dtype=np.int32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+        ]
+    
+        # Both int32 and float32 can be safely cast to float64
+>       _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float64)
+
+/tmp/tmp964v26nh/test_sample.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp964v26nh/sample_167.py:20: in stack_and_save
+    stacked = np.stack(arr_list, dtype=np.dtype(out_dtype), casting=casting_policy)  # type: ignore[call-overload]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ([array([[1, 2]], dtype=int32), array([[3., 4.]], dtype=float32)],)
+kwargs = {'casting': 'safe', 'dtype': dtype('float64')}
+
+>   ???
+E   TypeError: _stack_dispatcher() got an unexpected keyword argument 'dtype'
+
+<__array_function__ internals>:4: TypeError
+______________________ TestStackAndSave.test_safe_casting ______________________
+
+self = <test_sample.TestStackAndSave testMethod=test_safe_casting>
+
+    def test_safe_casting(self):
+        """"""Test safe casting policy.""""""
+        # Safe casting from float32 to float64 should work
+>       _, stacked = stack_and_save(
+            [self.float_array], self.base_path, ""test"", ""safe"", np.float64
+        )
+
+/tmp/tmp964v26nh/test_sample.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp964v26nh/sample_167.py:20: in stack_and_save
+    stacked = np.stack(arr_list, dtype=np.dtype(out_dtype), casting=casting_policy)  # type: ignore[call-overload]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ([array([[1.5, 2.5],
+       [3.5, 4.5]], dtype=float32)],)
+kwargs = {'casting': 'safe', 'dtype': dtype('float64')}
+
+>   ???
+E   TypeError: _stack_dispatcher() got an unexpected keyword argument 'dtype'
+
+<__array_function__ internals>:4: TypeError
+___________________ TestStackAndSave.test_safe_path_joining ____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_safe_path_joining>
+
+    def test_safe_path_joining(self):
+        """"""Test that paths are joined safely.""""""
+        # Valid sub path
+        sub_path = ""valid_subdir""
+>       joined_path, _ = stack_and_save(
+            [self.float_array], self.base_path, sub_path, ""safe"", np.float32
+        )
+
+/tmp/tmp964v26nh/test_sample.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp964v26nh/sample_167.py:20: in stack_and_save
+    stacked = np.stack(arr_list, dtype=np.dtype(out_dtype), casting=casting_policy)  # type: ignore[call-overload]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ([array([[1.5, 2.5],
+       [3.5, 4.5]], dtype=float32)],)
+kwargs = {'casting': 'safe', 'dtype': dtype('float32')}
+
+>   ???
+E   TypeError: _stack_dispatcher() got an unexpected keyword argument 'dtype'
+
+<__array_function__ internals>:4: TypeError
+________________ TestStackAndSave.test_stacking_multiple_arrays ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_stacking_multiple_arrays>
+
+    def test_stacking_multiple_arrays(self):
+        """"""Test stacking multiple arrays.""""""
+        # Stack multiple float32 arrays to float32
+        arrays = [
+            np.array([[1.0, 2.0]], dtype=np.float32),
+            np.array([[3.0, 4.0]], dtype=np.float32),
+            np.array([[5.0, 6.0]], dtype=np.float32),
+        ]
+    
+>       _, stacked = stack_and_save(arrays, self.base_path, ""test"", ""safe"", np.float32)
+
+/tmp/tmp964v26nh/test_sample.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp964v26nh/sample_167.py:20: in stack_and_save
+    stacked = np.stack(arr_list, dtype=np.dtype(out_dtype), casting=casting_policy)  # type: ignore[call-overload]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ([array([[1., 2.]], dtype=float32), array([[3., 4.]], dtype=float32), array([[5., 6.]], dtype=float32)],)
+kwargs = {'casting': 'safe', 'dtype': dtype('float32')}
+
+>   ???
+E   TypeError: _stack_dispatcher() got an unexpected keyword argument 'dtype'
+
+<__array_function__ internals>:4: TypeError
+_____________________ TestStackAndSave.test_unsafe_casting _____________________
+
+self = <test_sample.TestStackAndSave testMethod=test_unsafe_casting>
+
+    def test_unsafe_casting(self):
+        """"""Test unsafe casting policy.""""""
+        # Unsafe casting from float64 to float32 should work
+>       _, stacked = stack_and_save(
+            [self.double_array], self.base_path, ""test"", ""unsafe"", np.float32
+        )
+
+/tmp/tmp964v26nh/test_sample.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp964v26nh/sample_167.py:20: in stack_and_save
+    stacked = np.stack(arr_list, dtype=np.dtype(out_dtype), casting=casting_policy)  # type: ignore[call-overload]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ([array([[1.5, 2.5],
+       [3.5, 4.5]])],)
+kwargs = {'casting': 'unsafe', 'dtype': dtype('float32')}
+
+>   ???
+E   TypeError: _stack_dispatcher() got an unexpected keyword argument 'dtype'
+
+<__array_function__ internals>:4: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp964v26nh/test_sample.py::TestStackAndSave::test_mixed_array_types
+FAILED ../tmp/tmp964v26nh/test_sample.py::TestStackAndSave::test_safe_casting
+FAILED ../tmp/tmp964v26nh/test_sample.py::TestStackAndSave::test_safe_path_joining
+FAILED ../tmp/tmp964v26nh/test_sample.py::TestStackAndSave::test_stacking_multiple_arrays
+FAILED ../tmp/tmp964v26nh/test_sample.py::TestStackAndSave::test_unsafe_casting
+5 failed in 1.93s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp6gd3vydw/visible_test_sample_167.py"", line 34, in <module>
+    joined, stacked = stack_and_save(arr_list,base_path, sub_path,  casting_policy,out_dtype)
+  File ""/tmp/tmp6gd3vydw/visible_test_sample_167.py"", line 19, in stack_and_save
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmp6gd3vydw/visible_test_sample_167.py"", line 35, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+168,solution_code,"..F.                                                                     [100%]
+=================================== FAILURES ===================================
+_______________ TestStackAndSave.test_successful_stack_and_save ________________
+
+self = <test_sample.TestStackAndSave testMethod=test_successful_stack_and_save>
+
+    def test_successful_stack_and_save(self):
+        """"""Test successful stacking and path joining.""""""
+        sub_path = ""test_dir/test_file.npy""
+        # Create the subdirectory
+        os.makedirs(os.path.join(self.base_path, ""test_dir""), exist_ok=True)
+    
+        # Test with safe casting and float32 dtype
+        joined_path, stacked = stack_and_save(
+            self.arr_list, self.base_path, sub_path, ""safe"", np.float32
+        )
+    
+        # Check the joined path
+        expected_path = os.path.join(self.base_path, sub_path)
+        self.assertEqual(joined_path, expected_path)
+    
+        # Check the stacked array
+        expected_stack = np.vstack(self.arr_list)
+>       np.testing.assert_array_equal(stacked, expected_stack)
+
+/tmp/tmp720uby33/test_sample.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<built-in function eq>, array([[[ 1.,  2.,  3.],
+        [ 4.,  5.,  6.]],
+
+       [[ 7.,  8.,  9.],
+        [10., 11...at32), array([[ 1.,  2.,  3.],
+       [ 4.,  5.,  6.],
+       [ 7.,  8.,  9.],
+       [10., 11., 12.]], dtype=float32))
+kwds = {'err_msg': '', 'header': 'Arrays are not equal', 'strict': False, 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Arrays are not equal
+E           
+E           (shapes (2, 2, 3), (4, 3) mismatch)
+E            x: array([[[ 1.,  2.,  3.],
+E                   [ 4.,  5.,  6.]],
+E           ...
+E            y: array([[ 1.,  2.,  3.],
+E                  [ 4.,  5.,  6.],
+E                  [ 7.,  8.,  9.],
+E                  [10., 11., 12.]], dtype=float32)
+
+/root/.pyenv/versions/3.10.14/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp720uby33/test_sample.py::TestStackAndSave::test_successful_stack_and_save
+1 failed, 3 passed in 1.95s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp9149gmbi/visible_test_sample_168.py"", line 36, in <module>
+    joined, stacked = stack_and_save(arr_list,base_path, sub_path,  casting_policy,out_dtype)
+  File ""/tmp/tmp9149gmbi/visible_test_sample_168.py"", line 19, in stack_and_save
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmp9149gmbi/visible_test_sample_168.py"", line 37, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+169,solution_code,"........                                                                 [100%]
+8 passed in 2.39s",True,True,,True,True
+170,solution_code,"..                                                                       [100%]
+2 passed in 2.56s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp3gzztv53/visible_test_sample_170.py"", line 45, in <module>
+    assert assertion_results
+AssertionError",False,True
+171,solution_code,"FFF.FFF                                                                  [100%]
+=================================== FAILURES ===================================
+__________________ TestSample171.test_data_route_returns_json __________________
+
+self = <test_sample.TestSample171 object at 0x7cbed4a9d150>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_data_route_returns_json(self, setup_app, sample_data):
+        """"""Test that the data route returns JSON with the provided numbers.""""""
+        with setup_app.test_request_context():
+            response = data(sample_data.tolist())
+            response_data = json.loads(response.get_data(as_text=True))
+    
+            assert ""numbers"" in response_data
+>           assert response_data[""numbers""] == sample_data.tolist()
+E           assert [1.6363636363...6230366492147] == [[1, 2, 3], [...6], [7, 8, 9]]
+E             At index 0 diff: 1.6363636363636365 != [1, 2, 3]
+E             Use -v to get more diff
+
+/tmp/tmp7sovhtuk/test_sample.py:38: AssertionError
+_____________________ TestSample171.test_eval_app_function _____________________
+
+self = <test_sample.TestSample171 object at 0x7cbed4a9ec50>
+setup_app = <Flask 'test1'>
+sample_data = array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+    def test_eval_app_function(self, setup_app, sample_data):
+        """"""Test that eval_app correctly processes the request and returns data.""""""
+        result = eval_app(setup_app, data, sample_data.tolist())
+        response_data = json.loads(result)
+    
+        assert ""numbers"" in response_data
+>       assert response_data[""numbers""] == sample_data.tolist()
+E       assert [1.6363636363...6230366492147] == [[1, 2, 3], [...6], [7, 8, 9]]
+E         At index 0 diff: 1.6363636363636365 != [1, 2, 3]
+E         Use -v to get more diff
+
+/tmp/tmp7sovhtuk/test_sample.py:46: AssertionError
+_____________ TestSample171.test_custom_json_handler_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x7cbed4a9eb90>
+setup_app = <Flask 'test1'>
+
+    def test_custom_json_handler_with_ndarray(self, setup_app):
+        """"""Test that the custom JSON handler correctly processes NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        # Create an instance of the handler
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(test_array)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp7sovhtuk/test_sample.py:57: AssertionError
+______________ TestSample171.test_json_serialization_with_ndarray ______________
+
+self = <test_sample.TestSample171 object at 0x7cbed4a9d210>
+setup_app = <Flask 'test1'>
+
+    def test_json_serialization_with_ndarray(self, setup_app):
+        """"""Test end-to-end JSON serialization with NumPy arrays.""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+        expected_result = hmean(test_array, axis=1).tolist()
+    
+        with setup_app.test_request_context():
+            # Create a response with the array
+            response = flask.jsonify(test_array)
+            result = json.loads(response.get_data(as_text=True))
+    
+>           assert result == expected_result
+E           assert [[1, 2, 3], [...6], [7, 8, 9]] == [1.6363636363...6230366492147]
+E             At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E             Use -v to get more diff
+
+/tmp/tmp7sovhtuk/test_sample.py:77: AssertionError
+_____________________ TestSample171.test_with_empty_array ______________________
+
+self = <test_sample.TestSample171 object at 0x7cbed4a9c5e0>
+setup_app = <Flask 'test1'>
+
+    def test_with_empty_array(self, setup_app):
+        """"""Test handling of empty arrays.""""""
+        empty_array = np.array([])
+    
+        with setup_app.test_request_context():
+            # This should not raise an error
+>           response = data(empty_array.tolist())
+
+/tmp/tmp7sovhtuk/test_sample.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp7sovhtuk/sample_171.py:10: in data
+    result = hmean(arr, axis=1, nan_policy='omit')
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:476: in axis_nan_policy_wrapper
+    samples = _broadcast_arrays(samples, axis=axis)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:18: in _broadcast_arrays
+    new_shapes = _broadcast_array_shapes(arrays, axis=axis)
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:30: in _broadcast_array_shapes
+    return _broadcast_shapes(shapes, axis)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+shapes = [(0,)], axis = array([1])
+
+    def _broadcast_shapes(shapes, axis=None):
+        """"""
+        Broadcast shapes, ignoring incompatibility of specified axes
+        """"""
+        if not shapes:
+            return shapes
+    
+        # input validation
+        if axis is not None:
+            axis = np.atleast_1d(axis)
+            axis_int = axis.astype(int)
+            if not np.array_equal(axis_int, axis):
+                raise np.AxisError('`axis` must be an integer, a '
+                                   'tuple of integers, or `None`.')
+            axis = axis_int
+    
+        # First, ensure all shapes have same number of dimensions by prepending 1s.
+        n_dims = max([len(shape) for shape in shapes])
+        new_shapes = np.ones((len(shapes), n_dims), dtype=int)
+        for row, shape in zip(new_shapes, shapes):
+            row[len(row)-len(shape):] = shape  # can't use negative indices (-0:)
+    
+        # Remove the shape elements of the axes to be ignored, but remember them.
+        if axis is not None:
+            axis[axis < 0] = n_dims + axis[axis < 0]
+            axis = np.sort(axis)
+            if axis[-1] >= n_dims or axis[0] < 0:
+                message = (f""`axis` is out of bounds ""
+                           f""for array of dimension {n_dims}"")
+>               raise np.AxisError(message)
+E               numpy.AxisError: `axis` is out of bounds for array of dimension 1
+
+.dataset_venvs/gcham_venv_1829a9a6965f/lib/python3.10/site-packages/scipy/stats/_axis_nan_policy.py:62: AxisError
+___________________ TestSample171.test_with_single_row_array ___________________
+
+self = <test_sample.TestSample171 object at 0x7cbed4a9f130>
+setup_app = <Flask 'test1'>
+
+    def test_with_single_row_array(self, setup_app):
+        """"""Test handling of single row arrays.""""""
+        single_row = np.array([[1, 2, 3]])
+        expected_result = hmean(single_row, axis=1).tolist()
+    
+        # Test the custom handler directly
+        handler = MyCustomJSONHandler(setup_app)
+        result = handler.default(single_row)
+    
+>       assert result == expected_result
+E       assert [[1, 2, 3]] == [1.6363636363636365]
+E         At index 0 diff: [1, 2, 3] != 1.6363636363636365
+E         Use -v to get more diff
+
+/tmp/tmp7sovhtuk/test_sample.py:100: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp7sovhtuk/test_sample.py::TestSample171::test_data_route_returns_json
+FAILED ../tmp/tmp7sovhtuk/test_sample.py::TestSample171::test_eval_app_function
+FAILED ../tmp/tmp7sovhtuk/test_sample.py::TestSample171::test_custom_json_handler_with_ndarray
+FAILED ../tmp/tmp7sovhtuk/test_sample.py::TestSample171::test_json_serialization_with_ndarray
+FAILED ../tmp/tmp7sovhtuk/test_sample.py::TestSample171::test_with_empty_array
+FAILED ../tmp/tmp7sovhtuk/test_sample.py::TestSample171::test_with_single_row_array
+6 failed, 1 passed in 5.26s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpu8sy5400/visible_test_sample_171.py"", line 46, in <module>
+    assert assertion_results
+AssertionError",False,True
+172,solution_code,"F.FFF                                                                    [100%]
+=================================== FAILURES ===================================
+____________ TestSample172.test_custom_json_encoder_with_nan_values ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_nan_values>
+
+    def test_custom_json_encoder_with_nan_values(self):
+        """"""Test the custom JSON encoder with NaN values in the array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with an array containing NaN
+        test_array = np.array([[1, 2, np.nan], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: NaN for the first row, harmonic mean for the second
+>       self.assertTrue(np.isnan(encoded[0]))
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmp9gwjo9om/test_sample.py:78: ValueError
+___________ TestSample172.test_custom_json_encoder_with_numpy_array ____________
+
+self = <test_sample.TestSample172 testMethod=test_custom_json_encoder_with_numpy_array>
+
+    def test_custom_json_encoder_with_numpy_array(self):
+        """"""Test the custom JSON encoder with a numpy array""""""
+        encoder = MyCustomJSONHandler()
+    
+        # Test with a simple array
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+        encoded = encoder.default(test_array)
+    
+        # Expected result: harmonic means of each row
+        expected = [hmean(np.array([1, 2, 3])), hmean(np.array([4, 5, 6]))]
+>       self.assertEqual(encoded, expected)
+E       ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+/tmp/tmp9gwjo9om/test_sample.py:67: ValueError
+________________________ TestSample172.test_data_route _________________________
+
+self = <test_sample.TestSample172 testMethod=test_data_route>
+
+    def test_data_route(self):
+        """"""Test the /data route with a valid numpy array""""""
+        with self.app.test_request_context():
+            # Test with a simple array
+            test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>           response = data(test_array)
+
+/tmp/tmp9gwjo9om/test_sample.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1, 2, 3],
+       [4, 5, 6]])
+
+    @app.route('/data')
+    def data(num_arr):
+>       result = stats.hmean(num_arr, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmp9gwjo9om/sample_172.py:9: TypeError
+_______________________ TestSample172.test_eval_function _______________________
+
+self = <test_sample.TestSample172 testMethod=test_eval_function>
+
+    def test_eval_function(self):
+        """"""Test the eval function with a valid numpy array""""""
+        test_array = np.array([[1, 2, 3], [4, 5, 6]])
+>       result = eval(app, data, test_array)
+
+/tmp/tmp9gwjo9om/test_sample.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/tmp9gwjo9om/sample_172.py:14: in eval
+    response = data_fn(num_arr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+num_arr = array([[1, 2, 3],
+       [4, 5, 6]])
+
+    @app.route('/data')
+    def data(num_arr):
+>       result = stats.hmean(num_arr, axis=1, nan_policy='omit')
+E       TypeError: hmean() got an unexpected keyword argument 'nan_policy'
+
+/tmp/tmp9gwjo9om/sample_172.py:9: TypeError
+=========================== short test summary info ============================
+FAILED ../tmp/tmp9gwjo9om/test_sample.py::TestSample172::test_custom_json_encoder_with_nan_values
+FAILED ../tmp/tmp9gwjo9om/test_sample.py::TestSample172::test_custom_json_encoder_with_numpy_array
+FAILED ../tmp/tmp9gwjo9om/test_sample.py::TestSample172::test_data_route - Ty...
+FAILED ../tmp/tmp9gwjo9om/test_sample.py::TestSample172::test_eval_function
+4 failed, 1 passed in 5.11s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpyenjusld/visible_test_sample_172.py"", line 42, in <module>
+    assertion_results = eval(app2, data2,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]])) == eval(app, data,np.array([[3, 3, np.nan,], [np.nan,2,4],[1,2,1]]))
+  File ""/tmp/tmpyenjusld/visible_test_sample_172.py"", line 14, in eval
+    response = data_fn(num_arr)
+  File ""/tmp/tmpyenjusld/visible_test_sample_172.py"", line 27, in data2
+    return flask.jsonify({'numbers': num_arr})
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 348, in jsonify
+    f""{dumps(data, indent=indent, separators=separators)}\n"",
+  File ""/app/.dataset_venvs/gcham_venv_a49d85e9b35b/lib/python3.10/site-packages/flask/json/__init__.py"", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/__init__.py"", line 238, in dumps
+    **kw).encode(obj)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File ""/root/.pyenv/versions/3.10.14/lib/python3.10/json/encoder.py"", line 257, in iterencode
+    return _iterencode(o, 0)
+  File ""/tmp/tmpyenjusld/visible_test_sample_172.py"", line 36, in default
+    res[i_arr]  = hmean(obj[i_arr])
+NameError: name 'hmean' is not defined",False,True
+173,solution_code,".....                                                                    [100%]
+5 passed in 2.23s",True,True,"Traceback (most recent call last):
+  File ""/tmp/tmp7_thyya_/visible_test_sample_173.py"", line 32, in <module>
+    joined, results = save_exponential(a,base_path, sub_path)
+  File ""/tmp/tmp7_thyya_/visible_test_sample_173.py"", line 17, in save_exponential
+    raise error404()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/tmp/tmp7_thyya_/visible_test_sample_173.py"", line 33, in <module>
+    except werkzeug.exceptions.NotFound as e:
+NameError: name 'werkzeug' is not defined",False,True
+174,solution_code,"....                                                                     [100%]
+4 passed in 2.36s",True,True,,True,True
+326,solution_code,"..                                                                       [100%]
+2 passed, 1 warning in 4.07s",True,True,,True,True
+327,solution_code,"F.                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ TestSample327.test_modify_clears_ticks ____________________
+
+self = <test_sample.TestSample327 testMethod=test_modify_clears_ticks>
+
+    def test_modify_clears_ticks(self):
+        """"""Test that modify function clears both x and y ticks""""""
+        # Verify initial state has ticks
+        self.assertEqual(len(self.ax.get_xticks()), 3)
+        self.assertEqual(len(self.ax.get_yticks()), 3)
+    
+        # Call the function to test
+        modify(self.fig, self.ax)
+    
+        # Verify ticks are cleared
+>       self.assertEqual(len(self.ax.get_xticks()), 0)
+E       AssertionError: 3 != 0
+
+/tmp/tmpixxo4mb4/test_sample.py:40: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmpixxo4mb4/test_sample.py::TestSample327::test_modify_clears_ticks
+1 failed, 1 passed, 1 warning in 4.03s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmpakptof86/visible_test_sample_327.py"", line 17, in <module>
+    assert  assertion_value
+AssertionError",False,True
+328,solution_code,"F.                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ TestSample328.test_modify_clears_ticks ____________________
+
+self = <test_sample.TestSample328 testMethod=test_modify_clears_ticks>
+
+    def test_modify_clears_ticks(self):
+        """"""Test that the modify function clears both x and y ticks.""""""
+        # Verify initial state has ticks
+        self.assertEqual(len(self.ax.get_xticks()), 3)
+        self.assertEqual(len(self.ax.get_yticks()), 3)
+    
+        # Call the function to test
+        modify(self.fig, self.ax)
+    
+        # Verify that ticks are cleared
+>       self.assertEqual(len(self.ax.get_xticks()), 0)
+E       AssertionError: 3 != 0
+
+/tmp/tmprkw7yp4d/test_sample.py:41: AssertionError
+=========================== short test summary info ============================
+FAILED ../tmp/tmprkw7yp4d/test_sample.py::TestSample328::test_modify_clears_ticks
+1 failed, 1 passed, 1 warning in 5.48s",False,True,"Traceback (most recent call last):
+  File ""/tmp/tmp2frl307h/visible_test_sample_328.py"", line 14, in <module>
+    assert assertion_value
+AssertionError",False,True
+329,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 4.93s",True,True,,True,True
+330,solution_code,".                                                                        [100%]
+1 passed, 1 warning in 2.75s",True,True,,True,True

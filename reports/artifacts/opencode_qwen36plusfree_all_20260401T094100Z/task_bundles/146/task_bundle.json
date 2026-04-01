@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "146",
+  "library": "flask",
+  "problem": "\nComplete the download definition to download the data in the variable attachment_filename. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "from flask import Flask, send_file\nfrom io import BytesIO\n\napp1 = Flask(__name__)\n\ndef get_content_disp(app, download_fn):\n    with app.test_request_context():\n        response = download_fn()\n    content_disp = response.headers.get('Content-Disposition')\n    return content_disp\n\n@app1.route('/download')\ndef download():\n    data = BytesIO(b'Hello, World!')\n    attachment_filename = 'hello.txt'\n    return send_file(data, as_attachment=True,\n\n",
+  "version": "3.0.0"
+}

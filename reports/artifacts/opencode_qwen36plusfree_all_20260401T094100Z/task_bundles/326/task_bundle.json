@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "numpy==1.18.1 pyparsing==2.3.1 packaging==19.0",
+  "example_id": "326",
+  "library": "matplotlib",
+  "problem": "Implement the function to modify the axis of the figure to not visualize ticks on the x and y axis.",
+  "python_version": "3.7",
+  "starting_code": "import matplotlib\nimport matplotlib.pyplot as plt\nfrom matplotlib.figure import Figure\nfrom matplotlib.axes import Axes\n\ndef modify(fig: Figure, ax: Axes) -> None:\n    ",
+  "version": "3.4.0"
+}

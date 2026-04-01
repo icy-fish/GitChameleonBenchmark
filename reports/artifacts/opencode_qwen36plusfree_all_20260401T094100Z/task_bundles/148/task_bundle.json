@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "148",
+  "library": "flask",
+  "problem": "\nLoad the json file to config the Flask app. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import json\nimport tempfile\nfrom flask import Flask\n\nconfig_data = {'DEBUG': True, 'SECRET_KEY': 'secret'}\nwith tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmp:\n    json.dump(config_data, tmp)\n    tmp.flush()\n    config_file = tmp.name\n\napp = Flask(__name__)\n\ndef load_config(config_file: str) -> None:\n    ",
+  "version": "3.0.0"
+}
