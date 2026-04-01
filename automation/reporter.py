@@ -5,6 +5,8 @@ import json
 from collections import Counter
 from pathlib import Path
 
+from automation.backends.opencode import OpencodeBackend
+
 
 def _load_dataset_index(dataset_path: Path) -> dict[str, dict]:
     with dataset_path.open("r", encoding="utf-8") as handle:
@@ -20,11 +22,25 @@ def _load_raw_run_records(raw_output_path: Path | None) -> list[dict]:
 
 def _summarize_runtime_metrics(raw_records: list[dict]) -> dict:
     durations = [float(record["duration_sec"]) for record in raw_records if record.get("duration_sec") is not None]
-    token_usage_records = [
-        record.get("metrics", {}).get("token_usage", {})
-        for record in raw_records
-        if isinstance(record.get("metrics"), dict) and isinstance(record.get("metrics", {}).get("token_usage"), dict)
-    ]
+    opencode_backend = OpencodeBackend()
+    token_usage_records: list[dict] = []
+    for record in raw_records:
+        metrics = record.get("metrics")
+        if isinstance(metrics, dict) and isinstance(metrics.get("token_usage"), dict):
+            token_usage_records.append(metrics["token_usage"])
+            continue
+        if record.get("agent") != "opencode":
+            continue
+        reparsed_metrics = opencode_backend.extract_metrics(
+            stdout=record.get("stdout", ""),
+            stderr=record.get("stderr", ""),
+            combined_output=record.get("combined_output", ""),
+            exit_code=int(record.get("exit_code", 0)),
+            timed_out=bool(record.get("timed_out", False)),
+        )
+        token_usage = reparsed_metrics.get("token_usage")
+        if isinstance(token_usage, dict):
+            token_usage_records.append(token_usage)
     total_prompt_tokens = sum(int(usage.get("prompt_tokens", 0)) for usage in token_usage_records)
     total_completion_tokens = sum(int(usage.get("completion_tokens", 0)) for usage in token_usage_records)
     total_tokens = sum(int(usage.get("total_tokens", 0)) for usage in token_usage_records)

@@ -7,8 +7,8 @@ class OpencodeBackend(AgentBackend):
     name = "opencode"
     default_executable = "opencode"
 
-    _PROMPT_TOKEN_KEYS = ("prompt_tokens", "promptTokens", "input_tokens", "inputTokens")
-    _COMPLETION_TOKEN_KEYS = ("completion_tokens", "completionTokens", "output_tokens", "outputTokens")
+    _PROMPT_TOKEN_KEYS = ("prompt_tokens", "promptTokens", "input_tokens", "inputTokens", "input")
+    _COMPLETION_TOKEN_KEYS = ("completion_tokens", "completionTokens", "output_tokens", "outputTokens", "output")
     _TOTAL_TOKEN_KEYS = ("total_tokens", "totalTokens", "tokens", "tokenCount")
 
     def extract_metrics(
