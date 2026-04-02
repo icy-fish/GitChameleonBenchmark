@@ -385,14 +385,13 @@ class BenchmarkOrchestrator:
                 "openrouter": provider_config,
             }
         if enable_context7:
-            context7_command = ["npx", "-y", "@upstash/context7-mcp"]
-            if os.environ.get("CONTEXT7_API_KEY"):
-                context7_command.extend(["--api-key", "{env:CONTEXT7_API_KEY}"])
             context7_config: dict[str, object] = {
                 "type": "local",
-                "command": context7_command,
+                "command": ["npx", "-y", "@upstash/context7-mcp"],
                 "enabled": True,
             }
+            if os.environ.get("CONTEXT7_API_KEY"):
+                context7_config["command"].extend(["--api-key", "{env:CONTEXT7_API_KEY}"])
             config["mcp"] = {
                 "context7": context7_config,
             }

@@ -210,7 +210,6 @@ class AgentBackend:
             "docker",
             "run",
             "--rm",
-            "-i",
             "-v",
             f"{execution_workspace.resolve()}:{config.container_workdir}",
             "-w",
@@ -220,6 +219,8 @@ class AgentBackend:
             "--entrypoint",
             config.executable,
         ]
+        if config.use_stdin_prompt:
+            command.append("-i")
         for host_path, container_path in config.extra_mounts:
             command.extend(["-v", f"{host_path}:{container_path}"])
         for key, value in config.env.items():
