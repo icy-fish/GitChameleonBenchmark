@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "105",
+  "library": "django",
+  "problem": "\nCreate Square model with a side field and an area field that is calculated as the square of the side. Do not run the app in your code.\n",
+  "python_version": "3.10",
+  "starting_code": "import django\nfrom django.conf import settings\nfrom django.db import models, connection\nfrom django.db.models import F\n\nsettings.configure(\n    DATABASES={'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'}},\n)\ndjango.setup()\n\n\ndef display_side_and_area(square):\n    return square.side, square.area\n\ndef create_square(side):\n    square = Square.objects.create(side=side)\n    square.refresh_from_db()\n    return square\n\nclass Square(models.Model):\n    class Meta:\n        app_label = 'myapp'\n    side = models.IntegerField()\n    area = ",
+  "version": "4.0.0"
+}

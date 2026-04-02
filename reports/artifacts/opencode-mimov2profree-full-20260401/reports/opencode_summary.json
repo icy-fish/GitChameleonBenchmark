@@ -1,0 +1,48 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.5526315789473685,
+  "hidden_passed": 21,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.3,
+      "passed": 3,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.7272727272727273,
+      "passed": 16,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.3333333333333333,
+      "passed": 2,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 114.45253331502624,
+      "count": 38,
+      "total_seconds": 4349.196265970997
+    },
+    "token_usage": {
+      "average_tokens": 7327.0,
+      "completion_tokens": 9013,
+      "count": 38,
+      "prompt_tokens": 269413,
+      "total_tokens": 278426
+    }
+  },
+  "run_setup": {
+    "agent_name": "opencode",
+    "agent_version": "1.1",
+    "identifier": "opencode:opencode/mimo-v2-pro-free",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.\nYou should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.",
+    "model_name": "opencode/mimo-v2-pro-free",
+    "provider_name": ""
+  },
+  "total": 38,
+  "visible_compiled": 37,
+  "visible_pass_rate": 0.5789473684210527,
+  "visible_passed": 22
+}

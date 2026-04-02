@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "numpy==1.21.6 werkzeug==2.0.0",
+  "example_id": "163",
+  "library": "flask",
+  "problem": " \nComplete the app set-up for the json encoding to return only the unique values (each NaN being a different value) contained \nin the numpy array when called, we are using numpy 1.21.6. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import flask\nimport json\nimport numpy as np\napp = flask.Flask('test1')\n@app.route('/data')\ndef data(num_arr):\n    return flask.jsonify({'numbers': num_arr})\n\ndef eval(app, data_fn, num_arr):\n    with app.test_request_context():\n        response = data_fn(num_arr)\n        return response.get_data(as_text=False)\n\nclass MyCustomJSONHandler(json.JSONEncoder):\n    def default(self, obj: object) -> object:\n        if isinstance(obj, np.ndarray):",
+  "version": "2.0.0"
+}

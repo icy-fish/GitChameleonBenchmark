@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "152",
+  "library": "flask",
+  "problem": "\nComplete the function convert_timedelta_to_seconds, use other libraries if needed. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import flask\nimport datetime\n\ndef convert_timedelta_to_seconds(td: datetime.timedelta):\n",
+  "version": "3.0.0"
+}
