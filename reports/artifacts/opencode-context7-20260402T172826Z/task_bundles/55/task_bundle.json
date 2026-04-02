@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "55",
+  "library": "matplotlib",
+  "problem": "Reverse the following color mapping.",
+  "python_version": "3.10",
+  "starting_code": "from matplotlib.colors import *\nimport numpy as np\ncmap = {\n    \"blue\": [[1, 2, 2], [2, 2, 1]],\n    \"red\": [[0, 0, 0], [1, 0, 0]],\n    \"green\": [[0, 0, 0], [1, 0, 0]]\n}\n\ncmap_reversed = ",
+  "version": "3.4.0"
+}

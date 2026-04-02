@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "scipy==1.11.1",
+  "example_id": "171",
+  "library": "flask",
+  "problem": " \nComplete the app set-up so that, when given a batch (first dim) of values,\ncompute the harmonic mean along the second dimension (It should handle nan values),\nbefore flattening and converting the result to a list, we are using scipy 1.11.1. Do not run the app in your code.",
+  "python_version": "3.10",
+  "starting_code": "import flask\nimport numpy as np\nfrom scipy.stats import hmean\n\napp = flask.Flask('test1')\n\n@app.route('/data')\ndef data(num_list):\n    return flask.jsonify({'numbers': num_list})\n\ndef eval_app(app, data_fn, num_arr):\n    with app.test_request_context():\n        response = data_fn(num_arr)\n        return response.get_data(as_text=True)\n\nclass MyCustomJSONHandler(flask.json.provider.DefaultJSONProvider):\n    def default(self, obj: object) -> object:\n        if isinstance(obj, np.ndarray):",
+  "version": "3.0.0"
+}

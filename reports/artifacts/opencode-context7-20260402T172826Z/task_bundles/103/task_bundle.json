@@ -1,0 +1,9 @@
+{
+  "additional_dependencies": "",
+  "example_id": "103",
+  "library": "django",
+  "problem": "\nComplete the get_template_string function so that the template_string variable form the html string provided in comments, making the best use of the templates for form field rendering. Do not run the app in your code.\n",
+  "python_version": "3.10",
+  "starting_code": "import django\nfrom django.conf import settings\nfrom django import forms\nfrom django.template import Template, Context\n\nsettings.configure(\n      TEMPLATES=[\n          {\n              'BACKEND': 'django.template.backends.django.DjangoTemplates',\n          },\n      ],\n  )\ndjango.setup()\n\ndef render_output(template_string):\n  form = SampleForm()\n  template = Template(template_string)\n  context = Context({'form': form})\n  rendered_output = template.render(context)\n  return rendered_output\n\n# target for html string\n# <form>\n#   <div>\n#     <label for='id_name'>Name:</label>\n\n# <div class='helptext' id='id_name_helptext'>Enter your name</div>\n\n# <input type='text' name='name' required aria-describedby='id_name_helptext' id='id_name'>\n#   </div>\n# </form>\n\nclass SampleForm(forms.Form):\n    name = forms.CharField(label='Name', help_text='Enter your name')\ndef get_template_string()->str:\n",
+  "version": "5.0.0"
+}

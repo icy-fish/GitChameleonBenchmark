@@ -1,0 +1,48 @@
+{
+  "hidden_compiled": 38,
+  "hidden_pass_rate": 0.6578947368421053,
+  "hidden_passed": 25,
+  "library_breakdown": {
+    "django": {
+      "pass_rate": 0.6,
+      "passed": 6,
+      "total": 10
+    },
+    "flask": {
+      "pass_rate": 0.6363636363636364,
+      "passed": 14,
+      "total": 22
+    },
+    "matplotlib": {
+      "pass_rate": 0.8333333333333334,
+      "passed": 5,
+      "total": 6
+    }
+  },
+  "metrics": {
+    "runtime": {
+      "average_seconds": 81.86256565463324,
+      "count": 38,
+      "total_seconds": 3110.7774948760634
+    },
+    "token_usage": {
+      "average_tokens": 10454.763157894737,
+      "completion_tokens": 4391,
+      "count": 38,
+      "prompt_tokens": 392890,
+      "total_tokens": 397281
+    }
+  },
+  "run_setup": {
+    "agent_name": "opencode",
+    "agent_version": "1.1",
+    "identifier": "opencode:opencode/minimax-m2.5-free",
+    "initial_prompt": "Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.\nBefore you generate or edit code, identify the library and version requested in the sample header comments. If documentation is needed, first use Context7 to look up the relevant API for that exact dependency version and use the retrieved docs or snippets to guide the implementation.\nYou should only modify that sample file, without update other files in existing workspace or install any new tools. Always check LSP diagnostic result after editing file.",
+    "model_name": "opencode/minimax-m2.5-free",
+    "provider_name": ""
+  },
+  "total": 38,
+  "visible_compiled": 38,
+  "visible_pass_rate": 0.6578947368421053,
+  "visible_passed": 25
+}
