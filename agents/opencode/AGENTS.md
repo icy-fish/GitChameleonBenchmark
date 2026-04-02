@@ -59,6 +59,7 @@ The problem statement is flattened onto one line by replacing `\n` with `;`.
 - result file: `sample_{example_id}.py`
 - output format: JSON events via `opencode run --format json`
 - runtime model/provider config: injected through `OPENCODE_CONFIG_CONTENT`
+- optional MCP servers: injected through `OPENCODE_CONFIG_CONTENT.mcp`
 
 For OpenRouter runs, the harness is expected to:
 
@@ -66,6 +67,15 @@ For OpenRouter runs, the harness is expected to:
 - inject `OPENCODE_CONFIG_CONTENT` with an `openrouter` provider stanza
 - pass `OPENROUTER_API_KEY` through from the worker environment into the container
 - register the selected OpenRouter model in the injected config so non-default model ids can resolve
+
+For Context7-enabled OpenCode runs, the harness is expected to:
+
+- inject `mcp.context7` into `OPENCODE_CONFIG_CONTENT`
+- run Context7 as a local MCP server via `npx -y @upstash/context7-mcp`
+- set `mcp.context7.enabled` to `true`
+- append `--api-key {env:CONTEXT7_API_KEY}` when the worker environment provides `CONTEXT7_API_KEY`
+- pass through `CONTEXT7_API_KEY` when it exists in the worker environment
+- append a prompt hint telling OpenCode to `use context7` when documentation lookup is needed
 
 The default command passes the rendered prompt to OpenCode. That prompt is built from `prompt.txt` with task-specific placeholders such as `{sample_path}`, `{result_path}`, and `{task_venv}`.
 

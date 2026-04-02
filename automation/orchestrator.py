@@ -91,6 +91,7 @@ class BenchmarkOrchestrator:
         args: list[str] | None = None,
         model: str | None = None,
         provider: str | None = None,
+        enable_context7: bool = False,
         timeout_sec: int = 900,
         use_stdin_prompt: bool | None = None,
         container_image: str | None = None,
@@ -140,6 +141,7 @@ class BenchmarkOrchestrator:
                     agent_spec=agent_spec,
                     model=run_model,
                     provider=provider,
+                    enable_context7=enable_context7,
                 )
                 for example_id in task_examples
             ]
@@ -157,6 +159,7 @@ class BenchmarkOrchestrator:
                             agent_spec=agent_spec,
                             model=run_model,
                             provider=provider,
+                            enable_context7=enable_context7,
                         ),
                         task_examples,
                     )
@@ -216,6 +219,7 @@ class BenchmarkOrchestrator:
         agent_spec: AgentSpec | None,
         model: str,
         provider: str | None,
+        enable_context7: bool,
     ) -> dict[str, dict]:
         workspace = self.config.workspace_root / run_dir.name / agent_name / example_id
         bundle = self._load_task_bundle(run_dir, example_id)
@@ -225,6 +229,7 @@ class BenchmarkOrchestrator:
             bundle=bundle,
             model=model,
             provider=provider,
+            enable_context7=enable_context7,
             agent_spec=agent_spec,
         )
         if task_config.use_stdin_prompt and task_config.format_vars.get("prompt"):
@@ -269,6 +274,7 @@ class BenchmarkOrchestrator:
         bundle: TaskBundle,
         model: str,
         provider: str | None,
+        enable_context7: bool,
         agent_spec: AgentSpec | None,
     ):
         task_config = copy.deepcopy(base_config)
@@ -317,13 +323,17 @@ class BenchmarkOrchestrator:
             opencode_config = self._build_opencode_config_content(
                 model=resolved_model,
                 provider=resolved_provider,
+                enable_context7=enable_context7,
             )
             if opencode_config:
                 task_config.env["OPENCODE_CONFIG_CONTENT"] = json.dumps(opencode_config, separators=(",", ":"))
+            if enable_context7 and os.environ.get("CONTEXT7_API_KEY"):
+                task_config.env_passthrough.append("CONTEXT7_API_KEY")
         task_config.format_vars = {
             "agent_name": agent_name,
             "example_id": bundle.example_id,
             "model": resolved_model,
+            "mcp_prompt_hint": self._mcp_prompt_hint(agent_name, enable_context7),
             "provider": resolved_provider,
             "provider_config_args": self._provider_config_args(agent_name, resolved_provider),
             "sample_path": str(inner_workspace / bundle.sample_filename()),
@@ -352,8 +362,8 @@ class BenchmarkOrchestrator:
             return ["OPENAI_API_KEY"]
         return []
 
-    def _build_opencode_config_content(self, model: str, provider: str) -> dict | None:
-        if not model and not provider:
+    def _build_opencode_config_content(self, model: str, provider: str, enable_context7: bool) -> dict | None:
+        if not model and not provider and not enable_context7:
             return None
         config: dict[str, object] = {
             "$schema": "https://opencode.ai/config.json",
@@ -374,7 +384,24 @@ class BenchmarkOrchestrator:
             config["provider"] = {
                 "openrouter": provider_config,
             }
+        if enable_context7:
+            context7_command = ["npx", "-y", "@upstash/context7-mcp"]
+            if os.environ.get("CONTEXT7_API_KEY"):
+                context7_command.extend(["--api-key", "{env:CONTEXT7_API_KEY}"])
+            context7_config: dict[str, object] = {
+                "type": "local",
+                "command": context7_command,
+                "enabled": True,
+            }
+            config["mcp"] = {
+                "context7": context7_config,
+            }
         return config
+
+    def _mcp_prompt_hint(self, agent_name: str, enable_context7: bool) -> str:
+        if agent_name != "opencode" or not enable_context7:
+            return ""
+        return "If you need library or framework documentation, use context7."
 
     def _provider_config_args(self, agent_name: str, provider: str) -> str:
         if agent_name != "codex" or not provider or provider == "openai":

@@ -48,6 +48,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_agent.add_argument("--backend-args", help="Shell-style backend args; supports {prompt_path} etc.")
     run_agent.add_argument("--model")
     run_agent.add_argument("--provider", choices=["openai", "openrouter"])
+    run_agent.add_argument("--enable-context7", action="store_true")
     run_agent.add_argument("--timeout-sec", type=int, default=900)
     run_agent.add_argument("--no-stdin-prompt", action="store_true")
     run_agent.add_argument("--container-image")
@@ -77,6 +78,7 @@ def build_parser() -> argparse.ArgumentParser:
     full_run.add_argument("--executable-opencode")
     full_run.add_argument("--backend-args-opencode")
     full_run.add_argument("--model-opencode")
+    full_run.add_argument("--enable-context7-opencode", action="store_true")
     full_run.add_argument("--timeout-sec", type=int, default=900)
     full_run.add_argument("--docker-image")
     full_run.add_argument("--docker-tag")
@@ -129,6 +131,7 @@ def main() -> None:
             args=backend_args,
             model=args.model,
             provider=args.provider,
+            enable_context7=args.enable_context7,
             timeout_sec=args.timeout_sec,
             use_stdin_prompt=False if args.no_stdin_prompt else None,
             container_image=args.container_image,
@@ -172,6 +175,7 @@ def main() -> None:
                 args=backend_args,
                 model=getattr(args, f"model_{agent_name}", None),
                 provider=getattr(args, f"provider_{agent_name}", None),
+                enable_context7=bool(getattr(args, f"enable_context7_{agent_name}", False)),
                 timeout_sec=args.timeout_sec,
                 container_image=getattr(args, f"container_image_{agent_name}", None),
                 container_workdir=args.container_workdir,

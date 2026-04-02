@@ -1,8 +1,20 @@
 FROM gitchameleon-bench:1.1
 
+SHELL ["/bin/bash", "-lc"]
+
+ENV NVM_DIR="/root/.nvm"
 ENV PATH="/root/.local/bin:/root/.opencode/bin:${PATH}"
 
-RUN curl -fsSL https://opencode.ai/install | bash && \
+RUN mkdir -p "${NVM_DIR}" && \
+    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
+    source "${NVM_DIR}/nvm.sh" && \
+    nvm install node && \
+    nvm alias default node && \
+    NODE_VERSION="$(nvm version default)" && \
+    ln -sf "${NVM_DIR}/versions/node/${NODE_VERSION}/bin/node" /usr/local/bin/node && \
+    ln -sf "${NVM_DIR}/versions/node/${NODE_VERSION}/bin/npm" /usr/local/bin/npm && \
+    ln -sf "${NVM_DIR}/versions/node/${NODE_VERSION}/bin/npx" /usr/local/bin/npx && \
+    curl -fsSL https://opencode.ai/install | bash && \
     if [ -x /root/.local/bin/opencode ]; then \
         ln -sf /root/.local/bin/opencode /usr/local/bin/opencode; \
     elif [ -x /root/.opencode/bin/opencode ]; then \

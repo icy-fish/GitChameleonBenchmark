@@ -1,2 +1,3 @@
 Read and edit `{sample_path}` to complete the script by following the instructions written in the comments at the top of the sample file.
-You should only modify that sample file. Always verify the edited sample file with LSP. Do not execute the Python file in this workspace.
+Before you generate or edit code, identify the library and version requested in the sample header comments. If documentation is needed, first use Context7 to look up the relevant API for that exact dependency version and use the retrieved docs or snippets to guide the implementation.
+You should only modify that sample file, without update other files in existing workspace or install any new tools. Always check LSP diagnostic result after editing file.
