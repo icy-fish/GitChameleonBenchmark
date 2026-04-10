@@ -24,9 +24,9 @@ def main():
         help="Number of threads to use",
     )
     parser.add_argument(
-        "--docker-image", type=str, default="mrcabbage972/gitchameleon", help="Name of the Docker image to use"
+        "--docker-image", type=str, default="gitchameleon-bench", help="Name of the Docker image to use"
     )
-    parser.add_argument("--docker-tag", type=str, default="latest", help="Tag of the Docker image to use")
+    parser.add_argument("--docker-tag", type=str, default="1.1", help="Tag of the Docker image to use")
 
     args = parser.parse_args()
 
@@ -49,7 +49,7 @@ def main():
         "docker",
         "run",
         "--rm",
-        "-it",
+        "-i",
         # Mount the solution file (read-only)
         "-v",
         f"{solution_path_host}:/app/solution.jsonl:ro",
